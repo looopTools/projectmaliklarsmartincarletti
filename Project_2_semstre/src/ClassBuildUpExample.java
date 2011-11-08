@@ -22,4 +22,8 @@ public class ClassBuildUpExample {
 		
 	}
 	
+	public void plus(){
+		System.out.println(1+1);
+	}
+	
 }
