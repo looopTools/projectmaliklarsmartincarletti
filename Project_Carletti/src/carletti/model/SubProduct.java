@@ -13,6 +13,7 @@ public class SubProduct {
 	private String name;
 	private State state; //The current state which a SubProduct is in 
 	private ArrayList<SubTreatment> subtreatments = new ArrayList<SubTreatment>();
+	private int currentSubTreatmentIndex = -1;
 	
 	public SubProduct(int id, String name, State state) {
 		this.id = id;
@@ -58,6 +59,25 @@ public class SubProduct {
 	
 	public void removeSubTreatment(SubTreatment st){
 		subtreatments.remove(st);
+	}
+	
+	public int getCurrentSubTreatmentIndex() {
+		return currentSubTreatmentIndex;
+	}
+
+	public void setCurrentSubTreatmentIndex(int currentSubTreatmentIndex) {
+		this.currentSubTreatmentIndex = currentSubTreatmentIndex;
+	}
+
+	/*
+	 * @post subtreatments is in sort by need
+	 */
+	public void nextSubTreatment(){
+		setCurrentSubTreatmentIndex(getCurrentSubTreatmentIndex()+1);
+	}
+	
+	public SubTreatment getCurrentSubTreatment(){
+		return subtreatments.get(getCurrentSubTreatmentIndex());
 	}
 	
 	
