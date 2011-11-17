@@ -14,7 +14,7 @@ public class SubTreatment {
 	private String name;
 	
 	public SubTreatment(String name, long dryMin, long dryPrime, long dryMax){
-		this.name = name;
+		this.setName(name);
 		this.dryMin = dryMin;
 		this.dryPrime = dryPrime;
 		this.dryMax = dryMax;
@@ -43,6 +43,14 @@ public class SubTreatment {
 
 	public void setDryMax(long dryMax) {
 		this.dryMax = dryMax;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }
