@@ -5,7 +5,8 @@ public class LaunchInfo {
 	private static String $OS;
 	
 	public LaunchInfo(){
-//		String os = System
+		LaunchInfo.$OS = System.getProperty("os.name");
+		
 	}
 
 	public static String get$OS() {
