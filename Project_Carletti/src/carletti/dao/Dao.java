@@ -8,11 +8,13 @@ import carletti.model.SubProduct;
 import carletti.model.Product;
 
 /**
- * This class maintains connection, and any operations, with the database
+ * This class maintains connection, and any operations, with the database.
  * 
  * It is implemented as a Singleton-object to ensure there is only one
  * object interacting with the database.
  * To get an instance call the static method Dao.getInstance().
+ * 
+ * TODO Change implementation to use a database rather than lists.
  * 
  * @author Malik Lund
  *
