@@ -79,6 +79,14 @@ public class Dao {
 	public void storeProduct(Product p){
 		products.add(p);
 	}
+	
+	/**
+	 * Delete a product type from the system.
+	 * @param p The Product object to delete.
+	 */
+	public void removeProduct(Product p){
+		products.remove(p);
+	}
 
 	/**
 	 * Store a SubProduct object in the database.
@@ -86,6 +94,14 @@ public class Dao {
 	 */
 	public void storeSubProduct(SubProduct sp){
 		subproducts.add(sp);
+	}
+	
+	/**
+	 * Delete a sub-product from the system.
+	 * @param sp The SubProduct object to delete.
+	 */
+	public void removeSubProduct(SubProduct sp){
+		subproducts.remove(sp);
 	}
 	
 	/**
