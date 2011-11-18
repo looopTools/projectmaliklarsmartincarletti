@@ -47,13 +47,14 @@ public class Dao {
 	
 	/**
 	 * Returns a list of SubProducts in the given state.
-	 * @param state The state of the returned SubProducts
-	 * @return A list of SubProducts in a given state.
+	 * @param state The state of the returned SubProducts. 
+	 * @return A list of SubProducts in a given state. If state is null
+	 *         all SubProduct objects are returned.
 	 */
 	public List<SubProduct> getSubProducts(State state){
 		ArrayList<SubProduct> selectedSubproducts = new ArrayList<SubProduct>();
 		for (SubProduct sp: subproducts){
-			if (sp.getState().equals(state)){
+			if (sp.getState().equals(state) || state == null){
 				selectedSubproducts.add(sp);
 			}
 		}
