@@ -14,11 +14,14 @@ public class SubProduct {
 	private State state; //The current state which a SubProduct is in 
 	private ArrayList<SubTreatment> subtreatments = new ArrayList<SubTreatment>();
 	private int currentSubTreatmentIndex = -1;
+	private Product product;
 	
-	public SubProduct(int id, String name, State state) {
+	public SubProduct(int id, String name, State state, Product product) {
 		this.id = id;
 		this.name = name;
 		this.state = state;
+		this.product = product;
+		subtreatments.addAll(product.getTreatment().getSubTreatments());
 	}
 
 	public int getId() {
