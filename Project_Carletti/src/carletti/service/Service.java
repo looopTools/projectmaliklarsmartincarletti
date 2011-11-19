@@ -7,17 +7,17 @@ import carletti.model.Treatment;
 public class Service
 {
 
-	public void createSubproduct()
+	public void createSubProduct()
 	{
 		
 	}
 
-	public void deleteSubproduct(SubProduct subproduct)
+	public void deleteSubproduct(SubProduct subProduct)
 	{
 		
 	}
 	
-	public SubProduct getSubproduct(SubProduct subproduct)
+	public SubProduct getSubproduct(SubProduct subProduct)
 	{
 		
 	}
@@ -37,5 +37,10 @@ public class Service
 		
 	}
 	
+	public void nextTreatnemt(SubProduct subProduct)
+	{
+		
+	}
 	
+	public 
 }
