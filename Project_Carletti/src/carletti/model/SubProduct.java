@@ -20,7 +20,7 @@ public class SubProduct {
 		this.id = id;
 		this.name = name;
 		this.state = state;
-		this.product = product;
+		this.setProduct(product);
 		subtreatments.addAll(product.getTreatment().getSubTreatments());
 	}
 
@@ -70,6 +70,14 @@ public class SubProduct {
 
 	public void setCurrentSubTreatmentIndex(int currentSubTreatmentIndex) {
 		this.currentSubTreatmentIndex = currentSubTreatmentIndex;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	/*
