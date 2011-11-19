@@ -30,7 +30,8 @@ public class Dao {
 	 */
 	private Dao(){
 		products = new ArrayList<Product>();
-		subproducts = new ArrayList<SubProduct>();
+		subproducts = new ArrayList<SubProduct>();		
+		
 	}
 	
 	/**
