@@ -32,9 +32,16 @@ public class Service
 		dao.removeSubProduct(subProduct);
 	}
 	
+	public void discardSubProduct(SubProduct subProduct)
+	{
+		State waste = State.WASTE;
+		dao.changeStateOfSubProduct(subProduct, waste);
+	}
+	
 	public SubProduct getSubproduct(SubProduct subProduct)
 	{
-		return dao.getSubProducts().get(dao.getSubProducts().indexOf(subProduct));
+		int i = dao.getSubProducts().indexOf(subProduct);
+		return dao.getSubProducts().get(i);
 	}
 	
 	public void createProduct(int id, String name, String description, Treatment treatment)
@@ -51,7 +58,8 @@ public class Service
 	
 	public Product getProduct(Product product)
 	{
-		return dao.getProducts().get(dao.getProducts().indexOf(product));
+		int i = dao.getProducts().indexOf(product);
+		return dao.getProducts().get(i);
 	}
 	
 	public void nextTreatnemt(SubProduct subProduct)
@@ -79,7 +87,7 @@ public class Service
 	
 	public String getInfoAboutSubProduct(SubProduct subProduct)
 	{
-		return dao.getSubProducts().get(dao.getSubProducts().indexOf(subProduct)) + "";
-		
+		int i = dao.getSubProducts().indexOf(subProduct);
+		return dao.getSubProducts().get(i) + "";
 	}	
 }
