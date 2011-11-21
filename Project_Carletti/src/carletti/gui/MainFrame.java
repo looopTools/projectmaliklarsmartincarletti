@@ -57,12 +57,15 @@ public class MainFrame extends JFrame{
 		btnNew.setMinimumSize(btnMinSize);
 		panel.add(btnNew);
 		
-		scrollPane = new JScrollPane();
-		getContentPane().add(scrollPane, BorderLayout.CENTER);
-		
 		list = new JList();
 		list.setListData(Service.showAllSubProduct().toArray());
-		scrollPane.setViewportView(list);
+		System.out.println(Service.showAllSubProduct());
+		
+		scrollPane = new JScrollPane(list);
+		getContentPane().add(scrollPane, BorderLayout.CENTER);
+		
+		
+		
 		
 		this.setVisible(true);
 		

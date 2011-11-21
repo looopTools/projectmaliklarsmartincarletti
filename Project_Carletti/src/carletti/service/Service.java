@@ -103,25 +103,25 @@ public class Service
 	 */
 	public static void createSomeObjects()
 	{
-		Treatment t1 = createTreatment("Red chocolate MMs");
+		Treatment t1 = Service.createTreatment("Red chocolate MMs");
 		t1.createSubTreatment("1st drying", 1000, 1250, 1500);
 		t1.createSubTreatment("2nd drying", 500, 750, 1000);
 		t1.createSubTreatment("3rd drying", 1250, 1300, 1500);
-		Product p1 = createProduct(1, "Red Chocolate MMs", "Info about red chocolate MMs", t1);
+		Product p1 = Service.createProduct(1, "Red Chocolate MMs", "Info about red chocolate MMs", t1);
 		
-		Treatment t2 = createTreatment("Liquorice");
+		Treatment t2 = Service.createTreatment("Liquorice");
 		t2.createSubTreatment("1st drying", 1000, 1250, 1500);
 		t2.createSubTreatment("2nd drying", 1500, 1750, 2000);
-		Product p2 = createProduct(2, "Liquorice", "Liquorice with coloured sugar layer", t2);
+		Product p2 = Service.createProduct(2, "Liquorice", "Liquorice with coloured sugar layer", t2);
 		
-		Treatment t3 = createTreatment("Coffeebean");
+		Treatment t3 = Service.createTreatment("Coffeebean");
 		t3.createSubTreatment("1st drying", 500, 600, 700);
 		t3.createSubTreatment("2nd drying", 1200, 1300, 1400);
 		t3.createSubTreatment("3rd drying", 300, 400, 500);
-		Product p3 = createProduct(3, "Coffee Bean", "Coffee paste with a layer of chocolate", t3);
+		Product p3 = Service.createProduct(3, "Coffee Bean", "Coffee paste with a layer of chocolate", t3);
 		
-		SubProduct sp1 = createSubProduct(1, "Foobar", p1);
-		SubProduct sp2 = createSubProduct(2, "Barbaz", p2);
-		SubProduct sp3 = createSubProduct(3, "Bazfoo", p3);
+		SubProduct sp1 = Service.createSubProduct(1, "Foobar", p1);
+		SubProduct sp2 = Service.createSubProduct(2, "Barbaz", p2);
+		SubProduct sp3 = Service.createSubProduct(3, "Bazfoo", p3);
 	}
 }

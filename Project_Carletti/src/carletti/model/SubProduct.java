@@ -94,7 +94,7 @@ public class SubProduct {
 //	Added by Martin
 	public String toString()
 	{
-		return getId() + "" + name + "\n" + getState() + "\n" + getCurrentSubTreatmentIndex() + "" + " / " + getSubtreatments().size() + "";
+		return getId() + " " + name + " " + getState() + " " + getCurrentSubTreatmentIndex() + "" + " / " + getSubtreatments().size();
 	}
 //
 }

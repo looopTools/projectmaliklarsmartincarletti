@@ -63,6 +63,8 @@ public class SubProductDialog extends JDialog{
 		txfProd.setEditable(false);
 		panel.add(txfProd);		
 		
+		setInfo();
+		checkAndSetState();
 	}
 	
 //	txfID, txfName, txfState, txfProd;
