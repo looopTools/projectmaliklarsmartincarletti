@@ -11,11 +11,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JButton;
 
+import carletti.gui.dialogs.SubProductDialog;
 import carletti.model.SubProduct;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import carletti.service.Service;
 
 public class MainFrame extends JFrame{
 	private JPanel panel;
@@ -29,6 +32,7 @@ public class MainFrame extends JFrame{
 	
 	private Dimension minimumSize = new Dimension(400, 400);
 	private Dimension btnMinSize = new Dimension(20, 180);
+
 	public MainFrame() {
 		
 		btnCtrl = new Controller();
@@ -57,6 +61,7 @@ public class MainFrame extends JFrame{
 		getContentPane().add(scrollPane, BorderLayout.CENTER);
 		
 		list = new JList();
+		list.setListData(Service.showAllSubProduct().toArray());
 		scrollPane.setViewportView(list);
 		
 		this.setVisible(true);
@@ -67,9 +72,13 @@ public class MainFrame extends JFrame{
 		public void actionPerformed(ActionEvent ae) {
 			
 			if(ae.getSource().equals(btnInfo)){
-				SubProduct sp = null;
+			    SubProduct sp = (SubProduct) list.getSelectedValue();
 				if(sp == null){
 					JOptionPane.showMessageDialog(null, "You need to selected an object");
+				}
+				else{
+				    SubProductDialog spd = new SubProductDialog(sp);
+				    spd.setVisible(true);  
 				}
 			}
 			
