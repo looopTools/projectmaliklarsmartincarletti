@@ -22,7 +22,6 @@ public class SubProductDialog extends JDialog{
 	private JPanel panel;
 	private JLabel labID, labName, labState, labProduct;
 	private JTextField txfID, txfName, txfState, txfProd;
-	private JButton subBtn, canBtn;
 	
 	public SubProductDialog(SubProduct sub){
 		this.sub = sub;
@@ -64,12 +63,6 @@ public class SubProductDialog extends JDialog{
 		txfProd.setEditable(false);
 		panel.add(txfProd);		
 		
-		subBtn  = new JButton();
-		subBtn.setText("Submit");
-//		subBtn.addActionListener();
-		panel.add(subBtn);
-		
-		canBtn = new JButton()
 	}
 	
 //	txfID, txfName, txfState, txfProd;
