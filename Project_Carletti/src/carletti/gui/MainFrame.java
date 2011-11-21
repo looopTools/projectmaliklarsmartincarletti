@@ -1,23 +1,21 @@
 package carletti.gui;
 
-import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JList;
-import javax.swing.JButton;
+import javax.swing.ListSelectionModel;
 
 import carletti.gui.dialogs.SubProductDialog;
 import carletti.model.SubProduct;
-
-import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 import carletti.service.Service;
 
 public class MainFrame extends JFrame{
@@ -59,6 +57,7 @@ public class MainFrame extends JFrame{
 		
 		list = new JList();
 		list.setListData(Service.showAllSubProduct().toArray());
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		System.out.println(Service.showAllSubProduct());
 		
 		scrollPane = new JScrollPane(list);
