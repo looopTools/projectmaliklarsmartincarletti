@@ -23,7 +23,7 @@ public class Dao {
 	private static Dao dao = null;
 	private ArrayList<Product> products;
 	private ArrayList<SubProduct> subproducts;
-	
+	private int nextID = 1;
 	/**
 	 * Simply creates a Dao-object and initializes all
 	 * lists.
@@ -121,5 +121,13 @@ public class Dao {
 	 */
 	public List<SubProduct> getSubProducts(){
 		return new ArrayList<SubProduct>(subproducts);
+	}
+	
+	public int getNextID(){
+		return nextID;
+	}
+	
+	public void countID(){
+		nextID++;
 	}
 }

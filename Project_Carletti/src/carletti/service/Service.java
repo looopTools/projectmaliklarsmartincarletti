@@ -3,11 +3,11 @@ package carletti.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import carletti.dao.Dao;
 import carletti.model.Product;
 import carletti.model.State;
 import carletti.model.SubProduct;
 import carletti.model.Treatment;
-import carletti.dao.Dao;
 
 /**
  * 
@@ -87,6 +87,10 @@ public class Service
 		return dao.getSubProducts(done);
 	}
 	
+	public static List<Product> getProducts(){
+		return dao.getProducts();
+	}
+	
 	public static List<SubProduct> showAllSubProduct()
 	{
 		return dao.getSubProducts();
@@ -96,6 +100,14 @@ public class Service
 	{
 		int i = dao.getSubProducts().indexOf(subProduct);
 		return dao.getSubProducts().get(i) + "";
+	}
+	
+	public static int getNextID(){
+		return dao.getNextID();
+	}
+	
+	public static void countID(){
+		dao.countID();
 	}
 	
 	/**

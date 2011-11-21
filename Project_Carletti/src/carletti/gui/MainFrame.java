@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
+import carletti.gui.dialogs.NewSubProductDialog;
 import carletti.gui.dialogs.SubProductDialog;
 import carletti.model.SubProduct;
 import carletti.service.Service;
@@ -53,6 +54,7 @@ public class MainFrame extends JFrame{
 		
 		btnNew = new JButton("New");
 		btnNew.setMinimumSize(btnMinSize);
+		btnNew.addActionListener(btnCtrl);
 		panel.add(btnNew);
 		
 		list = new JList();
@@ -83,6 +85,11 @@ public class MainFrame extends JFrame{
 				    spd.setVisible(true);  
 				}
 			}
+			else if(ae.getSource().equals(btnNew)){
+				NewSubProductDialog nspd = new NewSubProductDialog();
+				nspd.setVisible(true);
+			}
+			
 			
 		}
 	}
