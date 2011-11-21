@@ -1,7 +1,13 @@
+/**
+ * @author Lars Nielsen, Malik Lasse Lund, Martin R¿n Bundgaard
+ * @class SubProductDialog
+ * @programmer: Lars Nielsen
+ */
 package carletti.gui.dialogs;
 
 import java.awt.GridLayout;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,6 +22,7 @@ public class SubProductDialog extends JDialog{
 	private JPanel panel;
 	private JLabel labID, labName, labState, labProduct;
 	private JTextField txfID, txfName, txfState, txfProd;
+	private JButton subBtn, canBtn;
 	
 	public SubProductDialog(SubProduct sub){
 		this.sub = sub;
@@ -23,7 +30,7 @@ public class SubProductDialog extends JDialog{
 		
 		panel = new JPanel();
 		getContentPane().add(panel);
-		panel.setLayout(new GridLayout(4, 2, 20, 20));
+		panel.setLayout(new GridLayout(5, 2, 20, 20));
 		
 		labID = new JLabel();
 		labID.setText("ID:");
@@ -56,6 +63,13 @@ public class SubProductDialog extends JDialog{
 		txfProd = new JTextField();
 		txfProd.setEditable(false);
 		panel.add(txfProd);		
+		
+		subBtn  = new JButton();
+		subBtn.setText("Submit");
+//		subBtn.addActionListener();
+		panel.add(subBtn);
+		
+		canBtn = new JButton()
 	}
 	
 //	txfID, txfName, txfState, txfProd;
