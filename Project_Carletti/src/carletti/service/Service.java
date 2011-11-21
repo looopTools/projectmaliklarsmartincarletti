@@ -19,80 +19,80 @@ import carletti.dao.Dao;
 public class Service
 {
 	
-	private Dao dao;
+	private static Dao dao = Dao.getInstance();
 	
-	public SubProduct createSubProduct(int id, String name, Product product)
+	public static SubProduct createSubProduct(int id, String name, Product product)
 	{
 		SubProduct sp = new SubProduct(id, name, product);
 		dao.storeSubProduct(sp);
 		return sp;
 	}
 	
-	public void removeSubproduct(SubProduct subProduct)
+	public static void removeSubproduct(SubProduct subProduct)
 	{
 		dao.removeSubProduct(subProduct);
 	}
 	
-	public void discardSubProduct(SubProduct subProduct)
+	public static void discardSubProduct(SubProduct subProduct)
 	{
 		State waste = State.WASTE;
 		dao.changeStateOfSubProduct(subProduct, waste);
 	}
 	
-	public SubProduct getSubproduct(SubProduct subProduct)
+	public static SubProduct getSubproduct(SubProduct subProduct)
 	{
 		int i = dao.getSubProducts().indexOf(subProduct);
 		return dao.getSubProducts().get(i);
 	}
 	
-	public Treatment createTreatment(String name)
+	public static Treatment createTreatment(String name)
 	{
 		Treatment t = new Treatment(name);
 		return t;
 	}
 	
-	public Product createProduct(int id, String name, String description, Treatment treatment)
+	public static Product createProduct(int id, String name, String description, Treatment treatment)
 	{
 		Product p = new Product(id, name, description, treatment);
 		dao.storeProduct(p);
 		return p;
 	}
 	
-	public void removeProduct(Product product)
+	public static void removeProduct(Product product)
 	{
 		dao.removeProduct(product);
 	}
 	
-	public Product getProduct(Product product)
+	public static Product getProduct(Product product)
 	{
 		int i = dao.getProducts().indexOf(product);
 		return dao.getProducts().get(i);
 	}
 	
-	public void nextTreatnemt(SubProduct subProduct)
+	public static void nextTreatnemt(SubProduct subProduct)
 	{
 		subProduct.nextSubTreatment();
 	}
 	
-	public void subProductDone(SubProduct subProduct)
+	public static void subProductDone(SubProduct subProduct)
 	{
 		State done = State.DONE;
 		dao.changeStateOfSubProduct(subProduct, done);
 	}
 	
-	public List<SubProduct> showAllDoneProduct()
+	public static List<SubProduct> showAllDoneProduct()
 	{
 		State done = State.DONE;
 		
 		return dao.getSubProducts(done);
 	}
 	
-	public List<SubProduct> showAllSubProduct()
+	public static List<SubProduct> showAllSubProduct()
 	{
 		return dao.getSubProducts();
 	}
 	
-	public String getInfoAboutSubProduct(SubProduct subProduct)
+	public static String getInfoAboutSubProduct(SubProduct subProduct)
 	{
 		int i = dao.getSubProducts().indexOf(subProduct);
 		return dao.getSubProducts().get(i) + "";
@@ -101,7 +101,7 @@ public class Service
 	/**
 	 * 
 	 */
-	public void createSomeObjects()
+	public static void createSomeObjects()
 	{
 		Treatment t1 = createTreatment("Red chocolate MMs");
 		t1.createSubTreatment("1st drying", 1000, 1250, 1500);
