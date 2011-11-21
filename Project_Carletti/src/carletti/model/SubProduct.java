@@ -13,7 +13,7 @@ public class SubProduct {
 	private String name;
 	private State state; //The current state which a SubProduct is in 
 	private ArrayList<SubTreatment> subtreatments = new ArrayList<SubTreatment>();
-	private int currentSubTreatmentIndex = -1;
+	private int currentSubTreatmentIndex = 0;
 	private Product product;
 	
 	public SubProduct(int id, String name, Product product) {
@@ -91,10 +91,13 @@ public class SubProduct {
 		return subtreatments.get(getCurrentSubTreatmentIndex());
 	}
 	
+	public int stringThis(){
+		return getCurrentSubTreatmentIndex() +1;
+	}
 //	Added by Martin
 	public String toString()
 	{
-		return getId() + " " + name + " " + getState() + " " + getCurrentSubTreatmentIndex() + "" + " / " + getSubtreatments().size();
+		return getId() + " " + name + " " + getState() + " " + stringThis() + "" + " / " + getSubtreatments().size();
 	}
 //
 }
