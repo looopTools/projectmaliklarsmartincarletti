@@ -113,10 +113,9 @@ public class NewSubProductDialog extends JDialog {
 		public void actionPerformed(ActionEvent ae) {
 			if (ae.getSource().equals(btnSub)) {
 				// int id, String name, Product product
-				int id = Service.getNextID();
 				String name = txfName.getText();
 				Product p = (Product) prodList.getSelectedValue();
-				Service.createSubProduct(id, name, p);
+				Service.createSubProduct(name, p);
 
 			} else if (ae.getSource().equals(btnCan)) {
 				setDialogVisibility(false);
