@@ -107,7 +107,6 @@ public class ShowProductFrame extends JDialog
 	public void updateTextPane()
 	{
 		int index = list.getSelectedIndex();
-		System.out.println(index);
 		if (index >= 0)
 			textPane.setText(Service.getProducts().get(list.getSelectedIndex()).getName() + "\n" +
 					Service.getProducts().get(list.getSelectedIndex()).getDescription() + "\n" + "Treatment:" + "\n" +
