@@ -80,5 +80,10 @@ public class Product {
 		this.description = newDescription;
 	}
 	
-	
+//	Added by Martin
+	public String toString()
+	{
+		return name;
+	}
+//
 }
