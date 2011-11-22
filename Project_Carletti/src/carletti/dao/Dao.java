@@ -97,7 +97,7 @@ public class Dao {
 	 */
 	public void storeSubProduct(SubProduct sp){
 		subproducts.add(sp);
-		System.out.println(sp);
+		
 	}
 	
 	/**
