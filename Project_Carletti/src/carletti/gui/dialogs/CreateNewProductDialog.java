@@ -1,4 +1,4 @@
-package carletti.gui;
+package carletti.gui.dialogs;
 
 import javax.swing.JDialog;
 import javax.swing.JPanel;
