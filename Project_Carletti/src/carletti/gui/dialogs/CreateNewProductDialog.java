@@ -128,7 +128,7 @@ public class CreateNewProductDialog extends JDialog {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			if (ae.getSource() == btnCreateSubTreatment){
-				CreateNewSubTreatmentDialog createSubTreatmentDialog = new CreateNewSubTreatmentDialog();
+				CreateNewSubTreatmentDialogTwo createSubTreatmentDialog = new CreateNewSubTreatmentDialogTwo();
 				createSubTreatmentDialog.setVisible(true);
 				if (createSubTreatmentDialog.succes()){
 					subTreatmentsNames.add(createSubTreatmentDialog.getName());
