@@ -46,8 +46,9 @@ public class NewSubProductDialog extends JDialog{
 	btnCtrl = new Controller();
 	
 	this.setSize(defaultSize);
-//	this.setResizable(false);
+	this.setResizable(false);
 	this.setTitle("New Subproduct");
+	this.setLayout(null);
 	
 	lblName = new JLabel();
 	lblName.setText("Name");
