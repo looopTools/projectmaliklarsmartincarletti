@@ -88,7 +88,7 @@ public class MainFrame extends JFrame{
 	}
 
 	private void updateList() {
-		subProductList.setListData(Service.showAllSubProduct().toArray());
+		subProductList.setListData(Service.getAllNotWastedSubProducts().toArray());
 	}
 
 	private class Controller implements ActionListener {
@@ -122,6 +122,7 @@ public class MainFrame extends JFrame{
 				else{
 				    WasteSubProduct wsp = new WasteSubProduct(sp);
 				    wsp.setVisible(true);
+				    updateList();
 				}
 			
 			}

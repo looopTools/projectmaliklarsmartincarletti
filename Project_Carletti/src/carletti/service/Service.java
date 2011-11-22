@@ -133,4 +133,16 @@ public class Service
 		SubProduct sp2 = Service.createSubProduct("Barbaz", p2);
 		SubProduct sp3 = Service.createSubProduct("Bazfoo", p3);
 	}
+	
+	public static List<SubProduct> getAllNotWastedSubProducts(){
+		ArrayList<SubProduct> productsNotWasted = new ArrayList<SubProduct>();
+		
+		for(int i = 0; i < Dao.getInstance().getSubProducts().size(); i++){
+			if(Dao.getInstance().getSubProducts().get(i).getState() != State.WASTE){
+				productsNotWasted.add(Dao.getInstance().getSubProducts().get(i));
+			}
+		}
+		
+		return productsNotWasted;
+	}
 }
