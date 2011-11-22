@@ -3,7 +3,7 @@ package carletti;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
-import carletti.gui.CreateNewProductDialog;
+import carletti.gui.dialogs.CreateNewProductDialog;
 import carletti.service.Service;
 
 public class CreateProductTester extends JFrame {
