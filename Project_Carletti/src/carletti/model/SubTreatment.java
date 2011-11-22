@@ -53,4 +53,8 @@ public class SubTreatment {
 		this.name = name;
 	}
 	
+	public String toString()
+	{
+		return "\n" + name + "\n" + "min= " + getDryMin() + "\nprime= " + getDryPrime() + "\nmax= " + getDryMax();
+	}
 }

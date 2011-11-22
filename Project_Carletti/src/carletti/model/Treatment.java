@@ -57,4 +57,9 @@ public class Treatment {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String toString()
+	{
+		return name + "\n" + getSubTreatments().toString() + "\n";
+	}
 }
