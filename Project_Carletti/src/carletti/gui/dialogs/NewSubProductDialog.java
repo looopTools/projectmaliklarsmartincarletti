@@ -48,6 +48,7 @@ public class NewSubProductDialog extends JDialog {
 		this.setResizable(false);
 		this.setTitle("New Subproduct");
 		this.setLayout(null);
+		this.setModal(true);
 
 		lblName = new JLabel();
 		lblName.setText("Name");
@@ -116,6 +117,7 @@ public class NewSubProductDialog extends JDialog {
 				String name = txfName.getText();
 				Product p = (Product) prodList.getSelectedValue();
 				Service.createSubProduct(name, p);
+				NewSubProductDialog.this.setVisible(false);
 
 			} else if (ae.getSource().equals(btnCan)) {
 				setDialogVisibility(false);
