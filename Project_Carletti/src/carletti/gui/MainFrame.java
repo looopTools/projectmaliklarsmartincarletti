@@ -126,7 +126,6 @@ public class MainFrame extends JFrame{
 			}
 			
 			else if(ae.getSource().equals(btnProductInfo)){
-				System.out.println("dfakjlkdsahfklhsaf");
 				ShowProductFrame spf = new ShowProductFrame();
 				spf.setVisible(true);
 					}
