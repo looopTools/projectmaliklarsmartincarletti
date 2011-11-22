@@ -16,6 +16,7 @@ import javax.swing.ListSelectionModel;
 
 import carletti.gui.dialogs.NewSubProductDialog;
 import carletti.gui.dialogs.SubProductDialog;
+import carletti.gui.dialogs.WasteSubProduct;
 import carletti.model.SubProduct;
 import carletti.service.Service;
 
@@ -25,7 +26,7 @@ public class MainFrame extends JFrame{
 	private JList subProductList;
 	private JButton btnNewSubProduct;
 	private JButton btnInfo;
-	private JButton btnKasser;
+	private JButton btnWaste;
 	
 	private Controller btnCtrl;
 	
@@ -49,9 +50,10 @@ public class MainFrame extends JFrame{
 		btnInfo.addActionListener(btnCtrl);
 		buttonsPanel.add(btnInfo);
 		
-		btnKasser = new JButton("Waste");
-		btnKasser.setMinimumSize(btnMinSize);
-		buttonsPanel.add(btnKasser);
+		btnWaste = new JButton("Waste");
+		btnWaste.setMinimumSize(btnMinSize);
+		btnWaste.addActionListener(btnCtrl);
+		buttonsPanel.add(btnWaste);
 		
 		btnNewSubProduct = new JButton("New subproduct");
 		btnNewSubProduct.setMinimumSize(btnMinSize);
@@ -101,6 +103,16 @@ public class MainFrame extends JFrame{
 			else if (ae.getSource().equals(btnNewProduct)){
 				CreateNewProductDialog newProductDialog = new CreateNewProductDialog();
 				newProductDialog.setVisible(true);
+			}
+			else if(ae.getSource().equals(btnWaste)){
+				SubProduct sp = (SubProduct) subProductList.getSelectedValue();
+				if(sp == null){
+					JOptionPane.showMessageDialog(null, "You need to selected an object");
+				}
+				else{
+				    WasteSubProduct wsp = new WasteSubProduct(sp);
+				    wsp.setVisible(true);
+				}
 			}
 		}
 	}
