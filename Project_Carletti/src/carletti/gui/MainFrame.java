@@ -20,10 +20,10 @@ import carletti.model.SubProduct;
 import carletti.service.Service;
 
 public class MainFrame extends JFrame{
-	private JPanel panel;
-	private JScrollPane scrollPane;
-	private JList list;
-	private JButton btnNew;
+	private JPanel buttonsPanel;
+	private JScrollPane subProductsScrollPane;
+	private JList subProductList;
+	private JButton btnNewSubProduct;
 	private JButton btnInfo;
 	private JButton btnKasser;
 	
@@ -31,6 +31,7 @@ public class MainFrame extends JFrame{
 	
 	private Dimension minimumSize = new Dimension(400, 400);
 	private Dimension btnMinSize = new Dimension(20, 180);
+	private JButton btnNewProduct;
 
 	public MainFrame() {
 		
@@ -39,31 +40,34 @@ public class MainFrame extends JFrame{
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		this.setTitle("Carletti");
 		this.setMinimumSize(minimumSize);
-		panel = new JPanel();
-		getContentPane().add(panel, BorderLayout.EAST);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		buttonsPanel = new JPanel();
+		getContentPane().add(buttonsPanel, BorderLayout.EAST);
+		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
 		
 		btnInfo = new JButton("Info");
 		btnInfo.setMinimumSize(btnMinSize);
 		btnInfo.addActionListener(btnCtrl);
-		panel.add(btnInfo);
+		buttonsPanel.add(btnInfo);
 		
 		btnKasser = new JButton("Waste");
 		btnKasser.setMinimumSize(btnMinSize);
-		panel.add(btnKasser);
+		buttonsPanel.add(btnKasser);
 		
-		btnNew = new JButton("New");
-		btnNew.setMinimumSize(btnMinSize);
-		btnNew.addActionListener(btnCtrl);
-		panel.add(btnNew);
+		btnNewSubProduct = new JButton("New subproduct");
+		btnNewSubProduct.setMinimumSize(btnMinSize);
+		btnNewSubProduct.addActionListener(btnCtrl);
+		buttonsPanel.add(btnNewSubProduct);
 		
-		list = new JList();
-		list.setListData(Service.showAllSubProduct().toArray());
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		System.out.println(Service.showAllSubProduct());
+		btnNewProduct = new JButton("New Product");
+		buttonsPanel.add(btnNewProduct);
+		btnNewProduct.addActionListener(btnCtrl);
 		
-		scrollPane = new JScrollPane(list);
-		getContentPane().add(scrollPane, BorderLayout.CENTER);
+		subProductList = new JList();
+		subProductList.setListData(Service.showAllSubProduct().toArray());
+		subProductList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		subProductsScrollPane = new JScrollPane(subProductList);
+		getContentPane().add(subProductsScrollPane, BorderLayout.CENTER);
 		
 		
 		
@@ -72,25 +76,32 @@ public class MainFrame extends JFrame{
 		
 	}
 
+	private void updateList() {
+		subProductList.setListData(Service.showAllSubProduct().toArray());
+	}
+
 	private class Controller implements ActionListener {
 		public void actionPerformed(ActionEvent ae) {
 			
 			if(ae.getSource().equals(btnInfo)){
-			    SubProduct sp = (SubProduct) list.getSelectedValue();
+			    SubProduct sp = (SubProduct) subProductList.getSelectedValue();
 				if(sp == null){
 					JOptionPane.showMessageDialog(null, "You need to selected an object");
 				}
 				else{
 				    SubProductDialog spd = new SubProductDialog(sp);
-				    spd.setVisible(true);  
+				    spd.setVisible(true);
 				}
 			}
-			else if(ae.getSource().equals(btnNew)){
+			else if(ae.getSource().equals(btnNewSubProduct)){
 				NewSubProductDialog nspd = new NewSubProductDialog();
 				nspd.setVisible(true);
+			    updateList();
 			}
-			
-			
+			else if (ae.getSource().equals(btnNewProduct)){
+				CreateNewProductDialog newProductDialog = new CreateNewProductDialog();
+				newProductDialog.setVisible(true);
+			}
 		}
 	}
 }

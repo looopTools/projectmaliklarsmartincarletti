@@ -39,6 +39,7 @@ public class CreateNewProductDialog extends JDialog {
 	public CreateNewProductDialog() {
 		setTitle("Create new product");
 		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
+		this.setModal(true);
 		controller = new Controller();
 		subTreatmentsNames = new ArrayList<String>();
 		subTreatmentsMin = new ArrayList<Long>();
