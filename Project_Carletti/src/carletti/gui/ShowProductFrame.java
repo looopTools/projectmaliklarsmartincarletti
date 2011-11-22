@@ -4,7 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -24,7 +24,7 @@ import carletti.gui.dialogs.SubProductDialog;
 import carletti.model.SubProduct;
 import carletti.service.Service;
 
-public class ShowProductFrame extends JFrame
+public class ShowProductFrame extends JDialog
 {
 
 	private JPanel contentPane;
@@ -64,7 +64,7 @@ public class ShowProductFrame extends JFrame
 	public ShowProductFrame()
 	{
 		btnCtrl = new Controller();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -101,8 +101,6 @@ public class ShowProductFrame extends JFrame
 		
 		scrollPane = new JScrollPane(list);
 		splitPane.setLeftComponent(scrollPane);
-		
-		textPane.setText("hej");
 	
 	}
 	
@@ -114,15 +112,12 @@ public class ShowProductFrame extends JFrame
 			textPane.setText(Service.getProducts().get(list.getSelectedIndex()).getName() + "\n" +
 					Service.getProducts().get(list.getSelectedIndex()).getDescription() + "\n" + "Treatment:" + "\n" +
 					Service.getProducts().get(list.getSelectedIndex()).getTreatment());
-		else
-			textPane.setText("Info");
 	}
 	
 	private class Controller implements ActionListener {
 		public void actionPerformed(ActionEvent ae) {
 			
 			if(ae.getSource().equals(btnOk)){
-				System.out.println("dsafdsafsa");
 			    ShowProductFrame.this.setVisible(false);
 				}
 		}

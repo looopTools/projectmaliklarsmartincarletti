@@ -33,6 +33,7 @@ public class MainFrame extends JFrame{
 	private Dimension minimumSize = new Dimension(400, 400);
 	private Dimension btnMinSize = new Dimension(20, 180);
 	private JButton btnNewProduct;
+	private JButton btnProductInfo;
 
 	public MainFrame() {
 		
@@ -53,7 +54,14 @@ public class MainFrame extends JFrame{
 		btnWaste = new JButton("Waste");
 		btnWaste.setMinimumSize(btnMinSize);
 		btnWaste.addActionListener(btnCtrl);
+		
+		
+		btnProductInfo = new JButton("Product Info");
+		btnProductInfo.addActionListener(btnCtrl);
 		buttonsPanel.add(btnWaste);
+		buttonsPanel.add(btnProductInfo);
+		
+		
 		
 		btnNewSubProduct = new JButton("New subproduct");
 		btnNewSubProduct.setMinimumSize(btnMinSize);
@@ -109,11 +117,19 @@ public class MainFrame extends JFrame{
 				if(sp == null){
 					JOptionPane.showMessageDialog(null, "You need to selected an object");
 				}
+					
 				else{
 				    WasteSubProduct wsp = new WasteSubProduct(sp);
 				    wsp.setVisible(true);
 				}
+			
 			}
+			
+			else if(ae.getSource().equals(btnProductInfo)){
+				System.out.println("dfakjlkdsahfklhsaf");
+				ShowProductFrame spf = new ShowProductFrame();
+				spf.setVisible(true);
+					}
 		}
 	}
 }
