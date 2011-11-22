@@ -43,7 +43,7 @@ public class MainFrame extends JFrame{
 		getContentPane().add(panel, BorderLayout.EAST);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
-		btnInfo = new JButton("Ifo");
+		btnInfo = new JButton("Info");
 		btnInfo.setMinimumSize(btnMinSize);
 		btnInfo.addActionListener(btnCtrl);
 		panel.add(btnInfo);

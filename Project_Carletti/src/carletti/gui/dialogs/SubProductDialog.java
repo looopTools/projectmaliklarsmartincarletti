@@ -65,6 +65,7 @@ public class SubProductDialog extends JDialog{
 		
 		setInfo();
 		checkAndSetState();
+		this.pack();
 	}
 	
 //	txfID, txfName, txfState, txfProd;
