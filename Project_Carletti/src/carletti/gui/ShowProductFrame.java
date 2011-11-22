@@ -33,6 +33,7 @@ public class ShowProductFrame extends JDialog
 	private JSplitPane splitPane;
 	private JTextPane textPane;
 	private JScrollPane scrollPane;
+	private JScrollPane screooPane2;
 	private JList list;
 	
 	private Controller btnCtrl;
@@ -102,6 +103,9 @@ public class ShowProductFrame extends JDialog
 		scrollPane = new JScrollPane(list);
 		splitPane.setLeftComponent(scrollPane);
 	
+		screooPane2 = new JScrollPane(textPane);
+		splitPane.setRightComponent(screooPane2);
+		
 	}
 	
 	public void updateTextPane()
