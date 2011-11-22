@@ -6,6 +6,8 @@
 package carletti.gui.dialogs;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -22,14 +24,18 @@ public class SubProductDialog extends JDialog{
 	private JPanel panel;
 	private JLabel labID, labName, labState, labProduct;
 	private JTextField txfID, txfName, txfState, txfProd;
+	private JButton btnOK;
+	private Controller btnCtrl;
 	
 	public SubProductDialog(SubProduct sub){
 		this.sub = sub;
+		btnCtrl = new Controller();
+		this.setResizable(false);
 		getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
 		
 		panel = new JPanel();
 		getContentPane().add(panel);
-		panel.setLayout(new GridLayout(5, 2, 20, 20));
+		panel.setLayout(new GridLayout(6, 2, 20, 20));
 		
 		labID = new JLabel();
 		labID.setText("ID:");
@@ -61,7 +67,12 @@ public class SubProductDialog extends JDialog{
 		
 		txfProd = new JTextField();
 		txfProd.setEditable(false);
-		panel.add(txfProd);		
+		panel.add(txfProd);
+		
+		btnOK = new JButton();
+		btnOK.setText("OK");
+		btnOK.addActionListener(btnCtrl);
+		panel.add(btnOK);
 		
 		setInfo();
 		checkAndSetState();
@@ -91,5 +102,21 @@ public class SubProductDialog extends JDialog{
 		else if(sub.getState() == State.WASTE){
 			txfState.setText("Waste");
 		}
+	}
+	
+	private void thisSetVisible(boolean visiblity){
+		this.setVisible(visiblity);
+	}
+	
+	private class Controller implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent ae) {
+			// TODO Auto-generated method stub
+			if(ae.getSource().equals(btnOK)){
+				thisSetVisible(false);
+			}
+		}
+		
 	}
 }
