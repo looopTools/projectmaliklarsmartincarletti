@@ -1,97 +1,59 @@
 /**
- * Lars
+ * @author Lars Nielsen, Mailk Lasse Lund, Martin R¿n Bundgaard
+ * @Class PositionTest
+ * @programmer Lars Nielsen
  */
 package carletti.test.model;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+
+import carletti.model.Position;
+import carletti.model.Product;
+import carletti.model.SubProduct;
+import carletti.model.Treatment;
 
 public class PositionTest {
 
 	@Test
 	public void testPosition() {
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
+		Position p = new Position("1A");
+		
 	}
 
 	@Test
 	public void testGetPosID() {
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
+		Position p = new Position("1A");
+		p.getPosID();
 	}
 
 	@Test
 	public void testSetPosID() {
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
+		Position p = new Position("1A");
+		p.setPosID("2A");
 	}
 
 	@Test
 	public void testPutSubProductOnPosition() {
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
+		Treatment tm = new Treatment("Kain");
+		Product pd = new Product(1, "name", "description", tm);
+		SubProduct sp = new SubProduct(10, "Judas", pd, 10000);
+		Position p = new Position("1A");
+		p.putSubProductOnPosition(sp);
 	}
 
 	@Test
 	public void testRemoveSubProductFromPosition() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testObject() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetClass() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testHashCode() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testEquals() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testClone() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testToString() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testNotify() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testNotifyAll() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testWaitLong() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testWaitLongInt() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testWait() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testFinalize() {
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
+		Treatment tm = new Treatment("Kain");
+		Product pd = new Product(1, "name", "description", tm);
+		SubProduct sp = new SubProduct(10, "Judas", pd, 10000);
+		Position p = new Position("1A");
+		p.putSubProductOnPosition(sp);
+		p.removeSubProductFromPosition();
 	}
 
 }
