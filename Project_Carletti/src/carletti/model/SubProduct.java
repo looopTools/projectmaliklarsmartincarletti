@@ -6,13 +6,14 @@
 package carletti.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SubProduct {
 	
 	private int id; //To have a key for the database
 	private String name;
 	private State state; //The current state which a SubProduct is in 
-	private ArrayList<SubTreatment> subtreatments = new ArrayList<SubTreatment>();
+	private List<SubTreatment> subtreatments = new ArrayList<SubTreatment>();
 	private int currentSubTreatmentIndex = 0;
 	private Product product;
 	private long timeAdded;
@@ -22,7 +23,6 @@ public class SubProduct {
 		this.name = name;
 		this.state = State.DRYING;
 		this.setProduct(product);
-		subtreatments.addAll(product.getTreatment().getSubTreatments());
 		this.timeAdded = timeAdded;
 	}
 
@@ -54,12 +54,13 @@ public class SubProduct {
 		this.state = state;
 	}
 
-	public ArrayList<SubTreatment> getSubtreatments() {
+	public List<SubTreatment> getSubtreatments() {
 		return new ArrayList<SubTreatment>(subtreatments);
 	}
 
-	public void setSubtreatments(ArrayList<SubTreatment> subtreatments) {
+	public void setSubtreatments(List<SubTreatment> subtreatments) {
 		this.subtreatments = subtreatments;
+		setCurrentSubTreatmentIndex(0);
 	}
 	
 	public void addSubTreatment(SubTreatment st){
@@ -84,13 +85,16 @@ public class SubProduct {
 
 	public void setProduct(Product product) {
 		this.product = product;
+		setSubtreatments(product.getTreatment().getSubTreatments());
 	}
 
 	/*
 	 * @post subtreatments is in sort by need
 	 */
 	public void nextSubTreatment(){
-		setCurrentSubTreatmentIndex(getCurrentSubTreatmentIndex()+1);
+		if (currentSubTreatmentIndex < (subtreatments.size() - 1)){
+			setCurrentSubTreatmentIndex(getCurrentSubTreatmentIndex()+1);
+		}
 	}
 	
 	public SubTreatment getCurrentSubTreatment(){
