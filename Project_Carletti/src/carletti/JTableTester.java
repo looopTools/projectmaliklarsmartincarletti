@@ -12,6 +12,7 @@ import javax.swing.table.TableModel;
 
 public class JTableTester extends JFrame {
 	private JTable table;
+	private TableModel tableModel;
 	
 	public JTableTester() {
 		
@@ -19,45 +20,48 @@ public class JTableTester extends JFrame {
 		getContentPane().add(scrollPane, BorderLayout.CENTER);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		String[] coloumnNames = {"ID", "Subproduct", "Product Type"};
-		Object[][] data = {
-				{new Integer(1), "Chocolate", "Chocolate Product"},
-				{new Integer(2), "FooBar", "FooBar Product"},
-				{new Integer(3), "BarBaz", "BarBaz Product"},
-				{new Integer(4), "BazFoo", "BazFoo Product"}
-		};
-		
-		table = new JTable(data, coloumnNames);
+		tableModel = new MyTableModel();
+		table = new JTable(tableModel);
 		table.setAutoCreateRowSorter(true);
-		TableColumn column = table.getColumn("Subproduct");
+		table.setFillsViewportHeight(true);
 		scrollPane.setViewportView(table);
 		
 		pack();
 	}
 	
 	private class MyTableModel extends AbstractTableModel {
+		private String[] coloumnNames = {"ID", "Subproduct", "Product Type"};
+		private Object[][] data = {
+				{new Integer(1), "Chocolate", "Chocolate Product"},
+				{new Integer(2), "FooBar", "FooBar Product"},
+				{new Integer(3), "BarBaz", "BarBaz Product"},
+				{new Integer(4), "BazFoo", "BazFoo Product"}
+		};
 
 		@Override
 		public int getColumnCount() {
-			// TODO Auto-generated method stub
-			return 0;
+			return coloumnNames.length;
 		}
 
 		@Override
 		public int getRowCount() {
-			// TODO Auto-generated method stub
-			return 0;
+			return data.length;
+		}
+		
+		@Override
+		public String getColumnName(int col){
+			return coloumnNames[col];
 		}
 
 		@Override
-		public Object getValueAt(int rowIndex, int columnIndex) {
-			// TODO Auto-generated method stub
-			return null;
+		public Object getValueAt(int row, int col) {
+			return data[row][col];
 		}
 		
+		public Class getColumnClass(int c){
+			return getValueAt(0,c).getClass();
+		}	
 	}
-	
-	
 
 	/**
 	 * @param args
