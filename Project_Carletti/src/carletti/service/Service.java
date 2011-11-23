@@ -107,6 +107,12 @@ public class Service
 		return dao.getSubProducts().get(i) + "";
 	}
 	
+	public static List<SubProduct> getDryingSubProduct()
+	{
+		State drying = State.DRYING;
+		return dao.getSubProducts(drying);
+	}
+	
 	/**
 	 * 
 	 */
