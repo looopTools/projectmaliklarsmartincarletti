@@ -1,21 +1,18 @@
-package carletti.model;
+package carletti.test.model;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class PositionTest
-{
+public class SubProductTest {
 
 	@Before
-	public void setUp() throws Exception
-	{
+	public void setUp() throws Exception {
 	}
 
 	@Test
-	public void test()
-	{
+	public void test() {
 		fail("Not yet implemented");
 	}
 

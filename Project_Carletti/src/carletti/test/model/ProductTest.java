@@ -1,4 +1,4 @@
-package carletti.model;
+package carletti.test.model;
 
 import static org.junit.Assert.*;
 
