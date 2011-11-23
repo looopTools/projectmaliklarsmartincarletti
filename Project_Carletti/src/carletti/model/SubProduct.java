@@ -15,13 +15,19 @@ public class SubProduct {
 	private ArrayList<SubTreatment> subtreatments = new ArrayList<SubTreatment>();
 	private int currentSubTreatmentIndex = 0;
 	private Product product;
+	private long timeAdded;
 	
-	public SubProduct(int id, String name, Product product) {
+	public SubProduct(int id, String name, Product product, long timeAdded) {
 		this.id = id;
 		this.name = name;
 		this.state = State.DRYING;
 		this.setProduct(product);
 		subtreatments.addAll(product.getTreatment().getSubTreatments());
+		this.timeAdded = timeAdded;
+	}
+
+	public long getTimeAdded() {
+		return timeAdded;
 	}
 
 	public int getId() {
