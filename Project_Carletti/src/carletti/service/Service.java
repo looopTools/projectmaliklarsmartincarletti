@@ -117,9 +117,7 @@ public class Service
 		return dao.getSubProducts(drying);
 	}
 	
-	/**
-	 * 
-	 */
+	//--------- Malik-------------
 	public static void createSomeObjects()
 	{
 		Treatment t1 = Service.createTreatment("Red chocolate MMs");
@@ -143,6 +141,7 @@ public class Service
 		SubProduct sp2 = Service.createSubProduct("Barbaz", p2);
 		SubProduct sp3 = Service.createSubProduct("Bazfoo", p3);
 	}
+	//----------------------------
 	
 	//Add by Lars
 	public static List<SubProduct> getAllNotWastedSubProducts(){
