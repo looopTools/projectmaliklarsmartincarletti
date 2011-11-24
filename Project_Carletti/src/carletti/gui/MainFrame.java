@@ -38,6 +38,7 @@ public class MainFrame extends JFrame{
 	private Dimension btnMinSize = new Dimension(20, 180);
 	private JButton btnNewProduct;
 	private JButton btnProductInfo;
+	private int subProductListlIndex;
 
 	public MainFrame() {
 		
@@ -80,6 +81,7 @@ public class MainFrame extends JFrame{
 		subProductList.setListData(Service.getAllNotWastedSubProducts().toArray());
 		subProductList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
+		
 		subProductsScrollPane = new JScrollPane(subProductList);
 		subProductsScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		getContentPane().add(subProductsScrollPane, BorderLayout.CENTER);
@@ -94,7 +96,9 @@ public class MainFrame extends JFrame{
 	}
 
 	public void updateList() {
+		subProductListlIndex = subProductList.getSelectedIndex(); //martin
 		subProductList.setListData(Service.getAllNotWastedSubProducts().toArray());
+		subProductList.setSelectedIndex(subProductListlIndex); //martin
 	}
 
 	private class Controller implements ActionListener {
