@@ -83,10 +83,4 @@ public class ProductTest
 		assertEquals("Den nye", p1.getDescription());
 	}
 
-	@Test
-	public void testToString()
-	{
-		assertEquals("Produkt1", p1.toString());
-	}
-
 }
