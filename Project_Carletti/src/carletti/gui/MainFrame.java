@@ -84,8 +84,10 @@ public class MainFrame extends JFrame{
 		subProductsScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		getContentPane().add(subProductsScrollPane, BorderLayout.CENTER);
 		
+		//--- Malik Lund ---
 		Thread t = new Thread(new UpdaterThread(this));
 		t.start();
+		//------------------
 		
 		this.setVisible(true);
 		
