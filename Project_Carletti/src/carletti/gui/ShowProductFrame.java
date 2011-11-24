@@ -1,6 +1,7 @@
 package carletti.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +36,7 @@ public class ShowProductFrame extends JDialog
 	private JScrollPane scrollPane;
 	private JScrollPane screooPane2;
 	private JList list;
+	private Dimension minimumSize = new Dimension(400, 500);
 	
 	private Controller btnCtrl;
 
@@ -65,7 +67,7 @@ public class ShowProductFrame extends JDialog
 	public ShowProductFrame()
 	{
 		btnCtrl = new Controller();
-		
+		this.setMinimumSize(minimumSize);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
