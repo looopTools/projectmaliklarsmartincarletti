@@ -1,6 +1,7 @@
 package carletti.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import carletti.dao.Dao;
@@ -98,7 +99,10 @@ public class Service
 	
 	public static List<SubProduct> showAllSubProduct()
 	{
-		return dao.getSubProducts();
+		List<SubProduct> list = Dao.getInstance().getSubProducts();
+		
+		Collections.sort(list);
+		return list;
 	}
 	
 	public static String getInfoAboutSubProduct(SubProduct subProduct)
@@ -149,6 +153,8 @@ public class Service
 				productsNotWasted.add(Dao.getInstance().getSubProducts().get(i));
 			}
 		}
+		
+		Collections.sort(productsNotWasted);
 		
 		return productsNotWasted;
 	}

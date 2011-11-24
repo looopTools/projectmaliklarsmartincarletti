@@ -5,10 +5,12 @@
  */
 package carletti.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubProduct {
+public class SubProduct implements Comparable<SubProduct>{
 	
 	private int id; //To have a key for the database
 	private String name;
@@ -104,10 +106,38 @@ public class SubProduct {
 	public int stringThis(){
 		return getCurrentSubTreatmentIndex() +1;
 	}
+	
+	public String getTime()
+	{
+		SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy '-' HH:mm:ss");
+		return sd.format(getTimeAdded());
+		
+	}
 //	Added by Martin
 	public String toString()
 	{
-		return getId() + " " + name + " " + getState() + " " + stringThis() + "" + " / " + getSubtreatments().size();
+		return timeLeft() + " | " + getTime()+ " | " + getId() + " " + name + " " + getState() + " " + stringThis() + "" + " / " + getSubtreatments().size();
 	}
-//
+
+	
+	public int timeLeft()
+	{
+		int min = (int) (getCurrentSubTreatment().getDryMin() + timeAdded);
+		int max = (int) (getCurrentSubTreatment().getDryMax() + timeAdded);
+		
+		SimpleDateFormat sdMin = new SimpleDateFormat("HH:mm:ss");
+		SimpleDateFormat sdMax = new SimpleDateFormat("HH:mm:ss");
+		
+		sdMin.format(min);
+		sdMax.format(max);
+		
+		
+		return max - min;
+	}
+
+	@Override
+	public int compareTo(SubProduct arg0)
+	{
+		return (int) (timeLeft()- arg0.timeLeft());
+	}
 }
