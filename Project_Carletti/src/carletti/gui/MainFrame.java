@@ -77,21 +77,21 @@ public class MainFrame extends JFrame{
 		btnNewProduct.addActionListener(btnCtrl);
 		
 		subProductList = new JList();
-		subProductList.setListData(Service.showAllSubProduct().toArray());
+		subProductList.setListData(Service.getAllNotWastedSubProducts().toArray());
 		subProductList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		subProductsScrollPane = new JScrollPane(subProductList);
 		subProductsScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		getContentPane().add(subProductsScrollPane, BorderLayout.CENTER);
 		
-		
-		
+		Thread t = new Thread(new UpdaterThread(this));
+		t.start();
 		
 		this.setVisible(true);
 		
 	}
 
-	private void updateList() {
+	public void updateList() {
 		subProductList.setListData(Service.getAllNotWastedSubProducts().toArray());
 	}
 

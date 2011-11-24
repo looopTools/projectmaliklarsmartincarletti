@@ -123,18 +123,18 @@ public class Service
 	public static void createSomeObjects()
 	{
 		Treatment t1 = Service.createTreatment("Red chocolate MMs");
-		t1.createSubTreatment("1st drying", 1000, 1250, 1500);
+		t1.createSubTreatment("1st drying", 1000*60*30, 1000*60*32, 1000*60*35);
 		t1.createSubTreatment("2nd drying", 500, 750, 1000);
 		t1.createSubTreatment("3rd drying", 1250, 1300, 1500);
 		Product p1 = Service.createProduct("Red Chocolate MMs", "Info about red chocolate MMs", t1);
 		
 		Treatment t2 = Service.createTreatment("Liquorice");
-		t2.createSubTreatment("1st drying", 1000, 1250, 1500);
+		t2.createSubTreatment("1st drying", 1000*60*15, 1000*60*20, 1000*60*25);
 		t2.createSubTreatment("2nd drying", 1500, 1750, 2000);
 		Product p2 = Service.createProduct("Liquorice", "Liquorice with coloured sugar layer", t2);
 		
 		Treatment t3 = Service.createTreatment("Coffeebean");
-		t3.createSubTreatment("1st drying", 500, 600, 700);
+		t3.createSubTreatment("1st drying", 1000*60*55, 1000*60*60, 1000*60*70);
 		t3.createSubTreatment("2nd drying", 1200, 1300, 1400);
 		t3.createSubTreatment("3rd drying", 300, 400, 500);
 		Product p3 = Service.createProduct("Coffee Bean", "Coffee paste with a layer of chocolate", t3);
