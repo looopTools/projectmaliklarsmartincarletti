@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-import carletti.gui.dialogs.CreateNewProductDialog;
+import carletti.gui.dialogs.CreateNewProductDialogTwo;
 import carletti.gui.dialogs.NewSubProductDialog;
 import carletti.gui.dialogs.SubProductDialog;
 import carletti.gui.dialogs.WasteSubProduct;
@@ -110,7 +110,7 @@ public class MainFrame extends JFrame{
 			    updateList();
 			}
 			else if (ae.getSource().equals(btnNewProduct)){
-				CreateNewProductDialog newProductDialog = new CreateNewProductDialog();
+				CreateNewProductDialogTwo newProductDialog = new CreateNewProductDialogTwo();
 				newProductDialog.setVisible(true);
 			}
 			else if(ae.getSource().equals(btnWaste)){
