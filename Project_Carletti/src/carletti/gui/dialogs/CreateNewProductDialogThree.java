@@ -132,7 +132,7 @@ public class CreateNewProductDialogThree extends JDialog {
 					.addComponent(txfName))
 				.addGroup(productGroupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 					.addComponent(lblDescription)
-					.addComponent(productDescriptionScrollPane, 100, 125, Short.MAX_VALUE))
+					.addComponent(productDescriptionScrollPane, 100, 100, Short.MAX_VALUE))
 		);
 		
 		//--------------
@@ -186,7 +186,7 @@ public class CreateNewProductDialogThree extends JDialog {
 		subTreatmentsGroupLayout.setVerticalGroup(
 			subTreatmentsGroupLayout.createSequentialGroup()
 				.addComponent(lblSubTreatment)
-				.addComponent(subTreatmentsScrollPane)
+				.addComponent(subTreatmentsScrollPane, 100, 100, Short.MAX_VALUE)
 		);
 		
 		//-----------
