@@ -1,5 +1,11 @@
 package carletti.gui;
 
+/**
+ * Continuously updates the list of SubProducts in MainFrame
+ * Obs. keeps running until window is closed.
+ * @author Malik Lund
+ *
+ */
 public class UpdaterThread implements Runnable {
 	private MainFrame mainFrame;
 	
@@ -12,7 +18,6 @@ public class UpdaterThread implements Runnable {
 		// TODO Auto-generated method stub
 		while (true){
 			mainFrame.updateList();
-			System.out.println("Updating");
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
