@@ -37,7 +37,7 @@ public class MainFrame extends JFrame{
 	
 	private Controller btnCtrl;
 	
-	private Dimension minimumSize = new Dimension(400, 400);
+	private Dimension minimumSize = new Dimension(600, 400);
 	private Dimension btnMinSize = new Dimension(20, 180);
 	private JButton btnNewProduct;
 	private JButton btnProductInfo;
