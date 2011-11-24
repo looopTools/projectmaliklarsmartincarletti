@@ -14,6 +14,11 @@ public class JTableTester extends JFrame {
 	private JTable table;
 	private TableModel tableModel;
 	
+	public static void main(String[] args){
+		JFrame frame = new JTableTester();
+		frame.setVisible(true);
+	}
+	
 	public JTableTester() {
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -30,12 +35,11 @@ public class JTableTester extends JFrame {
 	}
 	
 	private class MyTableModel extends AbstractTableModel {
-		private String[] coloumnNames = {"ID", "Subproduct", "Product Type"};
+		private String[] coloumnNames = {"Name", "Minimum (ms)", "Optimal (ms)", "Maximum (ms)"};
 		private Object[][] data = {
-				{new Integer(1), "Chocolate", "Chocolate Product"},
-				{new Integer(2), "FooBar", "FooBar Product"},
-				{new Integer(3), "BarBaz", "BarBaz Product"},
-				{new Integer(4), "BazFoo", "BazFoo Product"}
+				{"Subtreatment 1", new Integer(10), new Integer(20), new Integer(30)},
+				{"Subtreatment 2", new Integer(20), new Integer(30), new Integer(40)},
+				{"Subtreatment 3", new Integer(30), new Integer(40), new Integer(50)}
 		};
 
 		@Override
@@ -61,14 +65,6 @@ public class JTableTester extends JFrame {
 		public Class getColumnClass(int c){
 			return getValueAt(0,c).getClass();
 		}	
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		JFrame frame = new JTableTester();
-		frame.setVisible(true);
 	}
 
 }
