@@ -3,22 +3,18 @@ package carletti.gui.dialogs;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
+import javax.swing.ListSelectionModel;
 
 import carletti.model.Treatment;
 import carletti.service.Service;
@@ -42,20 +38,11 @@ public class CreateNewProductDialogThree extends JDialog {
 	private NewProductSubTreatmentsTableModel subTreatmentsTableModel;
 	private JScrollPane productDescriptionScrollPane, subTreatmentsScrollPane;
 
-	private ArrayList<String> subTreatmentsNames;
-	private ArrayList<Long> subTreatmentsMin;
-	private ArrayList<Long> subTreatmentsOptimal;
-	private ArrayList<Long> subTreatmentsMax;
-
 	public CreateNewProductDialogThree(){
 		this.setTitle("Create new product");
 		this.setModal(true);
 
 		controller = new Controller();
-		subTreatmentsNames = new ArrayList<String>();
-		subTreatmentsMin = new ArrayList<Long>();
-		subTreatmentsOptimal = new ArrayList<Long>();
-		subTreatmentsMax = new ArrayList<Long>();
 		
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
@@ -77,6 +64,7 @@ public class CreateNewProductDialogThree extends JDialog {
 		mainPanel.add(lblNewProduct, BorderLayout.NORTH);
 		
 		//------------
+		// General grouping of product information and subtreatment information
 		
 		outerGroupLayout.setHorizontalGroup(
 			outerGroupLayout.createSequentialGroup()
@@ -101,6 +89,7 @@ public class CreateNewProductDialogThree extends JDialog {
 		mainPanel.add(productAndSubproductPanel);
 		
 		//------------
+		// Product name and description
 		
 		GroupLayout productGroupLayout = new GroupLayout(productInfoPanel);
 		productInfoPanel.setLayout(productGroupLayout);
@@ -136,6 +125,7 @@ public class CreateNewProductDialogThree extends JDialog {
 		);
 		
 		//--------------
+		// Product create and cancel buttons
 		
 		GroupLayout productButtonsGroupLayout = new GroupLayout(productButtonsPanel);
 		productButtonsPanel.setLayout(productButtonsGroupLayout);
@@ -163,6 +153,7 @@ public class CreateNewProductDialogThree extends JDialog {
 		);
 		
 		//-------------
+		// Subtreatments table
 		
 		GroupLayout subTreatmentsGroupLayout = new GroupLayout(subTreatmentPanel);
 		subTreatmentPanel.setLayout(subTreatmentsGroupLayout);
@@ -171,10 +162,11 @@ public class CreateNewProductDialogThree extends JDialog {
 		subTreatmentsGroupLayout.setAutoCreateContainerGaps(true);
 		
 		lblSubTreatment = new JLabel("Subtreatments");
-//		subTreatmentsList = new JList();
 		subTreatmentsTableModel = new NewProductSubTreatmentsTableModel();
 		subTreatmentsTable = new JTable(subTreatmentsTableModel);
 		subTreatmentsScrollPane = new JScrollPane(subTreatmentsTable);
+		
+		subTreatmentsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		subTreatmentsGroupLayout.setHorizontalGroup(
 			subTreatmentsGroupLayout.createSequentialGroup()
@@ -190,6 +182,7 @@ public class CreateNewProductDialogThree extends JDialog {
 		);
 		
 		//-----------
+		// Subtreatment Add button
 		
 		GroupLayout subTreatmentButtonsGroupLayout = new GroupLayout(subTreatmentButtonsPanel);
 		subTreatmentButtonsPanel.setLayout(subTreatmentButtonsGroupLayout);
@@ -212,6 +205,11 @@ public class CreateNewProductDialogThree extends JDialog {
 		this.pack();
 	}
 	
+	/**
+	 * 
+	 * @author Malik Lund
+	 *
+	 */
 	private class Controller implements ActionListener{
 
 		@Override

@@ -27,6 +27,10 @@ public class CreateNewSubTreatmentDialogThree extends JDialog {
 	private boolean succes;
 	private NewProductSubTreatmentsTableModel subTreatmentsTableModel;
 	
+	/**
+	 * 
+	 * @param subTreatmentsTableModel
+	 */
 	public CreateNewSubTreatmentDialogThree(NewProductSubTreatmentsTableModel subTreatmentsTableModel){
 		this.getContentPane().setLayout(new FlowLayout());
 		this.setModal(true);

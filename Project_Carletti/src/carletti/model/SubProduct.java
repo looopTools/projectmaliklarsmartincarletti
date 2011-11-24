@@ -107,23 +107,34 @@ public class SubProduct implements Comparable<SubProduct>{
 		return getCurrentSubTreatmentIndex() +1;
 	}
 	
-	public String getTime()
+	public String getTime(long time)
 	{
 		SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy '-' HH:mm:ss");
-		return sd.format(getTimeAdded());
+		return sd.format(time);
 		
+	}
+	
+	public String getTimeLeft(long time){
+		int days = (int)(time / (1000*60*60*24));
+		time = time - days*1000*60*60*24;
+		int hours = (int)(time / (1000*60*60));		
+		time = time - hours * 1000*60*60;
+		int minutes = (int)(time / (1000*60));
+		time = time - minutes * 1000*60;
+		int seconds = (int)(time / (1000));
+		return String.format("%dd%h%dm%ds", days, hours, minutes, seconds);
 	}
 //	Added by Martin
 	public String toString()
 	{
-		return timeLeft() + " | " + getTime()+ " | " + getId() + " " + name + " " + getState() + " " + stringThis() + "" + " / " + getSubtreatments().size();
+		return getTimeLeft(timeLeft()) + " | " + getTime(timeAdded)+ " | " + getId() + " " + name + " " + getState() + " " + stringThis() + "" + " / " + getSubtreatments().size();
 	}
 
 	
-	public int timeLeft()
+	public long timeLeft()
 	{
-		int min = (int) (getCurrentSubTreatment().getDryMin() + timeAdded);
-		int max = (int) (getCurrentSubTreatment().getDryMax() + timeAdded);
+		long min = (getCurrentSubTreatment().getDryMin() + timeAdded - System.currentTimeMillis());
+		long max = (getCurrentSubTreatment().getDryMax() + timeAdded - System.currentTimeMillis());
 		
 		SimpleDateFormat sdMin = new SimpleDateFormat("HH:mm:ss");
 		SimpleDateFormat sdMax = new SimpleDateFormat("HH:mm:ss");
@@ -132,7 +143,7 @@ public class SubProduct implements Comparable<SubProduct>{
 		sdMax.format(max);
 		
 		
-		return max - min;
+		return max;
 	}
 
 	@Override
