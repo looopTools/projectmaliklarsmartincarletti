@@ -96,9 +96,9 @@ public class MainFrame extends JFrame{
 	}
 
 	public void updateList() {
-		subProductListlIndex = subProductList.getSelectedIndex(); //martin
+		subProductListlIndex = subProductList.getSelectedIndex(); //Martin
 		subProductList.setListData(Service.getAllNotWastedSubProducts().toArray());
-		subProductList.setSelectedIndex(subProductListlIndex); //martin
+		subProductList.setSelectedIndex(subProductListlIndex); //Martin
 	}
 
 	private class Controller implements ActionListener {

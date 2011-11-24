@@ -153,7 +153,7 @@ public class Service
 			}
 		}
 		
-		Collections.sort(productsNotWasted);
+		Collections.sort(productsNotWasted); // Martin
 		
 		return productsNotWasted;
 	}

@@ -113,7 +113,7 @@ public class SubProduct implements Comparable<SubProduct>{
 		return sd.format(time);
 		
 	}
-	
+//	----------Malik-------------
 	public String getTimeLeft(long time){
 		int days = (int)(time / (1000*60*60*24));
 		time = time - days*1000*60*60*24;
@@ -124,7 +124,9 @@ public class SubProduct implements Comparable<SubProduct>{
 		int seconds = (int)(time / (1000));
 		return String.format("%dd%h%dm%ds", days, hours, minutes, seconds);
 	}
-//	Added by Martin
+//	------------------------------
+	
+//	-------Martin--------
 	public String toString()
 	{
 		return getTimeLeft(timeLeft()) + " | " + getTime(timeAdded)+ " | " + getId() + " " + name + " " + getState() + " " + stringThis() + "" + " / " + getSubtreatments().size();
@@ -151,4 +153,5 @@ public class SubProduct implements Comparable<SubProduct>{
 	{
 		return (int) (timeLeft()- arg0.timeLeft());
 	}
+//	----------------------------
 }

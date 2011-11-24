@@ -10,5 +10,4 @@ public class App {
 		MainFrame mf = new MainFrame();
 		mf.setVisible(true);
 	}
-
 }
