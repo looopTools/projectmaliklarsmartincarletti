@@ -2,6 +2,7 @@ package carletti.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,8 +12,10 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 
 import carletti.gui.dialogs.CreateNewProductDialogTwo;
 import carletti.gui.dialogs.NewSubProductDialog;
@@ -78,6 +81,7 @@ public class MainFrame extends JFrame{
 		subProductList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		subProductsScrollPane = new JScrollPane(subProductList);
+		subProductsScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		getContentPane().add(subProductsScrollPane, BorderLayout.CENTER);
 		
 		

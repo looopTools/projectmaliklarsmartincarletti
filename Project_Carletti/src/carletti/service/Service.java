@@ -140,6 +140,7 @@ public class Service
 		SubProduct sp3 = Service.createSubProduct("Bazfoo", p3);
 	}
 	
+	//Add by Lars
 	public static List<SubProduct> getAllNotWastedSubProducts(){
 		ArrayList<SubProduct> productsNotWasted = new ArrayList<SubProduct>();
 		
