@@ -18,7 +18,6 @@ public class UpdaterThread implements Runnable {
 		// TODO Auto-generated method stub
 		while (true){
 			mainFrame.updateList();
-			
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
