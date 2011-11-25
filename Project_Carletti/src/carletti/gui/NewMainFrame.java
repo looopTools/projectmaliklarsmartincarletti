@@ -43,6 +43,8 @@ public class NewMainFrame extends JFrame {
 	private Dimension btnMinSize = new Dimension(20, 180);
 	private JButton btnNewProduct;
 	private JButton btnProductInfo;
+	private JButton btnNewButton;
+	private JButton btnNewButton_1;
 
 	public NewMainFrame() {
 
@@ -70,39 +72,40 @@ public class NewMainFrame extends JFrame {
 		btnNewSubProduct.addActionListener(btnCtrl);
 
 		btnNewProduct = new JButton("New Product");
+		
+		btnNewButton = new JButton("Treatment");
+		btnNewButton.addActionListener(new BtnNewButtonActionListener());
+		
+		btnNewButton_1 = new JButton("Next Sub Treatment");
 		GroupLayout gl_buttonsPanel = new GroupLayout(buttonsPanel);
-		gl_buttonsPanel.setHorizontalGroup(gl_buttonsPanel
-				.createParallelGroup(Alignment.LEADING)
-				.addComponent(btnNewSubProduct, GroupLayout.PREFERRED_SIZE,
-						GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-				.addComponent(btnInfo, GroupLayout.DEFAULT_SIZE, 111,
-						Short.MAX_VALUE)
-				.addComponent(btnWaste, GroupLayout.DEFAULT_SIZE, 111,
-						Short.MAX_VALUE)
-				.addComponent(btnProductInfo, GroupLayout.DEFAULT_SIZE, 111,
-						Short.MAX_VALUE)
-				.addComponent(btnNewProduct, GroupLayout.DEFAULT_SIZE, 111,
-						Short.MAX_VALUE));
-		gl_buttonsPanel.setVerticalGroup(gl_buttonsPanel.createParallelGroup(
-				Alignment.LEADING).addGroup(
-				gl_buttonsPanel
-						.createSequentialGroup()
-						.addComponent(btnInfo, GroupLayout.PREFERRED_SIZE,
-								GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnWaste, GroupLayout.PREFERRED_SIZE,
-								GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnProductInfo)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnNewSubProduct,
-								GroupLayout.PREFERRED_SIZE,
-								GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnNewProduct).addGap(229)));
+		gl_buttonsPanel.setHorizontalGroup(
+			gl_buttonsPanel.createParallelGroup(Alignment.LEADING)
+				.addComponent(btnInfo, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+				.addComponent(btnWaste, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+				.addComponent(btnProductInfo, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+				.addComponent(btnNewProduct, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+				.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+				.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 111, Short.MAX_VALUE)
+				.addComponent(btnNewSubProduct, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+		);
+		gl_buttonsPanel.setVerticalGroup(
+			gl_buttonsPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_buttonsPanel.createSequentialGroup()
+					.addComponent(btnInfo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnWaste, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnProductInfo)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnNewSubProduct, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnNewProduct)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnNewButton)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnNewButton_1)
+					.addGap(165))
+		);
 		buttonsPanel.setLayout(gl_buttonsPanel);
 		btnNewProduct.addActionListener(btnCtrl);
 
@@ -180,6 +183,10 @@ public class NewMainFrame extends JFrame {
 				ShowProductFrame spf = new ShowProductFrame();
 				spf.setVisible(true);
 			}
+		}
+	}
+	private class BtnNewButtonActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
 		}
 	}
 }
