@@ -58,7 +58,13 @@ public class NewSubProductTableModel extends AbstractTableModel{
 	}
 	
 	public SubProduct selctedSubProduct(int selectedRow){
-		return newData.get(selectedRow);
+		if(selectedRow >= 0){
+			return newData.get(selectedRow);
+		}
+		else{
+			return null;
+		}
+		
 	}
 
 	public void updateData() {
