@@ -35,12 +35,27 @@ public class NewProductSubTreatmentsTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int row, int col) {
-		return data.get(row)[col];
+		if (col < 1){
+			return data.get(row)[col];
+		} else {
+			return convertLongToString((Long)data.get(row)[col]);
+		}
 	}
 	
 	@Override
 	public Class getColumnClass(int c){
 		return getValueAt(0,c).getClass();
+	}
+	
+	private String convertLongToString(long time){
+		int days = (int)(time / (1000*60*60*24));
+		time = time - days*1000*60*60*24;
+		int hours = (int)(time / (1000*60*60));		
+		time = time - hours * 1000*60*60;
+		int minutes = (int)(time / (1000*60));
+		time = time - minutes * 1000*60;
+		int seconds = (int)(time / (1000));
+		return String.format("%dd%dh%dm%ds", days, hours, minutes, seconds);
 	}
 
 	/**
