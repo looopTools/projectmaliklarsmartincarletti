@@ -17,7 +17,7 @@ public class NextSubTreatmentDialogTableModel extends AbstractTableModel
 		private List<SubProduct> newData;
 		
 		public NextSubTreatmentDialogTableModel(){
-			newData = Service.getAllNotWastedSubProducts();
+			newData = Service.getAllInTreatment();
 		}
 		
 		@Override
