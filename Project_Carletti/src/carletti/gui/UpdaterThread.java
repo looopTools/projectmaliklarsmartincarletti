@@ -1,5 +1,7 @@
 package carletti.gui;
 
+import carletti.gui.dialogs.NextSubTreatmentDialog;
+
 /**
  * Continuously updates the list of SubProducts in MainFrame
  * Obs. keeps running until window is closed.
@@ -8,9 +10,15 @@ package carletti.gui;
  */
 public class UpdaterThread implements Runnable {
 	private NewMainFrame mainFrame;
+	private NextSubTreatmentDialog nextSubTreatmentDialog;
 	
 	public UpdaterThread(NewMainFrame mainFrame){
 		this.mainFrame = mainFrame;
+	}
+	
+	public UpdaterThread(NextSubTreatmentDialog nextSubTreatmentDialog)
+	{
+		this.nextSubTreatmentDialog =  nextSubTreatmentDialog;
 	}
 
 	@Override
@@ -26,5 +34,5 @@ public class UpdaterThread implements Runnable {
 			}
 		}
 	}
-
+	
 }

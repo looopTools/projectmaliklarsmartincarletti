@@ -11,51 +11,61 @@ import carletti.service.Service;
 public class NextSubTreatmentDialogTableModel extends AbstractTableModel
 {
 	// Column headers.
-		private String[] coloumnNames = {"ID", "Name", "Subtreatment", "Number of Subtreatments"};
-		// The actual data.
-		private ArrayList<Object[]> data = new ArrayList<Object[]>();
-		private List<SubProduct> newData;
-		
-		public NextSubTreatmentDialogTableModel(){
-			newData = Service.getAllInTreatment();
-		}
-		
-		@Override
-		public int getColumnCount() {
-			return coloumnNames.length;
-		}
+	private String[] coloumnNames =
+	{ "ID", "Name", "Subtreatment", "Number of Subtreatments" };
+	// The actual data.
+	private ArrayList<Object[]> data = new ArrayList<Object[]>();
+	private List<SubProduct> newData;
 
-		@Override
-		public int getRowCount() {
-			return newData.size();
-		}
+	public NextSubTreatmentDialogTableModel()
+	{
+		newData = Service.getAllInTreatment();
+	}
 
-		@Override
-		public String getColumnName(int col){
-			return coloumnNames[col];
-		}
+	@Override
+	public int getColumnCount()
+	{
+		return coloumnNames.length;
+	}
 
-		@Override
-		public Object getValueAt(int row, int col) {
-			SubProduct sp = newData.get(row);
-			Object[] value = {
-					
-					new Integer(sp.getId()), sp.getName(), 
-					 sp.getCurrentSubTreatment().getName(), sp.getSubtreatments().size()	
-			};
-			return value[col];
-		}
-		
-		@Override
-		public Class getColumnClass(int c){
-			return getValueAt(0,c).getClass();
-		}
-		
-		public SubProduct selctedSubProduct(int selectedRow){
-			return newData.get(selectedRow);
-		}
+	@Override
+	public int getRowCount()
+	{
+		return newData.size();
+	}
 
-		public void updateData() {
-			newData = Service.getAllNotWastedSubProducts();
-		}
+	@Override
+	public String getColumnName(int col)
+	{
+		return coloumnNames[col];
+	}
+
+	@Override
+	public Object getValueAt(int row, int col)
+	{
+		SubProduct sp = newData.get(row);
+		Object[] value =
+		{
+
+		new Integer(sp.getId()), sp.getName(),
+				sp.getCurrentSubTreatment().getName(),
+				sp.getSubtreatments().size() };
+		return value[col];
+	}
+
+	@Override
+	public Class getColumnClass(int c)
+	{
+		return getValueAt(0, c).getClass();
+	}
+
+	public SubProduct selctedSubProduct(int selectedRow)
+	{
+		return newData.get(selectedRow);
+	}
+
+	public void updateData()
+	{
+		newData = Service.getAllInTreatment();
+	}
 }
