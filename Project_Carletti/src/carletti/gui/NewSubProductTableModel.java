@@ -65,6 +65,9 @@ public class NewSubProductTableModel extends AbstractTableModel{
 		fireTableDataChanged();
 	}
 	
+	public SubProduct selctedSubProduct(int selectedRow){
+		return newData.get(selectedRow);
+	}
 	/**
 	 * Returns a list of all table data.
 	 * @return A new List containing the data.
