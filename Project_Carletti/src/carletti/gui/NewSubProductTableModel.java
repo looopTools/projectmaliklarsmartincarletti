@@ -56,24 +56,13 @@ public class NewSubProductTableModel extends AbstractTableModel{
 	public Class getColumnClass(int c){
 		return getValueAt(0,c).getClass();
 	}
-//	int id, String name, Product product, long timeAdded
-	public void newSubProduct(int id, String name, Product product, long timeAdded) {
-		Object[] newData = {
-			new Integer(id), name, product, new Long(timeAdded)	
-		};
-		data.add(newData);
-		fireTableDataChanged();
-	}
 	
 	public SubProduct selctedSubProduct(int selectedRow){
 		return newData.get(selectedRow);
 	}
-	/**
-	 * Returns a list of all table data.
-	 * @return A new List containing the data.
-	 */
-	public List<Object[]> getData(){
-		return new ArrayList<Object[]>(data);
+
+	public void updateData() {
+		newData = Service.getAllNotWastedSubProducts();
 	}
 	
 

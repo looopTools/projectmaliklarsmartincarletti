@@ -135,6 +135,7 @@ public class NewMainFrame extends JFrame {
 	 */
 	public void updateList() {
 		int selection = subProductTable.getSelectedRow();
+		subProductTableModel.updateData();
 		subProductTableModel.fireTableDataChanged();
 		subProductTable.changeSelection(selection, 0, false, false);
 	}
