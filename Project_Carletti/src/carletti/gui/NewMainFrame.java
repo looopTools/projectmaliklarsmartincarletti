@@ -45,9 +45,8 @@ public class NewMainFrame extends JFrame {
 	private Dimension btnMinSize = new Dimension(20, 180);
 	private JButton btnNewProduct;
 	private JButton btnProductInfo;
-	private JButton btnTreatment1;
+	private JButton btnTreatment;
 	private JButton btnNextSubTreatment;
-	private JButton btnNewButton;
 
 	public NewMainFrame() {
 
@@ -76,14 +75,11 @@ public class NewMainFrame extends JFrame {
 
 		btnNewProduct = new JButton("New Product");
 		
-		btnTreatment1 = new JButton("Treatment");
-		btnTreatment1.addActionListener(btnCtrl);
+		btnTreatment = new JButton("Treatment");
+		btnTreatment.addActionListener(btnCtrl);
 		
 		btnNextSubTreatment = new JButton("Next Sub Treatment");
 		btnNextSubTreatment.addActionListener(btnCtrl);
-		
-		btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(btnCtrl);
 		
 		GroupLayout gl_buttonsPanel = new GroupLayout(buttonsPanel);
 		gl_buttonsPanel.setHorizontalGroup(
@@ -92,10 +88,9 @@ public class NewMainFrame extends JFrame {
 				.addComponent(btnWaste, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
 				.addComponent(btnProductInfo, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
 				.addComponent(btnNewProduct, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-				.addComponent(btnTreatment1, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+				.addComponent(btnTreatment, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
 				.addComponent(btnNextSubTreatment, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 				.addComponent(btnNewSubProduct, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-				.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
 		);
 		gl_buttonsPanel.setVerticalGroup(
 			gl_buttonsPanel.createParallelGroup(Alignment.LEADING)
@@ -110,11 +105,9 @@ public class NewMainFrame extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnNewProduct)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnTreatment1)
+					.addComponent(btnTreatment)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnNextSubTreatment)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton)
 					.addGap(136))
 		);
 		buttonsPanel.setLayout(gl_buttonsPanel);
@@ -190,20 +183,19 @@ public class NewMainFrame extends JFrame {
 
 			}
 			
-			else if (ae.getSource().equals(btnNewButton))
-			{
-				System.out.println("asasdfsadf");
-//				SubProduct sp = subProductTableModel
-//						.selctedSubProduct(subProductTable.getSelectedRow());
-//				if (sp == null) 
-//				{
-//					JOptionPane.showMessageDialog(null,
-//							"You need to selected an object");
-//				}
-//					else
-//					{
-//						sp.setState(State.TREATMENT);
-//					}
+			else if (ae.getSource().equals(btnTreatment)){
+				SubProduct sp = subProductTableModel
+						.selctedSubProduct(subProductTable.getSelectedRow());
+				if (sp == null) 
+				{
+					JOptionPane.showMessageDialog(null,
+							"You need to selected an object");
+				}
+					else
+					{
+						sp.setState(State.TREATMENT);
+					}
+				updateList();
 			}
 
 			else if (ae.getSource().equals(btnProductInfo)) {
