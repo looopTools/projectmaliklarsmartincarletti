@@ -11,15 +11,18 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import carletti.model.Product;
+import carletti.model.SubProduct;
+import carletti.service.Service;
 
 public class NewSubProductTableModel extends AbstractTableModel{
 	// Column headers.
 	private String[] coloumnNames = {"Time left", "Complete time", "ID", "Name", "State", "Subtreatment", "Number of Subtreatments"};
 	// The actual data.
 	private ArrayList<Object[]> data = new ArrayList<Object[]>();
+	private List<SubProduct> newData;
 		
 	public NewSubProductTableModel(){
-		
+		newData = Service.getAllNotWastedSubProducts();
 	}
 
 	@Override
@@ -29,7 +32,7 @@ public class NewSubProductTableModel extends AbstractTableModel{
 
 	@Override
 	public int getRowCount() {
-		return data.size();
+		return newData.size();
 	}
 
 	@Override
@@ -39,7 +42,14 @@ public class NewSubProductTableModel extends AbstractTableModel{
 
 	@Override
 	public Object getValueAt(int row, int col) {
-		return data.get(row)[col];
+		SubProduct sp = newData.get(row);
+		Object[] value = {
+				sp.getTimeLeft(sp.timeLeft()), sp.getTime(sp.getTimeAdded()), 
+				new Integer(sp.getId()), sp.getName(), 
+				sp.getState(), sp.getCurrentSubTreatment().getName(), 
+				sp.getSubtreatments().size()	
+		};
+		return value[col];
 	}
 	
 	@Override

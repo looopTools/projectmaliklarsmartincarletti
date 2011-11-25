@@ -7,9 +7,9 @@ package carletti.gui;
  *
  */
 public class UpdaterThread implements Runnable {
-	private MainFrame mainFrame;
+	private NewMainFrame mainFrame;
 	
-	public UpdaterThread(MainFrame mainFrame){
+	public UpdaterThread(NewMainFrame mainFrame){
 		this.mainFrame = mainFrame;
 	}
 
