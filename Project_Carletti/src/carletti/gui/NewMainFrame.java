@@ -208,8 +208,6 @@ public class NewMainFrame extends JFrame {
 				NextSubTreatmentDialog ntd = new NextSubTreatmentDialog();
 				ntd.setVisible(true);
 			}
-			
-			
 		}
 	}
 }
