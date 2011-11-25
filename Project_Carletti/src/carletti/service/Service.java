@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import carletti.dao.Dao;
+import carletti.dao.LocalDao;
 import carletti.model.Product;
 import carletti.model.State;
 import carletti.model.SubProduct;
@@ -20,7 +21,7 @@ import carletti.model.Treatment;
 public class Service
 {
 	
-	private static Dao dao = Dao.getInstance();
+	private static Dao dao = LocalDao.getInstance();
 	
 	public static SubProduct createSubProduct(String name, Product product)
 	{
@@ -99,7 +100,7 @@ public class Service
 	
 	public static List<SubProduct> showAllSubProduct()
 	{
-		List<SubProduct> list = Dao.getInstance().getSubProducts();
+		List<SubProduct> list = LocalDao.getInstance().getSubProducts();
 		
 		Collections.sort(list);
 		return list;
@@ -147,9 +148,9 @@ public class Service
 	public static List<SubProduct> getAllNotWastedSubProducts(){
 		ArrayList<SubProduct> productsNotWasted = new ArrayList<SubProduct>();
 		
-		for(int i = 0; i < Dao.getInstance().getSubProducts().size(); i++){
-			if(Dao.getInstance().getSubProducts().get(i).getState() != State.WASTE){
-				productsNotWasted.add(Dao.getInstance().getSubProducts().get(i));
+		for(int i = 0; i < LocalDao.getInstance().getSubProducts().size(); i++){
+			if(LocalDao.getInstance().getSubProducts().get(i).getState() != State.WASTE){
+				productsNotWasted.add(LocalDao.getInstance().getSubProducts().get(i));
 			}
 		}
 		
