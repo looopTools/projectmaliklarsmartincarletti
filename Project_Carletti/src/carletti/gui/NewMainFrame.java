@@ -84,6 +84,7 @@ public class NewMainFrame extends JFrame{
 		
 		subProductTableModel = new NewSubProductTableModel();
 		subProductTable = new JTable(subProductTableModel);
+		subProductTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		
 		subProductsScrollPane = new JScrollPane(subProductTable);
@@ -91,17 +92,23 @@ public class NewMainFrame extends JFrame{
 		getContentPane().add(subProductsScrollPane, BorderLayout.CENTER);
 		
 		subProductTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 		//--- Malik Lund ---
-		//Thread t = new Thread(new UpdaterThread(this));
-		//t.start();
+		Thread t = new Thread(new UpdaterThread(this));
+		t.start();
 		//------------------
 		
 		this.setVisible(true);
 		
 	}
 
+	/*
+	 * @author Malik 
+	 */
 	public void updateList() {
-		subProductList.setListData(Service.getAllNotWastedSubProducts().toArray());
+		int selection = subProductTable.getSelectedRow();
+		subProductTableModel.fireTableDataChanged();
+		subProductTable.changeSelection(selection, 0, false, false);
 	}
 
 	private class Controller implements ActionListener {
