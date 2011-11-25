@@ -1,3 +1,6 @@
+/**
+ * @author Martin
+ */
 package carletti.gui.dialogs;
 
 import java.util.ArrayList;
@@ -61,11 +64,17 @@ public class NextSubTreatmentDialogTableModel extends AbstractTableModel
 
 	public SubProduct selctedSubProduct(int selectedRow)
 	{
-		return newData.get(selectedRow);
+		if ( selectedRow >= 0)
+		{
+			return newData.get(selectedRow);
+		}
+		else
+			return null;
 	}
 
 	public void updateData()
 	{
 		newData = Service.getAllInTreatment();
 	}
+		
 }

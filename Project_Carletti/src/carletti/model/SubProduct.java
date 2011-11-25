@@ -96,6 +96,11 @@ public class SubProduct implements Comparable<SubProduct>{
 	public void nextSubTreatment(){
 		if (currentSubTreatmentIndex < (subtreatments.size() - 1)){
 			setCurrentSubTreatmentIndex(getCurrentSubTreatmentIndex()+1);
+			setState(State.DRYING); // Martin
+		}
+		else if (currentSubTreatmentIndex >= (subtreatments.size() - 1))
+		{
+			setState(State.DONE);
 		}
 	}
 	
