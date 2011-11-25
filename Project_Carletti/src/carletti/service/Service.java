@@ -149,7 +149,7 @@ public class Service
 		ArrayList<SubProduct> productsNotWasted = new ArrayList<SubProduct>();
 		
 		for(int i = 0; i < LocalDao.getInstance().getSubProducts().size(); i++){
-			if(LocalDao.getInstance().getSubProducts().get(i).getState() != State.WASTE){
+			if(LocalDao.getInstance().getSubProducts().get(i).getState() == State.DRYING){
 				productsNotWasted.add(LocalDao.getInstance().getSubProducts().get(i));
 			}
 		}
@@ -158,6 +158,8 @@ public class Service
 		
 		return productsNotWasted;
 	}
+	
+//	---------Martin---------------
 	
 	public static List<SubProduct> getAllInTreatment()
 	{
@@ -173,5 +175,5 @@ public class Service
 		
 		return subProductUnderTreatment;
 	}
-	
+//	-----------------------------------
 }

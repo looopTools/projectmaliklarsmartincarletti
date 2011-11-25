@@ -5,6 +5,7 @@
  */
 package carletti.gui.dialogs;
 
+import carletti.gui.*;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -19,6 +20,8 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ScrollPaneConstants;
+
+import carletti.gui.UpdaterThread;
 
 public class NextSubTreatmentDialog extends JFrame
 {
@@ -72,8 +75,12 @@ public class NextSubTreatmentDialog extends JFrame
 		);
 		getContentPane().setLayout(groupLayout);
 		
-		
 		this.setVisible(true);
+	}
+	
+	public void update()
+	{
+		
 	}
 	
 	private class Controller implements ActionListener {
