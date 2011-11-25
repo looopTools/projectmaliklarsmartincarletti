@@ -31,6 +31,7 @@ public class SubProductDialog extends JDialog{
 		this.sub = sub;
 		btnCtrl = new Controller();
 		this.setResizable(false);
+		this.setLocationRelativeTo(null);
 		getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
 		
 		panel = new JPanel();
