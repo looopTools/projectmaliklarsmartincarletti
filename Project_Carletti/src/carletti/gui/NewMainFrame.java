@@ -21,6 +21,7 @@ import carletti.gui.dialogs.NewSubProductDialog;
 import carletti.gui.dialogs.NextSubTreatmentDialog;
 import carletti.gui.dialogs.SubProductDialog;
 import carletti.gui.dialogs.WasteSubProduct;
+import carletti.model.State;
 import carletti.model.SubProduct;
 import carletti.service.Service;
 import javax.swing.GroupLayout;
@@ -44,7 +45,7 @@ public class NewMainFrame extends JFrame {
 	private Dimension btnMinSize = new Dimension(20, 180);
 	private JButton btnNewProduct;
 	private JButton btnProductInfo;
-	private JButton btnTreatment;
+	private JButton btnTreatment1;
 	private JButton btnNextSubTreatment;
 
 	public NewMainFrame() {
@@ -74,8 +75,8 @@ public class NewMainFrame extends JFrame {
 
 		btnNewProduct = new JButton("New Product");
 		
-		btnTreatment = new JButton("Treatment");
-		btnTreatment.addActionListener(btnCtrl);
+		btnTreatment1 = new JButton("Treatment");
+		btnTreatment1.addActionListener(btnCtrl);
 		
 		btnNextSubTreatment = new JButton("Next Sub Treatment");
 		btnNextSubTreatment.addActionListener(btnCtrl);
@@ -87,7 +88,7 @@ public class NewMainFrame extends JFrame {
 				.addComponent(btnWaste, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
 				.addComponent(btnProductInfo, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
 				.addComponent(btnNewProduct, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-				.addComponent(btnTreatment, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+				.addComponent(btnTreatment1, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
 				.addComponent(btnNextSubTreatment, GroupLayout.PREFERRED_SIZE, 111, Short.MAX_VALUE)
 				.addComponent(btnNewSubProduct, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
 		);
@@ -104,7 +105,7 @@ public class NewMainFrame extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnNewProduct)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnTreatment)
+					.addComponent(btnTreatment1)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnNextSubTreatment)
 					.addGap(165))
@@ -181,6 +182,22 @@ public class NewMainFrame extends JFrame {
 				}
 
 			}
+			
+			else if (ae.getSource().equals(btnTreatment1))
+			{
+				System.out.println("asasdfsadf");
+//				SubProduct sp = subProductTableModel
+//						.selctedSubProduct(subProductTable.getSelectedRow());
+//				if (sp == null) 
+//				{
+//					JOptionPane.showMessageDialog(null,
+//							"You need to selected an object");
+//				}
+//					else
+//					{
+//						sp.setState(State.TREATMENT);
+//					}
+			}
 
 			else if (ae.getSource().equals(btnProductInfo)) {
 				ShowProductFrame spf = new ShowProductFrame();
@@ -192,6 +209,8 @@ public class NewMainFrame extends JFrame {
 				NextSubTreatmentDialog ntd = new NextSubTreatmentDialog();
 				ntd.setVisible(true);
 			}
+			
+			
 		}
 	}
 }

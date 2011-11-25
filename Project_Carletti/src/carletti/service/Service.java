@@ -158,4 +158,20 @@ public class Service
 		
 		return productsNotWasted;
 	}
+	
+	public static List<SubProduct> getAllInTreatment()
+	{
+		ArrayList<SubProduct> subProductUnderTreatment = new ArrayList<SubProduct>();
+		
+		for (int i = 0 ; i < LocalDao.getInstance().getSubProducts().size() ; i ++)
+		{
+			if (LocalDao.getInstance().getSubProducts().get(i).getState() == State.TREATMENT)
+			{
+				subProductUnderTreatment.add(LocalDao.getInstance().getSubProducts().get(i));
+			}
+		}
+		
+		return subProductUnderTreatment;
+	}
+	
 }
