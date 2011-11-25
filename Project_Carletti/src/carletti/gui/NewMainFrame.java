@@ -22,6 +22,9 @@ import carletti.gui.dialogs.SubProductDialog;
 import carletti.gui.dialogs.WasteSubProduct;
 import carletti.model.SubProduct;
 import carletti.service.Service;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class NewMainFrame extends JFrame{
 	
@@ -36,7 +39,7 @@ public class NewMainFrame extends JFrame{
 	
 	private Controller btnCtrl;
 	
-	private Dimension minimumSize = new Dimension(400, 400);
+	private Dimension minimumSize = new Dimension(800, 400);
 	private Dimension btnMinSize = new Dimension(20, 180);
 	private JButton btnNewProduct;
 	private JButton btnProductInfo;
@@ -50,12 +53,10 @@ public class NewMainFrame extends JFrame{
 		this.setMinimumSize(minimumSize);
 		buttonsPanel = new JPanel();
 		getContentPane().add(buttonsPanel, BorderLayout.EAST);
-		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
 		
 		btnInfo = new JButton("Info");
 		btnInfo.setMinimumSize(btnMinSize);
 		btnInfo.addActionListener(btnCtrl);
-		buttonsPanel.add(btnInfo);
 		
 		btnWaste = new JButton("Waste");
 		btnWaste.setMinimumSize(btnMinSize);
@@ -64,18 +65,38 @@ public class NewMainFrame extends JFrame{
 		
 		btnProductInfo = new JButton("Product Info");
 		btnProductInfo.addActionListener(btnCtrl);
-		buttonsPanel.add(btnWaste);
-		buttonsPanel.add(btnProductInfo);
 		
 		
 		
 		btnNewSubProduct = new JButton("New subproduct");
 		btnNewSubProduct.setMinimumSize(btnMinSize);
 		btnNewSubProduct.addActionListener(btnCtrl);
-		buttonsPanel.add(btnNewSubProduct);
 		
 		btnNewProduct = new JButton("New Product");
-		buttonsPanel.add(btnNewProduct);
+		GroupLayout gl_buttonsPanel = new GroupLayout(buttonsPanel);
+		gl_buttonsPanel.setHorizontalGroup(
+			gl_buttonsPanel.createParallelGroup(Alignment.LEADING)
+				.addComponent(btnNewSubProduct, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addComponent(btnInfo, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+				.addComponent(btnWaste, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+				.addComponent(btnProductInfo, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+				.addComponent(btnNewProduct, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+		);
+		gl_buttonsPanel.setVerticalGroup(
+			gl_buttonsPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_buttonsPanel.createSequentialGroup()
+					.addComponent(btnInfo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnWaste, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnProductInfo)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnNewSubProduct, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnNewProduct)
+					.addGap(229))
+		);
+		buttonsPanel.setLayout(gl_buttonsPanel);
 		btnNewProduct.addActionListener(btnCtrl);
 		
 //		subProductList = new JList();
