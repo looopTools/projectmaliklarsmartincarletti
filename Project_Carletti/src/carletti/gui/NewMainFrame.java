@@ -18,6 +18,7 @@ import javax.swing.ScrollPaneConstants;
 
 import carletti.gui.dialogs.CreateNewProductDialogThree;
 import carletti.gui.dialogs.NewSubProductDialog;
+import carletti.gui.dialogs.NextSubTreatmentDialog;
 import carletti.gui.dialogs.SubProductDialog;
 import carletti.gui.dialogs.WasteSubProduct;
 import carletti.model.SubProduct;
@@ -43,8 +44,8 @@ public class NewMainFrame extends JFrame {
 	private Dimension btnMinSize = new Dimension(20, 180);
 	private JButton btnNewProduct;
 	private JButton btnProductInfo;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
+	private JButton btnTreatment;
+	private JButton btnNextSubTreatment;
 
 	public NewMainFrame() {
 
@@ -73,10 +74,12 @@ public class NewMainFrame extends JFrame {
 
 		btnNewProduct = new JButton("New Product");
 		
-		btnNewButton = new JButton("Treatment");
-		btnNewButton.addActionListener(new BtnNewButtonActionListener());
+		btnTreatment = new JButton("Treatment");
+		btnTreatment.addActionListener(btnCtrl);
 		
-		btnNewButton_1 = new JButton("Next Sub Treatment");
+		btnNextSubTreatment = new JButton("Next Sub Treatment");
+		btnNextSubTreatment.addActionListener(btnCtrl);
+		
 		GroupLayout gl_buttonsPanel = new GroupLayout(buttonsPanel);
 		gl_buttonsPanel.setHorizontalGroup(
 			gl_buttonsPanel.createParallelGroup(Alignment.LEADING)
@@ -84,8 +87,8 @@ public class NewMainFrame extends JFrame {
 				.addComponent(btnWaste, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
 				.addComponent(btnProductInfo, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
 				.addComponent(btnNewProduct, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-				.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-				.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 111, Short.MAX_VALUE)
+				.addComponent(btnTreatment, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+				.addComponent(btnNextSubTreatment, GroupLayout.PREFERRED_SIZE, 111, Short.MAX_VALUE)
 				.addComponent(btnNewSubProduct, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
 		);
 		gl_buttonsPanel.setVerticalGroup(
@@ -101,9 +104,9 @@ public class NewMainFrame extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnNewProduct)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton)
+					.addComponent(btnTreatment)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton_1)
+					.addComponent(btnNextSubTreatment)
 					.addGap(165))
 		);
 		buttonsPanel.setLayout(gl_buttonsPanel);
@@ -183,10 +186,12 @@ public class NewMainFrame extends JFrame {
 				ShowProductFrame spf = new ShowProductFrame();
 				spf.setVisible(true);
 			}
-		}
-	}
-	private class BtnNewButtonActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
+			
+			else if (ae.getSource().equals(btnNextSubTreatment))
+			{
+				NextSubTreatmentDialog ntd = new NextSubTreatmentDialog();
+				ntd.setVisible(true);
+			}
 		}
 	}
 }
