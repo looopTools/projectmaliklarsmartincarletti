@@ -4,11 +4,8 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
 
-	<persistence-unit name="minihandel" transaction-type="RESOURCE_LOCAL">
-		<class>model.Kunde</class>
-		<class>model.Ordre</class>
-		<class>model.OrdreLinie</class>
-		<class>model.Vare</class>
+	<persistence-unit name="Carletti" transaction-type="RESOURCE_LOCAL">
+		<class>carletti.model.SubProduct</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="net.sourceforge.jtds.jdbc.Driver" />
