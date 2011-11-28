@@ -3,6 +3,9 @@ package carletti.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Treatment represents the various drying treatments a product 
  * needs to complete before it is a finished product.
@@ -10,7 +13,11 @@ import java.util.List;
  * @author Malik Lund
  *
  */
+
+@Entity
 public class Treatment {
+	
+	@Id
 	private int id;
 	private String name;
 	private ArrayList<SubTreatment> subTreatments;
