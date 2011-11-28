@@ -1,5 +1,8 @@
 package carletti.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 
 /**
  * Product represents encapsulates the name,
@@ -8,7 +11,9 @@ package carletti.model;
  * @author Malik Lund
  *
  */
+@Entity
 public class Product {
+	@Id
 	private int id;
 	private String name;
 	private String description;

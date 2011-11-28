@@ -5,11 +5,16 @@
  */
 package carletti.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class SubTreatment {
 	
 	/*
 	 * Holds the drying time for minimum, prime and maximum drying time
 	 */
+	@Id
 	private long dryMin, dryPrime, dryMax;
 	private String name;
 	
