@@ -10,8 +10,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="SubProduct")
 public class SubProduct implements Comparable<SubProduct>{
 	
+	@Id
 	private int id; //To have a key for the database
 	private String name;
 	private State state; //The current state which a SubProduct is in 
