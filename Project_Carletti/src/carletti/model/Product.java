@@ -27,7 +27,7 @@ public class Product {
 	private Treatment treatment;
 	
 	
-	public Product(int id, String name, String description, Treatment treatment) {
+	public Product(String name, String description, Treatment treatment) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
