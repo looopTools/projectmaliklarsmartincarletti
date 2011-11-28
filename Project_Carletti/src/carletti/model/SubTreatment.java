@@ -6,6 +6,8 @@
 package carletti.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
@@ -15,14 +17,22 @@ public class SubTreatment {
 	 * Holds the drying time for minimum, prime and maximum drying time
 	 */
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 	private long dryMin, dryPrime, dryMax;
 	private String name;
+	;
 	
 	public SubTreatment(String name, long dryMin, long dryPrime, long dryMax){
 		this.setName(name);
 		this.dryMin = dryMin;
 		this.dryPrime = dryPrime;
 		this.dryMax = dryMax;
+		
+	}
+	
+	public SubTreatment()
+	{
 		
 	}
 

@@ -9,7 +9,7 @@ import carletti.service.jpa.ServiceJpa;
 public class JpaTEST {
 	
 	public static void main(String[] args){
-		Treatment t1 = Service.createTreatment("Red chocolate MMs");
+		Treatment t1 = Service.createTreatment("Martins MMs");
 		t1.createSubTreatment("1st drying", 1000*60*30, 1000*60*32, 1000*60*35);
 		t1.createSubTreatment("2nd drying", 500, 750, 1000);
 		t1.createSubTreatment("3rd drying", 1250, 1300, 1500);

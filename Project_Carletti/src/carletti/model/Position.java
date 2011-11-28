@@ -6,18 +6,26 @@
 
 package carletti.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Position {
 
 	@Id 
 	private String posID;
+	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private SubProduct sub; // Holds which product is on the position
 
 	public Position(String posID) {
 		this.posID = posID;
+	}
+	
+	public Position()
+	{
+		
 	}
 
 	public String getPosID() {
