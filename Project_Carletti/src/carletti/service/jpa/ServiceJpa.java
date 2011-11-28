@@ -6,7 +6,7 @@
 
 package carletti.service.jpa;
 
-import carletti.dao.jpa.JpaDao;
+import carletti.dao.JpaDao;
 import carletti.model.SubProduct;
 
 public class ServiceJpa {
