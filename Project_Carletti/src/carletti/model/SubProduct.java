@@ -10,19 +10,33 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 
 @Entity
 public class SubProduct implements Comparable<SubProduct>{
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id; //To have a key for the database
 	private String name;
+	@Enumerated (EnumType.STRING)
 	private State state; //The current state which a SubProduct is in 
+	
+	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
+	@JoinColumn
 	private List<SubTreatment> subtreatments = new ArrayList<SubTreatment>();
 	private int currentSubTreatmentIndex = 0;
+	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private Product product;
 	private long timeAdded;
 	
@@ -32,6 +46,11 @@ public class SubProduct implements Comparable<SubProduct>{
 		this.state = State.DRYING;
 		this.setProduct(product);
 		this.timeAdded = timeAdded;
+	}
+	
+	public SubProduct()
+	{
+		
 	}
 
 	public long getTimeAdded() {

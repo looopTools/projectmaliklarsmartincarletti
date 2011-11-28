@@ -3,8 +3,13 @@ package carletti.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 /**
  * Treatment represents the various drying treatments a product 
@@ -18,14 +23,24 @@ import javax.persistence.Id;
 public class Treatment {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
-	private ArrayList<SubTreatment> subTreatments;
+	
+	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
+	@JoinColumn
+	private List<SubTreatment> subTreatments;
 	
 	/**
 	 * 
 	 * @param name
 	 */
+	
+	public Treatment()
+	{
+		
+	}
+	
 	public Treatment(String name){
 		this.name = name;
 		subTreatments = new ArrayList<SubTreatment>();
