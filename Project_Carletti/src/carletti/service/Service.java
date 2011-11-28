@@ -65,8 +65,7 @@ public class Service
 	
 	public static Product createProduct(String name, String description, Treatment treatment)
 	{
-		int id = dao.getProducNextID();
-		Product p = new Product(id, name, description, treatment);
+		Product p = new Product(name, description, treatment);
 		dao.storeProduct(p);
 		dao.countProducID();
 		return p;
