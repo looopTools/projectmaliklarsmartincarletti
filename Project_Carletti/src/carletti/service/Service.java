@@ -46,8 +46,16 @@ public class Service
 	
 	public static SubProduct getSubproduct(SubProduct subProduct)
 	{
+		
 		int i = dao.getSubProducts().indexOf(subProduct);
+		if(i >0)
+			
 		return dao.getSubProducts().get(i);
+		
+		else
+		{
+			return null;
+		}
 	}
 	
 	public static Treatment createTreatment(String name)
