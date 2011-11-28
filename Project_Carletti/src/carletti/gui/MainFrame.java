@@ -108,8 +108,8 @@ public class MainFrame extends JFrame{
 		getContentPane().add(subProductsScrollPane, BorderLayout.CENTER);
 		
 		//--- Malik Lund ---
-		Thread t = new Thread(new UpdaterThread(this));
-		t.start();
+//		Thread t = new Thread(new UpdaterThread(this));
+//		t.start();
 		//------------------
 		
 		this.setVisible(true);
