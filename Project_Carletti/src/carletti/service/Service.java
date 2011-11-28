@@ -25,8 +25,7 @@ public class Service
 	
 	public static SubProduct createSubProduct(String name, Product product)
 	{
-		int id = dao.getSubProducNextID();
-		SubProduct sp = new SubProduct(id, name, product, System.currentTimeMillis()); // TODO Make timestamp an option to the user
+		SubProduct sp = new SubProduct(name, product, System.currentTimeMillis()); // TODO Make timestamp an option to the user
 		dao.storeSubProduct(sp);
 		dao.countSubProducID();
 		

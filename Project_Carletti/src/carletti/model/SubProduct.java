@@ -40,8 +40,7 @@ public class SubProduct implements Comparable<SubProduct>{
 	private Product product;
 	private long timeAdded;
 	
-	public SubProduct(int id, String name, Product product, long timeAdded) {
-		this.id = id;
+	public SubProduct(String name, Product product, long timeAdded) {
 		this.name = name;
 		this.state = State.DRYING;
 		this.setProduct(product);
