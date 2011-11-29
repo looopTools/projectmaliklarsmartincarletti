@@ -19,11 +19,11 @@ import javax.persistence.OneToOne;
 @Entity
 public class Product {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	private int id;
 	private String name;
 	private String description;
-	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToOne(cascade={CascadeType.PERSIST})
 	private Treatment treatment;
 	
 	

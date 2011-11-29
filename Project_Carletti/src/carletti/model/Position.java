@@ -8,15 +8,17 @@ package carletti.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Position {
 
-	@Id 
+	@Id
+	@GeneratedValue
+	private int id;
 	private String posID;
-	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private SubProduct sub; // Holds which product is on the position
 
 	public Position(String posID) {
@@ -42,12 +44,13 @@ public class Position {
 	 */
 	public boolean putSubProductOnPosition(SubProduct sub) {
 		// boolean taskCompleted = false;
-		if (sub == null) {
-			this.sub = sub;
-			return true;
-		} else {
-			return false;
-		}
+//		if (sub == null) {
+//			this.sub = sub;
+//			return true;
+//		} else {
+//			return false;
+//		}
+		return false;
 	}
 
 	/*
@@ -55,11 +58,12 @@ public class Position {
 	 * are non located
 	 */
 	public boolean removeSubProductFromPosition() {
-		if (sub == null) {
-			return false;
-		} else {
-			sub = null;
-			return true;
-		}
+//		if (sub == null) {
+//			return false;
+//		} else {
+//			sub = null;
+//			return true;
+//		}
+		return false;
 	}
 }

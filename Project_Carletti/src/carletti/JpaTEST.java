@@ -30,10 +30,10 @@ public class JpaTEST {
 		dao.storeSubProduct(sp2);
 //		dao.storeProduct(p2);
 //		JpaDao.getInstance().storeProduct(p1);
-//		ServiceJpa.getInstance().storeSubProduct(sp1);
+		ServiceJpa.getInstance().storeSubProduct(sp1);
 		List<SubProduct> subProducts = JpaDao.getInstance().getSubProducts(State.DRYING);
 		System.out.println(subProducts);
-		dao.changeStateOfSubProduct(subProducts.get(0), State.WASTE);
+//		dao.changeStateOfSubProduct(subProducts.get(0), State.WASTE);
 		System.out.println(JpaDao.getInstance().getSubProducts(State.WASTE));
 	}
 }
