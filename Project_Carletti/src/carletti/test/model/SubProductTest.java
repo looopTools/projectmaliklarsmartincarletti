@@ -13,6 +13,7 @@ import carletti.model.SubProduct;
 import carletti.model.SubTreatment;
 import carletti.model.Treatment;
 import carletti.service.Service;
+import carletti.dao.JpaDao;
 
 /**
  * 
@@ -20,6 +21,7 @@ import carletti.service.Service;
  *
  */
 public class SubProductTest {
+	Service service = Service.getInstance(JpaDao.getInstance());
 	SubProduct subproduct;
 	Treatment treatment;
 	Product product;
@@ -27,13 +29,13 @@ public class SubProductTest {
 
 	@Before
 	public void setUp() throws Exception {
-		treatment = Service.createTreatment("Treatment");
+		treatment = service.createTreatment("Treatment");
 		treatment.createSubTreatment("Subtreatment 1", 10, 20, 30);
 		treatment.createSubTreatment("Subtreatment 2", 20, 30, 40);
 		treatment.createSubTreatment("Subtreatment 3", 30, 40, 50);
-		product = Service.createProduct("TestProduct", "Product to test", treatment);
+		product = service.createProduct("TestProduct", "Product to test", treatment);
 		timeAdded = System.currentTimeMillis();
-		subproduct = new SubProduct(1, "Name", product, timeAdded);
+		subproduct = new SubProduct("Name", product, timeAdded);
 	}
 
 	/**
@@ -42,7 +44,6 @@ public class SubProductTest {
 	@Test
 	public void testSubProduct() {
 		assertEquals("Time differs", timeAdded, subproduct.getTimeAdded());
-		assertEquals("Id differs", 1, subproduct.getId());
 		assertEquals("Name differs", "Name", subproduct.getName());
 		assertEquals("State differs", State.DRYING, subproduct.getState());
 		
@@ -92,7 +93,7 @@ public class SubProductTest {
 		subproduct.nextSubTreatment();
 		subproduct.nextSubTreatment();
 		
-		Treatment newTreatment = Service.createTreatment("NewTreatment");
+		Treatment newTreatment = service.createTreatment("NewTreatment");
 		newTreatment.createSubTreatment("NewSubTreatment", 50, 60, 70);
 		subproduct.setSubtreatments(newTreatment.getSubTreatments());
 		List<SubTreatment> expectedSubTreatments = newTreatment.getSubTreatments();
@@ -124,10 +125,10 @@ public class SubProductTest {
 		subproduct.nextSubTreatment();
 		subproduct.nextSubTreatment();
 		
-		Treatment newTreatment = Service.createTreatment("NewTreatment");
+		Treatment newTreatment = service.createTreatment("NewTreatment");
 		newTreatment.createSubTreatment("T1", 1, 2, 3);
 		newTreatment.createSubTreatment("T2", 2, 3, 4);
-		Product newProduct = Service.createProduct("NewProduct", "Description of new product", newTreatment);
+		Product newProduct = service.createProduct("NewProduct", "Description of new product", newTreatment);
 		subproduct.setProduct(newProduct);
 		assertEquals("Product differs", newProduct, subproduct.getProduct());
 
