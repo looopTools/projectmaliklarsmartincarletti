@@ -151,7 +151,7 @@ public class SubProduct implements Comparable<SubProduct>{
 		int minutes = (int)(time / (1000*60));
 		time = time - minutes * 1000*60;
 		int seconds = (int)(time / (1000));
-		return String.format("%dd%h%dm%ds", days, hours, minutes, seconds);
+		return String.format("%dd%dh%dm%ds", days, hours, minutes, seconds);
 	}
 //	------------------------------
 	
