@@ -3,10 +3,14 @@ package carletti;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
@@ -29,7 +33,9 @@ public class JTableTester extends JFrame {
 		table = new JTable(tableModel);
 		table.setAutoCreateRowSorter(true);
 		table.setFillsViewportHeight(true);
+		table.setDefaultRenderer(table.getColumnClass(1), new MyCellRenderer());
 		scrollPane.setViewportView(table);
+		
 		
 		pack();
 	}
@@ -64,7 +70,18 @@ public class JTableTester extends JFrame {
 		
 		public Class getColumnClass(int c){
 			return getValueAt(0,c).getClass();
-		}	
+		}
 	}
-
+	
+	private class MyCellRenderer extends DefaultTableCellRenderer{
+		
+		@Override
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
+			Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+			if (row == 1 && column == 1){
+				comp.setBackground(Color.green);
+			}
+			return comp;
+		}
+	}
 }

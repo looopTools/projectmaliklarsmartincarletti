@@ -12,7 +12,7 @@ public class TestAppLars {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Service s = Service.getInstance(JpaDao.getInstance());
-//		s.createSomeObjects(JpaDao.getInstance());
+		s.createSomeObjects(JpaDao.getInstance());
 		NewMainFrame nmf = new NewMainFrame();
 	}
 
