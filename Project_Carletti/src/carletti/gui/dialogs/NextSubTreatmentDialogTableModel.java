@@ -10,9 +10,11 @@ import javax.swing.table.AbstractTableModel;
 
 import carletti.model.SubProduct;
 import carletti.service.Service;
+import carletti.dao.JpaDao;
 
 public class NextSubTreatmentDialogTableModel extends AbstractTableModel
 {
+	private Service service;
 	// Column headers.
 	private String[] coloumnNames =
 	{ "ID", "Name", "Subtreatment", "Number of Subtreatments" };
@@ -22,7 +24,8 @@ public class NextSubTreatmentDialogTableModel extends AbstractTableModel
 
 	public NextSubTreatmentDialogTableModel()
 	{
-		newData = Service.getAllInTreatment();
+		service = Service.getInstance(JpaDao.getInstance());
+		newData = service.getAllInTreatment();
 	}
 
 	@Override
@@ -74,7 +77,7 @@ public class NextSubTreatmentDialogTableModel extends AbstractTableModel
 
 	public void updateData()
 	{
-		newData = Service.getAllInTreatment();
+		newData = service.getAllInTreatment();
 	}
 		
 }

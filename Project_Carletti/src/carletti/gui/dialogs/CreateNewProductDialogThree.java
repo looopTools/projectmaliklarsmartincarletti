@@ -18,6 +18,7 @@ import javax.swing.ListSelectionModel;
 
 import carletti.model.Treatment;
 import carletti.service.Service;
+import carletti.dao.JpaDao;
 
 /**
  * 
@@ -26,6 +27,7 @@ import carletti.service.Service;
  */
 public class CreateNewProductDialogThree extends JDialog {
 	
+	private Service service;
 	private Controller controller;
 	
 	private JPanel mainPanel, productAndSubproductPanel, productInfoPanel,
@@ -39,6 +41,7 @@ public class CreateNewProductDialogThree extends JDialog {
 	private JScrollPane productDescriptionScrollPane, subTreatmentsScrollPane;
 
 	public CreateNewProductDialogThree(){
+		service = Service.getInstance(JpaDao.getInstance());
 		this.setTitle("Create new product");
 		this.setModal(true);
 
@@ -219,7 +222,7 @@ public class CreateNewProductDialogThree extends JDialog {
 				createSubTreatmentDialog.setVisible(true);
 			}
 			if (ae.getSource() == btnCreate){
-				Treatment treatment = Service.createTreatment(txfName.getText());
+				Treatment treatment = service.createTreatment(txfName.getText());
 				List<Object[]> data = subTreatmentsTableModel.getData();
 				for (int i = 0; i < data.size(); i++){
 					String name = (String)(data.get(i)[0]);
@@ -228,7 +231,7 @@ public class CreateNewProductDialogThree extends JDialog {
 					long max = (Long)(data.get(i)[3]);
 					treatment.createSubTreatment(name, min, optimal, max);
 				}
-				Service.createProduct(txfName.getText(), txtAreaDescription.getText(), treatment);
+				service.createProduct(txfName.getText(), txtAreaDescription.getText(), treatment);
 				CreateNewProductDialogThree.this.setVisible(false);
 			}
 			if (ae.getSource() == btnCancel){

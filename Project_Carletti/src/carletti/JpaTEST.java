@@ -27,13 +27,13 @@ public class JpaTEST {
 		t2.createSubTreatment("2nd", 3000, 4000, 5000);
 		Product p2 = Service.createProduct("FooBarCandy", "Some FooBarCandy from Baz company", t2);
 		SubProduct sp2 = Service.createSubProduct("Malik", p2);
+		dao.storeProduct(p2);
 		dao.storeSubProduct(sp2);
-//		dao.storeProduct(p2);
 //		JpaDao.getInstance().storeProduct(p1);
 		ServiceJpa.getInstance().storeSubProduct(sp1);
 		List<SubProduct> subProducts = JpaDao.getInstance().getSubProducts(State.DRYING);
 		System.out.println(subProducts);
-//		dao.changeStateOfSubProduct(subProducts.get(0), State.WASTE);
+		dao.changeStateOfSubProduct(subProducts.get(0), State.WASTE);
 		System.out.println(JpaDao.getInstance().getSubProducts(State.WASTE));
 	}
 }

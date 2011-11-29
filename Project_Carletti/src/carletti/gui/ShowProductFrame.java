@@ -6,28 +6,23 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.JButton;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 
-import carletti.gui.dialogs.NewSubProductDialog;
-import carletti.gui.dialogs.SubProductDialog;
-import carletti.model.SubProduct;
 import carletti.service.Service;
+import carletti.dao.JpaDao;
 
 public class ShowProductFrame extends JDialog
 {
-
+	private Service service;
 	private JPanel contentPane;
 	private JPanel panel;
 	private JButton btnOk;
@@ -66,6 +61,8 @@ public class ShowProductFrame extends JDialog
 	 */
 	public ShowProductFrame()
 	{
+		service = Service.getInstance(JpaDao.getInstance());
+		
 		btnCtrl = new Controller();
 		this.setMinimumSize(minimumSize);
 		setBounds(100, 100, 450, 300);
@@ -90,7 +87,7 @@ public class ShowProductFrame extends JDialog
 		
 		list = new JList();
 		contentPane.add(list, BorderLayout.NORTH);
-		list.setListData(Service.getProducts().toArray());
+		list.setListData(service.getProducts().toArray());
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		list.addListSelectionListener(new ListSelectionListener() {
@@ -114,9 +111,9 @@ public class ShowProductFrame extends JDialog
 	{
 		int index = list.getSelectedIndex();
 		if (index >= 0)
-			textPane.setText(Service.getProducts().get(list.getSelectedIndex()).getName() + "\n" +
-					Service.getProducts().get(list.getSelectedIndex()).getDescription() + "\n" + "Treatment:" + "\n" +
-					Service.getProducts().get(list.getSelectedIndex()).getTreatment());
+			textPane.setText(service.getProducts().get(list.getSelectedIndex()).getName() + "\n" +
+					service.getProducts().get(list.getSelectedIndex()).getDescription() + "\n" + "Treatment:" + "\n" +
+					service.getProducts().get(list.getSelectedIndex()).getTreatment());
 	}
 	
 	private class Controller implements ActionListener {
