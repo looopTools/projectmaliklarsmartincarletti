@@ -24,9 +24,12 @@ import carletti.gui.UpdaterThread;
 import carletti.model.State;
 import carletti.model.SubProduct;
 import carletti.service.Service;
+import carletti.dao.JpaDao;
 
 public class NextSubTreatmentDialog extends JFrame
 {
+	private Service service;
+	
 	private Dimension minsize = new Dimension(600, 400);
 	private JTable nextSubProcuctTable;
 	private JButton btnNextSubTreatment;
@@ -38,6 +41,7 @@ public class NextSubTreatmentDialog extends JFrame
 
 	public NextSubTreatmentDialog()
 	{
+		service = Service.getInstance(JpaDao.getInstance());
 		btnCtrl = new Controller();
 		this.setMinimumSize(minsize);
 
@@ -103,9 +107,9 @@ public class NextSubTreatmentDialog extends JFrame
 							"You need to selected an object");
 				} else
 				{
-					Service.getAllInTreatment()
-							.get(nextSubProcuctTable.getSelectedRow())
-							.nextSubTreatment();
+					SubProduct sp = service.getAllInTreatment()
+							.get(nextSubProcuctTable.getSelectedRow());
+					service.nextTreatnemt(sp);
 					NextSubTreatmentDialog.this.setVisible(false);
 				}
 			}

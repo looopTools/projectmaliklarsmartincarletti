@@ -16,9 +16,11 @@ import javax.swing.JTextField;
 
 import carletti.model.State;
 import carletti.model.SubProduct;
+import carletti.dao.JpaDao;
+import carletti.service.Service;
 
 public class WasteSubProduct extends JDialog{
-	
+	private Service service;
 	private JPanel infoPanel, btnPanel;
 	private JButton btnWaste;
 	private JButton btnCan;
@@ -34,6 +36,7 @@ public class WasteSubProduct extends JDialog{
 	private Controller btnCtrl;
 	
 	public WasteSubProduct(SubProduct sub) {
+		service = Service.getInstance(JpaDao.getInstance());
 		this.sub = sub;
 		btnCtrl = new Controller();
 		
@@ -171,7 +174,7 @@ public class WasteSubProduct extends JDialog{
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			if(ae.getSource().equals(btnWaste)){
-				sub.setState(State.WASTE);
+				service.changeState(sub, State.WASTE);
 				desposeDialog(false);
 			}
 			else if(ae.getSource().equals(btnCan)){

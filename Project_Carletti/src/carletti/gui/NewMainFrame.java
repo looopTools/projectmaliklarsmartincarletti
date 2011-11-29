@@ -24,11 +24,13 @@ import carletti.gui.dialogs.WasteSubProduct;
 import carletti.model.State;
 import carletti.model.SubProduct;
 import carletti.service.Service;
+import carletti.dao.JpaDao;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class NewMainFrame extends JFrame {
+	private Service service;
 
 	private JPanel buttonsPanel;
 	private JScrollPane subProductsScrollPane;
@@ -49,6 +51,7 @@ public class NewMainFrame extends JFrame {
 	private JButton btnNextSubTreatment;
 
 	public NewMainFrame() {
+		service = Service.getInstance(JpaDao.getInstance());
 
 		btnCtrl = new Controller();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -191,10 +194,10 @@ public class NewMainFrame extends JFrame {
 					JOptionPane.showMessageDialog(null,
 							"You need to selected an object");
 				}
-					else
-					{
-						sp.setState(State.TREATMENT);
-					}
+				else
+				{
+					service.changeState(sp, State.TREATMENT);
+				}
 				updateList();
 			}
 

@@ -20,13 +20,15 @@ import javax.swing.ListSelectionModel;
 
 import carletti.model.Product;
 import carletti.service.Service;
+import carletti.dao.JpaDao;
 
 /*
  * This class is harcoded dou to certain requriments, which windows build
  * couldn't do.
  */
 public class NewSubProductDialog extends JDialog {
-
+	private Service service;
+	
 	private JTextField txfName;
 	private JLabel lblName, lblProd;
 	private JScrollPane jspProducts;
@@ -42,6 +44,8 @@ public class NewSubProductDialog extends JDialog {
 	private Controller btnCtrl;
 
 	public NewSubProductDialog() {
+		service = Service.getInstance(JpaDao.getInstance());
+		
 		btnCtrl = new Controller();
 
 		this.setSize(defaultSize);
@@ -75,7 +79,7 @@ public class NewSubProductDialog extends JDialog {
 		y += 40;
 
 		prodList = new JList();
-		prodList.setListData(Service.getProducts().toArray());
+		prodList.setListData(service.getProducts().toArray());
 		prodList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		jspProducts = new JScrollPane(prodList);
@@ -116,7 +120,7 @@ public class NewSubProductDialog extends JDialog {
 				// int id, String name, Product product
 				String name = txfName.getText();
 				Product p = (Product) prodList.getSelectedValue();
-				Service.createSubProduct(name, p);
+				service.createSubProduct(name, p);
 				NewSubProductDialog.this.setVisible(false);
 
 			} else if (ae.getSource().equals(btnCan)) {

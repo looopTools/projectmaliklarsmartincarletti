@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import carletti.dao.Dao;
-import carletti.dao.LocalDao;
 import carletti.model.Product;
 import carletti.model.State;
 import carletti.model.SubProduct;
@@ -21,9 +20,27 @@ import carletti.model.Treatment;
 public class Service
 {
 	
-	private static Dao dao = LocalDao.getInstance();
+	private Dao dao;
+	private static Service serviceInstance;
 	
-	public static SubProduct createSubProduct(String name, Product product)
+	private Service(Dao dao){
+		this.dao = dao;
+	}
+	
+	/**
+	 * 
+	 * @param dao The dao to use. OBS: After initial call, dao doesn't change!
+	 * @return The instance
+	 * @author Malik Lund
+	 */
+	public static Service getInstance(Dao dao){
+		if (serviceInstance == null){
+			serviceInstance = new Service(dao);
+		}
+		return serviceInstance;
+	}
+	
+	public SubProduct createSubProduct(String name, Product product)
 	{
 		SubProduct sp = new SubProduct(name, product, System.currentTimeMillis()); // TODO Make timestamp an option to the user
 		dao.storeSubProduct(sp);
@@ -32,18 +49,18 @@ public class Service
 		return sp;
 	}
 	
-	public static void removeSubproduct(SubProduct subProduct)
+	public void removeSubproduct(SubProduct subProduct)
 	{
 		dao.removeSubProduct(subProduct);
 	}
 	
-	public static void discardSubProduct(SubProduct subProduct)
+	public void discardSubProduct(SubProduct subProduct)
 	{
 		State waste = State.WASTE;
 		dao.changeStateOfSubProduct(subProduct, waste);
 	}
 	
-	public static SubProduct getSubproduct(SubProduct subProduct)
+	public SubProduct getSubproduct(SubProduct subProduct)
 	{
 		
 		int i = dao.getSubProducts().indexOf(subProduct);
@@ -57,13 +74,13 @@ public class Service
 		}
 	}
 	
-	public static Treatment createTreatment(String name)
+	public Treatment createTreatment(String name)
 	{
 		Treatment t = new Treatment(name);
 		return t;
 	}
 	
-	public static Product createProduct(String name, String description, Treatment treatment)
+	public Product createProduct(String name, String description, Treatment treatment)
 	{
 		Product p = new Product(name, description, treatment);
 		dao.storeProduct(p);
@@ -71,92 +88,100 @@ public class Service
 		return p;
 	}
 	
-	public static void removeProduct(Product product)
+	public void removeProduct(Product product)
 	{
 		dao.removeProduct(product);
 	}
 	
-	public static Product getProduct(Product product)
+	public Product getProduct(Product product)
 	{
 		int i = dao.getProducts().indexOf(product);
 		return dao.getProducts().get(i);
 	}
 	
-	public static void nextTreatnemt(SubProduct subProduct)
+	public void nextTreatnemt(SubProduct subProduct)
 	{
-		subProduct.nextSubTreatment();
+		if (subProduct.getCurrentSubTreatmentIndex() < (subProduct.getSubtreatments().size() - 1)){
+			subProduct.setCurrentSubTreatmentIndex(subProduct.getCurrentSubTreatmentIndex()+1);
+			dao.changeStateOfSubProduct(subProduct, State.DRYING); // Martin
+		}
+		else if (subProduct.getCurrentSubTreatmentIndex() >= (subProduct.getSubtreatments().size() - 1))
+		{
+			dao.changeStateOfSubProduct(subProduct, State.DONE);
+		}
 	}
 	
-	public static void subProductDone(SubProduct subProduct)
+	public void subProductDone(SubProduct subProduct)
 	{
 		State done = State.DONE;
 		dao.changeStateOfSubProduct(subProduct, done);
 	}
 	
-	public static List<SubProduct> showAllDoneProduct()
+	public List<SubProduct> showAllDoneProduct()
 	{
 		State done = State.DONE;
 		
 		return dao.getSubProducts(done);
 	}
 	
-	public static List<Product> getProducts(){
+	public List<Product> getProducts(){
 		return dao.getProducts();
 	}
 	
-	public static List<SubProduct> showAllSubProduct()
+	public List<SubProduct> showAllSubProduct()
 	{
-		List<SubProduct> list = LocalDao.getInstance().getSubProducts();
+		List<SubProduct> list = dao.getSubProducts();
 		
 		Collections.sort(list);
 		return list;
 	}
 	
-	public static String getInfoAboutSubProduct(SubProduct subProduct)
+	public String getInfoAboutSubProduct(SubProduct subProduct)
 	{
 		int i = dao.getSubProducts().indexOf(subProduct);
 		return dao.getSubProducts().get(i) + "";
 	}
 	
-	public static List<SubProduct> getDryingSubProduct()
+	public List<SubProduct> getDryingSubProduct()
 	{
 		State drying = State.DRYING;
 		return dao.getSubProducts(drying);
 	}
 	
 	//--------- Malik-------------
-	public static void createSomeObjects()
+	public void createSomeObjects(Dao dao)
 	{
-		Treatment t1 = Service.createTreatment("Red chocolate MMs");
+		Service s = Service.getInstance(dao);
+		Treatment t1 = s.createTreatment("Red chocolate MMs");
 		t1.createSubTreatment("1st drying", 1000*60*30, 1000*60*32, 1000*60*35);
 		t1.createSubTreatment("2nd drying", 500, 750, 1000);
 		t1.createSubTreatment("3rd drying", 1250, 1300, 1500);
-		Product p1 = Service.createProduct("Red Chocolate MMs", "Info about red chocolate MMs", t1);
+		Product p1 = s.createProduct("Red Chocolate MMs", "Info about red chocolate MMs", t1);
 		
-		Treatment t2 = Service.createTreatment("Liquorice");
+		Treatment t2 = s.createTreatment("Liquorice");
 		t2.createSubTreatment("1st drying", 1000*60*15, 1000*60*20, 1000*60*25);
 		t2.createSubTreatment("2nd drying", 1500, 1750, 2000);
-		Product p2 = Service.createProduct("Liquorice", "Liquorice with coloured sugar layer", t2);
+		Product p2 = s.createProduct("Liquorice", "Liquorice with coloured sugar layer", t2);
 		
-		Treatment t3 = Service.createTreatment("Coffeebean");
+		Treatment t3 = s.createTreatment("Coffeebean");
 		t3.createSubTreatment("1st drying", 1000*60*55, 1000*60*60, 1000*60*70);
 		t3.createSubTreatment("2nd drying", 1200, 1300, 1400);
 		t3.createSubTreatment("3rd drying", 300, 400, 500);
-		Product p3 = Service.createProduct("Coffee Bean", "Coffee paste with a layer of chocolate", t3);
+		Product p3 = s.createProduct("Coffee Bean", "Coffee paste with a layer of chocolate", t3);
 		
-		SubProduct sp1 = Service.createSubProduct("Foobar", p1);
-		SubProduct sp2 = Service.createSubProduct("Barbaz", p2);
-		SubProduct sp3 = Service.createSubProduct("Bazfoo", p3);
+		SubProduct sp1 = s.createSubProduct("Foobar", p1);
+		SubProduct sp2 = s.createSubProduct("Barbaz", p2);
+		SubProduct sp3 = s.createSubProduct("Bazfoo", p3);
 	}
 	//----------------------------
 	
 	//Add by Lars
-	public static List<SubProduct> getAllNotWastedSubProducts(){
+	public List<SubProduct> getAllDryingSubProducts(){
 		ArrayList<SubProduct> productsNotWasted = new ArrayList<SubProduct>();
-		
-		for(int i = 0; i < LocalDao.getInstance().getSubProducts().size(); i++){
-			if(LocalDao.getInstance().getSubProducts().get(i).getState() == State.DRYING){
-				productsNotWasted.add(LocalDao.getInstance().getSubProducts().get(i));
+		List<SubProduct> allSubProducts = dao.getSubProducts(); 
+		for(int i = 0; i < allSubProducts.size(); i++){
+			if(allSubProducts.get(i).getState() == State.DRYING){
+				productsNotWasted.add(allSubProducts.get(i));
 			}
 		}
 		
@@ -167,19 +192,23 @@ public class Service
 	
 //	---------Martin---------------
 	
-	public static List<SubProduct> getAllInTreatment()
+	public List<SubProduct> getAllInTreatment()
 	{
 		ArrayList<SubProduct> subProductUnderTreatment = new ArrayList<SubProduct>();
 		
-		for (int i = 0 ; i < LocalDao.getInstance().getSubProducts().size() ; i ++)
+		for (int i = 0 ; i <dao.getSubProducts().size() ; i ++)
 		{
-			if (LocalDao.getInstance().getSubProducts().get(i).getState() == State.TREATMENT)
+			if (dao.getSubProducts().get(i).getState() == State.TREATMENT)
 			{
-				subProductUnderTreatment.add(LocalDao.getInstance().getSubProducts().get(i));
+				subProductUnderTreatment.add(dao.getSubProducts().get(i));
 			}
 		}
 		
 		return subProductUnderTreatment;
 	}
 //	-----------------------------------
+
+	public void changeState(SubProduct sp, State state) {
+		dao.changeStateOfSubProduct(sp, state);
+	}
 }

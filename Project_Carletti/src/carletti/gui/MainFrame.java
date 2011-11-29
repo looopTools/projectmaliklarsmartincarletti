@@ -1,5 +1,7 @@
 package carletti.gui;
 
+import carletti.dao.JpaDao;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.ScrollPane;
@@ -28,6 +30,8 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MainFrame extends JFrame{
+	private Service service;
+	
 	private JPanel buttonsPanel;
 	private JScrollPane subProductsScrollPane;
 	private JList subProductList;
@@ -44,6 +48,7 @@ public class MainFrame extends JFrame{
 	private int subProductListlIndex;
 
 	public MainFrame() {
+		service = Service.getInstance(JpaDao.getInstance());
 		
 		btnCtrl = new Controller();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -99,7 +104,7 @@ public class MainFrame extends JFrame{
 		btnNewProduct.addActionListener(btnCtrl);
 		
 		subProductList = new JList();
-		subProductList.setListData(Service.getAllNotWastedSubProducts().toArray());
+		subProductList.setListData(service.getAllNotWastedSubProducts().toArray());
 		subProductList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		
@@ -118,7 +123,7 @@ public class MainFrame extends JFrame{
 
 	public void updateList() {
 		subProductListlIndex = subProductList.getSelectedIndex(); //Martin
-		subProductList.setListData(Service.getAllNotWastedSubProducts().toArray());
+		subProductList.setListData(service.getAllNotWastedSubProducts().toArray());
 		subProductList.setSelectedIndex(subProductListlIndex); //Martin
 	}
 

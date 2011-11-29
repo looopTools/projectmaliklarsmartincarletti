@@ -10,11 +10,13 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import carletti.dao.JpaDao;
 import carletti.model.Product;
 import carletti.model.SubProduct;
 import carletti.service.Service;
 
 public class NewSubProductTableModel extends AbstractTableModel{
+	private Service service;
 	// Column headers.
 	private String[] coloumnNames = {"Time left", "Complete time", "ID", "Name", "State", "Subtreatment", "Number of Subtreatments"};
 	// The actual data.
@@ -22,7 +24,8 @@ public class NewSubProductTableModel extends AbstractTableModel{
 	private List<SubProduct> newData;
 		
 	public NewSubProductTableModel(){
-		newData = Service.getAllNotWastedSubProducts();
+		service = Service.getInstance(JpaDao.getInstance());
+		newData = service.getAllDryingSubProducts();
 	}
 
 	@Override
@@ -68,7 +71,7 @@ public class NewSubProductTableModel extends AbstractTableModel{
 	}
 
 	public void updateData() {
-		newData = Service.getAllNotWastedSubProducts();
+		newData = service.getAllDryingSubProducts();
 	}
 	
 

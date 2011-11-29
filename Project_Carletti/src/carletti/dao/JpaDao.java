@@ -65,6 +65,9 @@ public class JpaDao implements Dao{
 
 	@Override
 	public SubProduct changeStateOfSubProduct(SubProduct subProduct, State state) {
+//		Query query = em.createQuery("SELECT sp FROM SubProduct sp WHERE sp.id = :id", SubProduct.class);
+//		query.setParameter("id", subProduct.getId());
+//		SubProduct sp = (SubProduct)query.getResultList().get(0);
 		em.getTransaction().begin();
 		subProduct.setState(state);
 		em.getTransaction().commit();
