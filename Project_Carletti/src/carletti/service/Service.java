@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import carletti.dao.Dao;
+import carletti.model.Position;
 import carletti.model.Product;
 import carletti.model.State;
 import carletti.model.SubProduct;
@@ -40,9 +41,9 @@ public class Service
 		return serviceInstance;
 	}
 	
-	public SubProduct createSubProduct(String name, Product product)
+	public SubProduct createSubProduct(String name, Product product, Position position)
 	{
-		SubProduct sp = new SubProduct(name, product, System.currentTimeMillis()); // TODO Make timestamp an option to the user
+		SubProduct sp = new SubProduct(name, product, System.currentTimeMillis(), position); // TODO Make timestamp an option to the user
 		dao.storeSubProduct(sp);
 		
 		return sp;
@@ -152,7 +153,7 @@ public class Service
 		Service s = Service.getInstance(dao);
 		Treatment t1 = s.createTreatment("Red chocolate MMs");
 		t1.createSubTreatment("1st drying", 1000*60*30, 1000*60*32, 1000*60*35);
-		t1.createSubTreatment("2nd drying", 500, 750, 1000);
+		t1.createSubTreatment("2nd drying", 10000, 20000, 30000);
 		t1.createSubTreatment("3rd drying", 1250, 1300, 1500);
 		Product p1 = s.createProduct("Red Chocolate MMs", "Info about red chocolate MMs", t1);
 		
@@ -167,9 +168,9 @@ public class Service
 		t3.createSubTreatment("3rd drying", 300, 400, 500);
 		Product p3 = s.createProduct("Coffee Bean", "Coffee paste with a layer of chocolate", t3);
 		
-		SubProduct sp1 = s.createSubProduct("Foobar", p1);
-		SubProduct sp2 = s.createSubProduct("Barbaz", p2);
-		SubProduct sp3 = s.createSubProduct("Bazfoo", p3);
+		SubProduct sp1 = s.createSubProduct("Foobar", p1, new Position("A1"));
+		SubProduct sp2 = s.createSubProduct("Barbaz", p2, new Position("B4"));
+		SubProduct sp3 = s.createSubProduct("Bazfoo", p3, new Position("C7"));
 	}
 	//----------------------------
 	

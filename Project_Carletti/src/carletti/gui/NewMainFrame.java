@@ -1,9 +1,12 @@
 package carletti.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -28,6 +31,7 @@ import carletti.dao.JpaDao;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class NewMainFrame extends JFrame {
 	private Service service;
@@ -123,6 +127,7 @@ public class NewMainFrame extends JFrame {
 		subProductTableModel = new NewSubProductTableModel();
 		subProductTable = new JTable(subProductTableModel);
 		subProductTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		subProductTable.setDefaultRenderer(subProductTableModel.getColumnClass(0), new HighlighterCellRenderer());
 
 		subProductsScrollPane = new JScrollPane(subProductTable);
 		subProductsScrollPane
@@ -211,6 +216,44 @@ public class NewMainFrame extends JFrame {
 				NextSubTreatmentDialog ntd = new NextSubTreatmentDialog();
 				ntd.setVisible(true);
 			}
+		}
+	}
+	
+	/**
+	 * Custom cell renderer that colors the time remaining cell
+	 * white, green, yellow or red depending on the time remaining
+	 * until max drying time is exceeded.
+	 * 
+	 * @author Malik Lund
+	 */
+	private class HighlighterCellRenderer extends DefaultTableCellRenderer{
+		
+		@Override
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
+			Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+			SubProduct subProducts = subProductTableModel.getSubProduct(row);
+			
+			long currentTime = System.currentTimeMillis();
+			long minTime = subProducts.getTimeAdded() + subProducts.getCurrentSubTreatment().getDryMin();
+			long optimalTime = subProducts.getTimeAdded() + subProducts.getCurrentSubTreatment().getDryPrime();
+			long maxTime = subProducts.getTimeAdded() + subProducts.getCurrentSubTreatment().getDryMax();
+			
+			// Set color
+			if (minTime < currentTime && optimalTime > currentTime && column == 0){
+				comp.setBackground(Color.green);
+			} 
+			else if (optimalTime < currentTime && maxTime > currentTime && column == 0){
+				comp.setBackground(Color.yellow);
+			}
+			else if (currentTime > maxTime && column == 0) {
+				comp.setBackground(Color.red);
+			} else {
+//				comp.setBackground(Color.white);
+				DefaultTableCellRenderer defaultRenderer = new DefaultTableCellRenderer();
+				return defaultRenderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+			}
+			
+			return comp;
 		}
 	}
 }

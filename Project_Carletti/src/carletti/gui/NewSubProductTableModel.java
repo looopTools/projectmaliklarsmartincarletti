@@ -69,6 +69,14 @@ public class NewSubProductTableModel extends AbstractTableModel{
 		}
 		
 	}
+	
+	/**
+	 * @author Malik Lund
+	 * @return
+	 */
+	public SubProduct getSubProduct(int row){
+		return newData.get(row);
+	}
 
 	public void updateData() {
 		newData = service.getAllDryingSubProducts();
