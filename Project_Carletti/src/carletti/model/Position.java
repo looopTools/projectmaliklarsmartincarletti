@@ -19,7 +19,7 @@ public class Position {
 	@GeneratedValue
 	private int id;
 	private String posID;
-	private SubProduct sub; // Holds which product is on the position
+	private SubProduct sp; // Holds which product is on the position
 
 	public Position(String posID) {
 		this.posID = posID;
@@ -42,15 +42,16 @@ public class Position {
 	 * @precon There can't be put a SubProduct on a position where there already
 	 * is another SubProduct already position
 	 */
-	public boolean putSubProductOnPosition(SubProduct sub) {
-		// boolean taskCompleted = false;
-//		if (sub == null) {
-//			this.sub = sub;
-//			return true;
-//		} else {
-//			return false;
-//		}
-		return false;
+	public boolean putSubProductOnPosition(SubProduct sp) {
+		 boolean taskCompleted = false;
+		if (sp == null) {
+			putSubProductOnPositionUD(sp);
+			sp.setPositionUD(this);
+			return true;
+		} else {
+			return false;
+		}
+//		return false;
 	}
 
 	/*
@@ -58,12 +59,18 @@ public class Position {
 	 * are non located
 	 */
 	public boolean removeSubProductFromPosition() {
-//		if (sub == null) {
-//			return false;
-//		} else {
-//			sub = null;
-//			return true;
-//		}
-		return false;
+		if (sp == null) {
+			return false;
+		} else {
+			sp = null;
+			return true;
+		}
+//		return false;
 	}
+	
+	void putSubProductOnPositionUD(SubProduct sp){
+		this.sp = sp;
+	}
+	
+	
 }
