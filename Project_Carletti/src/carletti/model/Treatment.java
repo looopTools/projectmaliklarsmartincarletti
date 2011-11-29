@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 /**
@@ -23,12 +24,10 @@ import javax.persistence.OneToMany;
 public class Treatment {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	private int id;
 	private String name;
-	
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
-	@JoinColumn
+	@OneToMany(cascade={CascadeType.PERSIST})
 	private List<SubTreatment> subTreatments;
 	
 	/**

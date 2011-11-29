@@ -17,11 +17,10 @@ public class SubTreatment {
 	 * Holds the drying time for minimum, prime and maximum drying time
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	private int id;
 	private long dryMin, dryPrime, dryMax;
 	private String name;
-	;
 	
 	public SubTreatment(String name, long dryMin, long dryPrime, long dryMax){
 		this.setName(name);

@@ -18,6 +18,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -26,17 +27,16 @@ import javax.persistence.OneToOne;
 public class SubProduct implements Comparable<SubProduct>{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	private int id; //To have a key for the database
 	private String name;
 	@Enumerated (EnumType.STRING)
 	private State state; //The current state which a SubProduct is in 
 	
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
-	@JoinColumn
+	@OneToMany
 	private List<SubTreatment> subtreatments = new ArrayList<SubTreatment>();
 	private int currentSubTreatmentIndex = 0;
-	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToOne(cascade={CascadeType.PERSIST})
 	private Product product;
 	private long timeAdded;
 	
