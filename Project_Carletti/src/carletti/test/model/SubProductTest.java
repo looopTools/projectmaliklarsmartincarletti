@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import carletti.model.Position;
 import carletti.model.Product;
 import carletti.model.State;
 import carletti.model.SubProduct;
@@ -25,6 +26,7 @@ public class SubProductTest {
 	SubProduct subproduct;
 	Treatment treatment;
 	Product product;
+	Position position;
 	long timeAdded;
 
 	@Before
@@ -35,7 +37,8 @@ public class SubProductTest {
 		treatment.createSubTreatment("Subtreatment 3", 30, 40, 50);
 		product = service.createProduct("TestProduct", "Product to test", treatment);
 		timeAdded = System.currentTimeMillis();
-		subproduct = new SubProduct("Name", product, timeAdded);
+		position = new Position("A2");
+		subproduct = new SubProduct("Name", product, timeAdded, position);
 	}
 
 	/**
