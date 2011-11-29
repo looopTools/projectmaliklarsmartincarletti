@@ -16,6 +16,7 @@ import javax.persistence.Query;
 import carletti.model.Product;
 import carletti.model.State;
 import carletti.model.SubProduct;
+import carletti.model.Treatment;
 
 public class JpaDao implements Dao{
 
@@ -31,7 +32,7 @@ public class JpaDao implements Dao{
 	
 	/**
 	 * insures that we are only able to create on JpaDao instance
-	 * and it is done, but implementing the Singelton design pattern
+	 * and it is done by implementing the Singelton design pattern
 	 * @return
 	 */
 	public static JpaDao getInstance(){
@@ -65,9 +66,6 @@ public class JpaDao implements Dao{
 
 	@Override
 	public SubProduct changeStateOfSubProduct(SubProduct subProduct, State state) {
-//		Query query = em.createQuery("SELECT sp FROM SubProduct sp WHERE sp.id = :id", SubProduct.class);
-//		query.setParameter("id", subProduct.getId());
-//		SubProduct sp = (SubProduct)query.getResultList().get(0);
 		em.getTransaction().begin();
 		subProduct.setState(state);
 		em.getTransaction().commit();
@@ -111,25 +109,22 @@ public class JpaDao implements Dao{
 	}
 
 	@Override
-	public int getSubProducNextID() {
-		return 0;
+	public void storeTreatment(Treatment t) {
+		em.getTransaction().begin();
+		em.persist(t);
+		em.getTransaction().commit();
 	}
 
 	@Override
-	public void countSubProducID() {
-		// TODO Auto-generated method stub
-		
+	public void removeTreatment(Treatment t) {
+		em.getTransaction().begin();
+		em.remove(t);
+		em.getTransaction().commit();
 	}
 
 	@Override
-	public int getProducNextID() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void countProducID() {
-		// TODO Auto-generated method stub
-		
+	public List<Treatment> getTreatments() {
+		Query query = em.createQuery("SELECT t FROM Treatment t", Treatment.class);
+		return query.getResultList();
 	}
 }

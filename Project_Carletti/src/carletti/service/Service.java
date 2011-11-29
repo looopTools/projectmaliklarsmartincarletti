@@ -44,7 +44,6 @@ public class Service
 	{
 		SubProduct sp = new SubProduct(name, product, System.currentTimeMillis()); // TODO Make timestamp an option to the user
 		dao.storeSubProduct(sp);
-		dao.countSubProducID();
 		
 		return sp;
 	}
@@ -84,7 +83,6 @@ public class Service
 	{
 		Product p = new Product(name, description, treatment);
 		dao.storeProduct(p);
-		dao.countProducID();
 		return p;
 	}
 	

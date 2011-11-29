@@ -7,6 +7,5 @@
 	<classpathentry kind="lib" path="JPA_Connections/javax.persistence_2.0.3.v201010191057.jar"/>
 	<classpathentry kind="lib" path="JPA_Connections/eclipselink.jar"/>
 	<classpathentry kind="lib" path="JPA_Connections/jtds-1.2.5.jar"/>
-	<classpathentry kind="lib" path="JPA_Connections/sqljdbc4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

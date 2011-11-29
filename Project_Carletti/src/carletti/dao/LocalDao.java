@@ -6,6 +6,7 @@ import java.util.List;
 import carletti.model.State;
 import carletti.model.SubProduct;
 import carletti.model.Product;
+import carletti.model.Treatment;
 
 /**
  * This class maintains connection, and any operations, with the database.
@@ -21,6 +22,7 @@ import carletti.model.Product;
  */
 public class LocalDao implements Dao {
 	private static LocalDao dao = null;
+	private ArrayList<Treatment> treatments;
 	private ArrayList<Product> products;
 	private ArrayList<SubProduct> subproducts;
 	private int subProductnextID = 1;
@@ -30,9 +32,9 @@ public class LocalDao implements Dao {
 	 * lists.
 	 */
 	private LocalDao(){
+		treatments = new ArrayList<Treatment>();
 		products = new ArrayList<Product>();
 		subproducts = new ArrayList<SubProduct>();		
-		
 	}
 	
 	/**
@@ -138,5 +140,20 @@ public class LocalDao implements Dao {
 	
 	public void countProducID(){
 		productNextID++;
+	}
+
+	@Override
+	public void storeTreatment(Treatment t) {
+		treatments.add(t);
+	}
+
+	@Override
+	public void removeTreatment(Treatment t) {
+		treatments.remove(t);
+	}
+
+	@Override
+	public List<Treatment> getTreatments() {
+		return new ArrayList<Treatment>(treatments);
 	}
 }
