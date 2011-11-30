@@ -120,7 +120,7 @@ public class NewSubProductDialog extends JDialog {
 				// int id, String name, Product product
 				String name = txfName.getText();
 				Product p = (Product) prodList.getSelectedValue();
-				service.createSubProduct(name, p);
+				service.createSubProduct(name, p, null);
 				NewSubProductDialog.this.setVisible(false);
 
 			} else if (ae.getSource().equals(btnCan)) {
