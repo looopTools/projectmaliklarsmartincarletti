@@ -18,14 +18,15 @@ import javax.swing.ListSelectionModel;
 
 import carletti.model.Treatment;
 import carletti.service.Service;
+import carletti.dao.JpaDao;
 
 /**
- * The CreateNewProductDialog class handles the creation
- * of a new product and it's associated treatment plan.
+ * 
  * @author Malik Lund
  *
  */
-public class CreateNewProductDialog extends JDialog {
+public class CreateNewProductDialogOld extends JDialog {
+	
 	private Service service;
 	private Controller controller;
 	
@@ -34,13 +35,13 @@ public class CreateNewProductDialog extends JDialog {
 	private JLabel lblNewProduct, lblName, lblDescription, lblSubTreatment;
 	private JTextField txfName;
 	private JTextArea txtAreaDescription;
-	private JButton btnCreate, btnCancel, btnAddSubTreatment, btnSelectTreatment;
+	private JButton btnCreate, btnCancel, btnAddSubTreatment;
 	private JTable subTreatmentsTable;
 	private NewProductSubTreatmentsTableModel subTreatmentsTableModel;
 	private JScrollPane productDescriptionScrollPane, subTreatmentsScrollPane;
 
-	public CreateNewProductDialog(){
-		service = service.getInstance(null);
+	public CreateNewProductDialogOld(){
+		service = Service.getInstance();
 		this.setTitle("Create new product");
 		this.setModal(true);
 
@@ -163,7 +164,7 @@ public class CreateNewProductDialog extends JDialog {
 		subTreatmentsGroupLayout.setAutoCreateGaps(true);
 		subTreatmentsGroupLayout.setAutoCreateContainerGaps(true);
 		
-		lblSubTreatment = new JLabel("Treatments");
+		lblSubTreatment = new JLabel("Subtreatments");
 		subTreatmentsTableModel = new NewProductSubTreatmentsTableModel();
 		subTreatmentsTable = new JTable(subTreatmentsTableModel);
 		subTreatmentsScrollPane = new JScrollPane(subTreatmentsTable);
@@ -184,7 +185,7 @@ public class CreateNewProductDialog extends JDialog {
 		);
 		
 		//-----------
-		// Treatment buttons.
+		// Subtreatment Add button
 		
 		GroupLayout subTreatmentButtonsGroupLayout = new GroupLayout(subTreatmentButtonsPanel);
 		subTreatmentButtonsPanel.setLayout(subTreatmentButtonsGroupLayout);
@@ -193,30 +194,22 @@ public class CreateNewProductDialog extends JDialog {
 		subTreatmentButtonsGroupLayout.setAutoCreateContainerGaps(true);
 		
 		btnAddSubTreatment = new JButton("Add subtreatment");
-		btnSelectTreatment = new JButton("Select existing treatment");
 		
 		btnAddSubTreatment.addActionListener(controller);
-		btnSelectTreatment.addActionListener(controller);
 		
 		subTreatmentButtonsGroupLayout.setHorizontalGroup(
-			subTreatmentButtonsGroupLayout
-				.createSequentialGroup()
-					.addComponent(btnAddSubTreatment)
-					.addComponent(btnSelectTreatment)
+			subTreatmentButtonsGroupLayout.createSequentialGroup().addComponent(btnAddSubTreatment)
 		);
 		
 		subTreatmentButtonsGroupLayout.setVerticalGroup(
-			subTreatmentButtonsGroupLayout
-				.createParallelGroup()
-					.addComponent(btnAddSubTreatment)
-					.addComponent(btnSelectTreatment)
+				subTreatmentButtonsGroupLayout.createSequentialGroup().addComponent(btnAddSubTreatment)
 		);
 		
 		this.pack();
 	}
 	
 	/**
-	 * Handles all input for this class.
+	 * 
 	 * @author Malik Lund
 	 *
 	 */
@@ -224,10 +217,10 @@ public class CreateNewProductDialog extends JDialog {
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-			
-			/**
-			 * Create product button.
-			 */
+			if (ae.getSource() == btnAddSubTreatment){
+				CreateNewSubTreatmentDialog createSubTreatmentDialog = new CreateNewSubTreatmentDialog(subTreatmentsTableModel);
+				createSubTreatmentDialog.setVisible(true);
+			}
 			if (ae.getSource() == btnCreate){
 				Treatment treatment = service.createTreatment(txfName.getText());
 				List<Object[]> data = subTreatmentsTableModel.getData();
@@ -239,28 +232,10 @@ public class CreateNewProductDialog extends JDialog {
 					treatment.createSubTreatment(name, min, optimal, max);
 				}
 				service.createProduct(txfName.getText(), txtAreaDescription.getText(), treatment);
-				CreateNewProductDialog.this.setVisible(false);
+				CreateNewProductDialogOld.this.setVisible(false);
 			}
-			/**
-			 * Cancel creation of product button.
-			 */
-			else if (ae.getSource() == btnCancel){
-				CreateNewProductDialog.this.setVisible(false);
-			}
-			
-			/**
-			 * Add subtreatment button.
-			 */
-			else if (ae.getSource() == btnAddSubTreatment){
-				CreateNewSubTreatmentDialogFour createSubTreatmentDialog = new CreateNewSubTreatmentDialogFour(subTreatmentsTableModel);
-				createSubTreatmentDialog.setVisible(true);
-			}
-			/**
-			 * Select treatment button. 
-			 */
-			else if (ae.getSource() == btnSelectTreatment){
-				SelectTreatmentDialog selectTreatmentDialog = new SelectTreatmentDialog(subTreatmentsTableModel);
-				selectTreatmentDialog.setVisible(true);
+			if (ae.getSource() == btnCancel){
+				CreateNewProductDialogOld.this.setVisible(false);
 			}
 		}
 	}

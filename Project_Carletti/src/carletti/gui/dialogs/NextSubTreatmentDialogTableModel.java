@@ -24,7 +24,7 @@ public class NextSubTreatmentDialogTableModel extends AbstractTableModel
 
 	public NextSubTreatmentDialogTableModel()
 	{
-		service = Service.getInstance(JpaDao.getInstance());
+		service = Service.getInstance();
 		newData = service.getAllInTreatment();
 	}
 

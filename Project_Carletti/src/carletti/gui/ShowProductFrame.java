@@ -61,7 +61,7 @@ public class ShowProductFrame extends JDialog
 	 */
 	public ShowProductFrame()
 	{
-		service = Service.getInstance(JpaDao.getInstance());
+		service = Service.getInstance();
 		
 		btnCtrl = new Controller();
 		this.setMinimumSize(minimumSize);

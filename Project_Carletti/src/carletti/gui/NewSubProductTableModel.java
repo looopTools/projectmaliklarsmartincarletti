@@ -25,7 +25,7 @@ public class NewSubProductTableModel extends AbstractTableModel{
 	private List<SubProduct> newData;
 		
 	public NewSubProductTableModel(){
-		service = Service.getInstance(JpaDao.getInstance());
+		service = Service.getInstance();
 		newData = service.getAllDryingSubProducts();
 	}
 

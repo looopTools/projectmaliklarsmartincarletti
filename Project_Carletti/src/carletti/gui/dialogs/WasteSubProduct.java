@@ -36,7 +36,7 @@ public class WasteSubProduct extends JDialog{
 	private Controller btnCtrl;
 	
 	public WasteSubProduct(SubProduct sub) {
-		service = Service.getInstance(JpaDao.getInstance());
+		service = Service.getInstance();
 		this.sub = sub;
 		btnCtrl = new Controller();
 		

@@ -41,7 +41,7 @@ public class NextSubTreatmentDialog extends JFrame
 
 	public NextSubTreatmentDialog()
 	{
-		service = Service.getInstance(JpaDao.getInstance());
+		service = Service.getInstance();
 		btnCtrl = new Controller();
 		this.setMinimumSize(minsize);
 
