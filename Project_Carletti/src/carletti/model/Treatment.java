@@ -27,7 +27,7 @@ public class Treatment {
 	@GeneratedValue
 	private int id;
 	private String name;
-	@OneToMany(cascade={CascadeType.PERSIST})
+	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<SubTreatment> subTreatments;
 	
 	/**
