@@ -94,6 +94,15 @@ public class Service
 			return null;
 		}
 	}
+	
+	/**
+	 * 
+	 * @author Malik Lund
+	 * @return
+	 */
+	public List<Treatment> getTreatments(){
+		return dao.getTreatments();
+	}
 
 	public Treatment createTreatment(String name)
 	{

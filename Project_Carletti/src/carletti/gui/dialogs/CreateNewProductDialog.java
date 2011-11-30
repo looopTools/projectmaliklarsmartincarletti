@@ -3,8 +3,11 @@ package carletti.gui.dialogs;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -16,6 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import carletti.model.SubTreatment;
 import carletti.model.Treatment;
 import carletti.service.Service;
 
@@ -29,10 +33,12 @@ public class CreateNewProductDialog extends JDialog {
 	private Service service;
 	private Controller controller;
 	
+	private boolean newTreatment;
+	
 	private JPanel mainPanel, productAndSubproductPanel, productInfoPanel,
-	               productButtonsPanel, subTreatmentPanel, subTreatmentButtonsPanel;
-	private JLabel lblNewProduct, lblName, lblDescription, lblSubTreatment;
-	private JTextField txfName;
+	               productButtonsPanel, treatmentNamePanel, subTreatmentPanel, subTreatmentButtonsPanel;
+	private JLabel lblNewProduct, lblName, lblDescription, lblTreatmentName, lblSubTreatment;
+	private JTextField txfName, txfTreatmentName;
 	private JTextArea txtAreaDescription;
 	private JButton btnCreate, btnCancel, btnAddSubTreatment, btnSelectTreatment;
 	private JTable subTreatmentsTable;
@@ -164,22 +170,32 @@ public class CreateNewProductDialog extends JDialog {
 		subTreatmentsGroupLayout.setAutoCreateContainerGaps(true);
 		
 		lblSubTreatment = new JLabel("Treatments");
+		treatmentNamePanel = new JPanel();
+		lblTreatmentName = new JLabel("Name:    ");
+		txfTreatmentName = new JTextField();
 		subTreatmentsTableModel = new NewProductSubTreatmentsTableModel();
 		subTreatmentsTable = new JTable(subTreatmentsTableModel);
 		subTreatmentsScrollPane = new JScrollPane(subTreatmentsTable);
 		
+		treatmentNamePanel.setLayout(new BoxLayout(treatmentNamePanel, BoxLayout.X_AXIS));
+		treatmentNamePanel.add(lblTreatmentName);
+		treatmentNamePanel.add(txfTreatmentName);
+		txfTreatmentName.setEnabled(false);
+		txfTreatmentName.addKeyListener(controller);
 		subTreatmentsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		subTreatmentsGroupLayout.setHorizontalGroup(
 			subTreatmentsGroupLayout.createSequentialGroup()
 				.addGroup(subTreatmentsGroupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-					.addComponent(lblSubTreatment)	
+					.addComponent(lblSubTreatment)
+					.addComponent(treatmentNamePanel)
 					.addComponent(subTreatmentsScrollPane, 400, 400, 400))
 		);
 		
 		subTreatmentsGroupLayout.setVerticalGroup(
 			subTreatmentsGroupLayout.createSequentialGroup()
 				.addComponent(lblSubTreatment)
+				.addComponent(treatmentNamePanel)
 				.addComponent(subTreatmentsScrollPane, 100, 100, Short.MAX_VALUE)
 		);
 		
@@ -192,7 +208,7 @@ public class CreateNewProductDialog extends JDialog {
 		subTreatmentButtonsGroupLayout.setAutoCreateGaps(true);
 		subTreatmentButtonsGroupLayout.setAutoCreateContainerGaps(true);
 		
-		btnAddSubTreatment = new JButton("Add subtreatment");
+		btnAddSubTreatment = new JButton("New Treatment");
 		btnSelectTreatment = new JButton("Select existing treatment");
 		
 		btnAddSubTreatment.addActionListener(controller);
@@ -220,7 +236,7 @@ public class CreateNewProductDialog extends JDialog {
 	 * @author Malik Lund
 	 *
 	 */
-	private class Controller implements ActionListener{
+	private class Controller implements ActionListener, KeyListener{
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
@@ -229,13 +245,13 @@ public class CreateNewProductDialog extends JDialog {
 			 * Create product button.
 			 */
 			if (ae.getSource() == btnCreate){
-				Treatment treatment = service.createTreatment(txfName.getText());
-				List<Object[]> data = subTreatmentsTableModel.getData();
+				Treatment treatment = service.createTreatment(txfTreatmentName.getText());
+				List<SubTreatment> data = subTreatmentsTableModel.getData().getSubTreatments();
 				for (int i = 0; i < data.size(); i++){
-					String name = (String)(data.get(i)[0]);
-					long min = (Long)(data.get(i)[1]);
-					long optimal = (Long)(data.get(i)[2]);
-					long max = (Long)(data.get(i)[3]);
+					String name = (String)(data.get(i).getName());
+					long min = (Long)(data.get(i).getDryMin());
+					long optimal = (Long)(data.get(i).getDryPrime());
+					long max = (Long)(data.get(i).getDryMax());
 					treatment.createSubTreatment(name, min, optimal, max);
 				}
 				service.createProduct(txfName.getText(), txtAreaDescription.getText(), treatment);
@@ -249,18 +265,80 @@ public class CreateNewProductDialog extends JDialog {
 			}
 			
 			/**
-			 * Add subtreatment button.
+			 * New/Add subtreatment button.
 			 */
 			else if (ae.getSource() == btnAddSubTreatment){
-				CreateNewSubTreatmentDialogFour createSubTreatmentDialog = new CreateNewSubTreatmentDialogFour(subTreatmentsTableModel);
-				createSubTreatmentDialog.setVisible(true);
+				if (newTreatment){
+					CreateNewSubTreatmentDialogFour createSubTreatmentDialog = new CreateNewSubTreatmentDialogFour(subTreatmentsTableModel);
+					createSubTreatmentDialog.setVisible(true);
+				} else {
+					newTreatment = true;
+					txfTreatmentName.setEnabled(true);
+					txfTreatmentName.setText("");
+					btnAddSubTreatment.setText("Add subtreatment");
+					subTreatmentsTableModel.setData(new Treatment("Temp"));
+				}
 			}
 			/**
 			 * Select treatment button. 
 			 */
 			else if (ae.getSource() == btnSelectTreatment){
+				// save new Treatment in case you regret 
+				// selecting an existing one
+				Treatment temporaryTreatment = null;
+				if (newTreatment){
+					temporaryTreatment = subTreatmentsTableModel.getData();
+				}
+				
+				// prepare table and tablemodel
+				subTreatmentsTableModel.setData(new Treatment("Temp"));
+				subTreatmentsTableModel.removeTableModelListener(subTreatmentsTable); // "disconnect" table 
+				txfTreatmentName.setText("");
+				
+				// start selection
 				SelectTreatmentDialog selectTreatmentDialog = new SelectTreatmentDialog(subTreatmentsTableModel);
 				selectTreatmentDialog.setVisible(true);
+				
+				// handle selection
+				Treatment treatment = subTreatmentsTableModel.getData();
+				if (!treatment.getName().equals("Temp")){
+					// selected an existing treatment
+					txfTreatmentName.setText(treatment.getName());
+				} else {
+					// didn't select an existing treatment
+					if (newTreatment){
+						// revert to previous data.
+						subTreatmentsTableModel.setData(temporaryTreatment);
+						txfTreatmentName.setText(temporaryTreatment.getName());
+					} else {
+						// no previsous data.
+						subTreatmentsTableModel.setData(new Treatment("Temp"));
+					}
+				}
+				
+				subTreatmentsTableModel.addTableModelListener(subTreatmentsTable); // "reconnect" table
+				subTreatmentsTableModel.fireTableDataChanged();
+
+			}
+		}
+
+		@Override
+		public void keyPressed(KeyEvent arg0) {
+			// do nothing
+		}
+
+		@Override
+		public void keyReleased(KeyEvent arg0) {
+			// do nothing
+		}
+
+		@Override
+		public void keyTyped(KeyEvent ke) {
+			// saves the text in the treatment name textfield, so
+			// that it can be restored if you press cancel when
+			// selecting an exisiting treatment.
+			if(ke.getSource() == txfTreatmentName){
+				subTreatmentsTableModel.getData().setName(txfTreatmentName.getText());
 			}
 		}
 	}
