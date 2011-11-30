@@ -18,7 +18,7 @@ import carletti.service.Service;
 public class NewSubProductTableModel extends AbstractTableModel{
 	private Service service;
 	// Column headers.
-	private String[] coloumnNames = {"Time left", "Complete time", "ID", "Name", "State", "Subtreatment", "Number of Subtreatments"};
+	private String[] coloumnNames = {"Time left", "Started on", "ID", "Position", "Name", "State", "Subtreatment", "Subtreatment #"};
 	// The actual data.
 	private ArrayList<Object[]> data = new ArrayList<Object[]>();
 	private List<SubProduct> newData;
@@ -48,9 +48,9 @@ public class NewSubProductTableModel extends AbstractTableModel{
 		SubProduct sp = newData.get(row);
 		Object[] value = {
 				sp.getTimeLeft(sp.timeLeft()), sp.getTime(sp.getTimeAdded()), 
-				new Integer(sp.getId()), sp.getName(), 
+				new Integer(sp.getId()), sp.getPosition().getPosID(), sp.getName(), 
 				sp.getState(), sp.getCurrentSubTreatment().getName(), 
-				sp.getSubtreatments().size()	
+				(sp.getCurrentSubTreatmentIndex() + 1) + "/" + sp.getSubtreatments().size()	
 		};
 		return value[col];
 	}

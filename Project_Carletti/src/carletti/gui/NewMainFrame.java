@@ -148,7 +148,7 @@ public class NewMainFrame extends JFrame {
 	/*
 	 * @author Malik
 	 */
-	public void updateList() {
+	public synchronized void updateList() {
 		int selection = subProductTable.getSelectedRow();
 		subProductTableModel.updateData();
 		subProductTableModel.fireTableDataChanged();
