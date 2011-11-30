@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import carletti.model.Position;
 import carletti.model.Product;
 import carletti.service.Service;
 import carletti.dao.JpaDao;
@@ -120,7 +121,7 @@ public class NewSubProductDialog extends JDialog {
 				// int id, String name, Product product
 				String name = txfName.getText();
 				Product p = (Product) prodList.getSelectedValue();
-				service.createSubProduct(name, p, null);
+				service.createSubProduct(name, p, new Position("2A"));
 				NewSubProductDialog.this.setVisible(false);
 
 			} else if (ae.getSource().equals(btnCan)) {
