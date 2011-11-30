@@ -8,6 +8,7 @@ import org.junit.Test;
 import carletti.dao.Dao;
 import carletti.dao.JpaDao;
 import carletti.dao.LocalDao;
+import carletti.model.Position;
 import carletti.model.Product;
 import carletti.model.SubProduct;
 import carletti.model.SubTreatment;
@@ -23,7 +24,10 @@ public class ServiceTest
 	private SubProduct subproduct;
 	private SubProduct subproduct2;
 	private Dao localDao = LocalDao.getInstance();
-	private Dao dao = JpaDao.getInstance();
+//	private Dao dao = JpaDao.getInstance();
+	
+	private Position p1;
+	private Position p2;
 	
 	private Service service;
 	
@@ -31,22 +35,27 @@ public class ServiceTest
 	@Before
 	public void setUp() throws Exception
 	{
+		
 		service = Service.getInstance(localDao);
 		treatment = service.createTreatment("testTreatment");
 		treatment.createSubTreatment("subTreatment1", 100, 200, 300);
 		treatment.createSubTreatment("subTreatment2", 400, 500, 600);
 		
 		product = service.createProduct("product", "dette er en test", treatment );
-		subproduct = service.createSubProduct("Sub", product);
-		subproduct2 = service.createSubProduct("Sub2", product);
+		p1 = new Position("1");
+		p2 = new Position("2");
+		subproduct = service.createSubProduct("Sub", product, p1);
+		subproduct2 = service.createSubProduct("Sub2", product, p2);
+		
 	}
 
 	@Test
 	public void testCreateSubProduct()
 	{
-		SubProduct d = service.createSubProduct("test", product);
+		SubProduct d = service.createSubProduct("test", product, p1);
 		assertEquals("test", service.getSubproduct(d).getName());
 		assertEquals(product, service.getSubproduct(d).getProduct());
+		
 	}
 
 	@Test
@@ -55,7 +64,6 @@ public class ServiceTest
 		service.removeSubproduct(subproduct);
 		
 		assertEquals(null, service.getSubproduct(subproduct));
-		
 	}
 
 	@Test
@@ -94,6 +102,7 @@ public class ServiceTest
 	@Test
 	public void testRemoveProduct()
 	{
+		service.createProduct("afasf", "adsfasf", treatment);
 		service.removeProduct(product);
 		assertEquals(null, service.getProduct(product));
 	}
@@ -132,7 +141,7 @@ public class ServiceTest
 	public void testGetProducts()
 	{
 		
-		assertEquals(13, service.getProducts().size());
+		assertEquals(14, service.getProducts().size());
 		
 	}
 
@@ -143,22 +152,16 @@ public class ServiceTest
 	}
 
 	@Test
-	public void testGetInfoAboutSubProduct()
-	{
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testGetDryingSubProduct()
 	{
-		assertEquals(27, service.getDryingSubProduct().size());
+		assertEquals(25, service.getDryingSubProduct().size());
 	}
 
 	@Test
 	public void testGetAllNotWastedSubProducts()
 	{
 		
-		assertEquals(29, service.getAllDryingSubProducts().size());
+		assertEquals(27, service.getAllDryingSubProducts().size());
 	}
 
 	@Test
@@ -169,5 +172,5 @@ public class ServiceTest
 		service.changeState(subproduct2, State.TREATMENT);
 		assertEquals(1, service.getAllInTreatment().size());
 	}
-
+	
 }
