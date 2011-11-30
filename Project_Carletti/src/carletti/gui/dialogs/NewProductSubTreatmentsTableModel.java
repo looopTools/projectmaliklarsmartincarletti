@@ -5,6 +5,10 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import carletti.model.LongToStringParser;
+import carletti.model.SubTreatment;
+import carletti.model.Treatment;
+
 /**
  * This class is used by the JTable in CreateNewSubTreatmentDialog.
  * It contains the current list of SubTreatment-objects to be added to a
@@ -14,9 +18,9 @@ import javax.swing.table.AbstractTableModel;
  */
 public class NewProductSubTreatmentsTableModel extends AbstractTableModel {
 	// Column headers.
-	private String[] coloumnNames = {"Name", "Minimum (ms)", "Optimal (ms)", "Maximum (ms)"};
+	private String[] coloumnNames = {"Name", "Minimum", "Optimal", "Maximum"};
 	// The actual data.
-	private ArrayList<Object[]> data = new ArrayList<Object[]>();
+	private Treatment treatment = new Treatment("temp");
 
 	@Override
 	public int getColumnCount() {
@@ -25,7 +29,7 @@ public class NewProductSubTreatmentsTableModel extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return data.size();
+		return treatment.getSubTreatments().size();
 	}
 	
 	@Override
@@ -35,27 +39,26 @@ public class NewProductSubTreatmentsTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int row, int col) {
+		List<SubTreatment> subTreatments = treatment.getSubTreatments();
 		if (col < 1){
-			return data.get(row)[col];
+			return subTreatments.get(row).getName();
 		} else {
-			return convertLongToString((Long)data.get(row)[col]);
+			long time;
+			if (col == 1){
+				time = subTreatments.get(row).getDryMin();
+			}
+			else if (col == 2){
+				time = subTreatments.get(row).getDryPrime();
+			} else {
+				time = subTreatments.get(row).getDryMax();
+			}
+			return LongToStringParser.parseLongToString(time);
 		}
 	}
 	
 	@Override
 	public Class getColumnClass(int c){
 		return getValueAt(0,c).getClass();
-	}
-	
-	private String convertLongToString(long time){
-		int days = (int)(time / (1000*60*60*24));
-		time = time - days*1000*60*60*24;
-		int hours = (int)(time / (1000*60*60));		
-		time = time - hours * 1000*60*60;
-		int minutes = (int)(time / (1000*60));
-		time = time - minutes * 1000*60;
-		int seconds = (int)(time / (1000));
-		return String.format("%dd%dh%dm%ds", days, hours, minutes, seconds);
 	}
 
 	/**
@@ -66,19 +69,27 @@ public class NewProductSubTreatmentsTableModel extends AbstractTableModel {
 	 * @param max Maximum drying time.
 	 */
 	public void newSubTreatment(String name, long min, long optimal, long max) {
-		Object[] newData = {
-			name, new Long(min), new Long(optimal), new Long(max)	
-		};
-		data.add(newData);
+		treatment.createSubTreatment(name, min, optimal, max);
 		fireTableDataChanged();
 	}
 	
 	/**
-	 * Returns a list of all table data.
-	 * @return A new List containing the data.
+	 * Returns a temporary treatment containing the subtreatments
+	 * @return A Treatment object containing the SubTreatments. OBS! Recreate using
+	 * 		   the Service class!! This is only temporary and it will not be saved
+	 * 		   in the database!
 	 */
-	public List<Object[]> getData(){
-		return new ArrayList<Object[]>(data);
+	public Treatment getData(){
+		return treatment;
+	}
+	
+	/**
+	 * 
+	 * @param subTreatments
+	 */
+	public void setData(Treatment t){
+		treatment = t;
+		fireTableDataChanged();
 	}
 
 }

@@ -223,14 +223,14 @@ public class CreateNewProductDialogOld extends JDialog {
 			}
 			if (ae.getSource() == btnCreate){
 				Treatment treatment = service.createTreatment(txfName.getText());
-				List<Object[]> data = subTreatmentsTableModel.getData();
-				for (int i = 0; i < data.size(); i++){
-					String name = (String)(data.get(i)[0]);
-					long min = (Long)(data.get(i)[1]);
-					long optimal = (Long)(data.get(i)[2]);
-					long max = (Long)(data.get(i)[3]);
-					treatment.createSubTreatment(name, min, optimal, max);
-				}
+//				List<Object[]> data = subTreatmentsTableModel.getData();
+//				for (int i = 0; i < data.size(); i++){
+//					String name = (String)(data.get(i)[0]);
+//					long min = (Long)(data.get(i)[1]);
+//					long optimal = (Long)(data.get(i)[2]);
+//					long max = (Long)(data.get(i)[3]);
+//					treatment.createSubTreatment(name, min, optimal, max);
+//				}
 				service.createProduct(txfName.getText(), txtAreaDescription.getText(), treatment);
 				CreateNewProductDialogOld.this.setVisible(false);
 			}

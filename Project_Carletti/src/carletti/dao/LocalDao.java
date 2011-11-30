@@ -82,6 +82,10 @@ public class LocalDao implements Dao {
 	 * @param p The Product object to store.
 	 */
 	public void storeProduct(Product p){
+		Treatment t = p.getTreatment();
+		if (!treatments.contains(t)){
+			storeTreatment(t);
+		}
 		products.add(p);
 	}
 	
