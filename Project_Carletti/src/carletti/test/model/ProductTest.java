@@ -24,13 +24,13 @@ public class ProductTest
 	{
 		treatment1 = new Treatment("Treatment1"); 
 		
-		p1 = new Product(01, "Produkt1", "Hej dette er en test",treatment1);
+		p1 = new Product("Produkt1", "Hej dette er en test",treatment1);
 	}
 	
 	@Test
 	public void Product()
 	{
-		Product p2 = new Product(02, "produkt2", "test", treatment1);
+		Product p2 = new Product("produkt2", "test", treatment1);
 		assertEquals(02, p2.getId());
 		assertEquals("produkt2", p2.getName());
 		assertEquals("test", p2.getDescription());

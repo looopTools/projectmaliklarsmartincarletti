@@ -25,7 +25,7 @@ import carletti.dao.JpaDao;
  * @author Malik Lund
  *
  */
-public class CreateNewProductDialogThree extends JDialog {
+public class CreateNewProductDialog extends JDialog {
 	
 	private Service service;
 	private Controller controller;
@@ -40,7 +40,7 @@ public class CreateNewProductDialogThree extends JDialog {
 	private NewProductSubTreatmentsTableModel subTreatmentsTableModel;
 	private JScrollPane productDescriptionScrollPane, subTreatmentsScrollPane;
 
-	public CreateNewProductDialogThree(){
+	public CreateNewProductDialog(){
 		service = Service.getInstance(JpaDao.getInstance());
 		this.setTitle("Create new product");
 		this.setModal(true);
@@ -218,7 +218,7 @@ public class CreateNewProductDialogThree extends JDialog {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			if (ae.getSource() == btnAddSubTreatment){
-				CreateNewSubTreatmentDialogFour createSubTreatmentDialog = new CreateNewSubTreatmentDialogFour(subTreatmentsTableModel);
+				CreateNewSubTreatmentDialog createSubTreatmentDialog = new CreateNewSubTreatmentDialog(subTreatmentsTableModel);
 				createSubTreatmentDialog.setVisible(true);
 			}
 			if (ae.getSource() == btnCreate){
@@ -232,10 +232,10 @@ public class CreateNewProductDialogThree extends JDialog {
 					treatment.createSubTreatment(name, min, optimal, max);
 				}
 				service.createProduct(txfName.getText(), txtAreaDescription.getText(), treatment);
-				CreateNewProductDialogThree.this.setVisible(false);
+				CreateNewProductDialog.this.setVisible(false);
 			}
 			if (ae.getSource() == btnCancel){
-				CreateNewProductDialogThree.this.setVisible(false);
+				CreateNewProductDialog.this.setVisible(false);
 			}
 		}
 	}

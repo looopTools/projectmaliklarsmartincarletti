@@ -39,8 +39,8 @@ public class PositionTest {
 	public void testPutSubProductOnPosition() {
 //		fail("Not yet implemented");
 		Treatment tm = new Treatment("Kain");
-		Product pd = new Product(1, "name", "description", tm);
-		SubProduct sp = new SubProduct(10, "Judas", pd, 10000);
+		Product pd = new Product("name", "description", tm);
+		SubProduct sp = new SubProduct("Judas", pd, 10000, new Position("1M"));
 		Position p = new Position("1A");
 		p.putSubProductOnPosition(sp);
 	}
@@ -49,8 +49,8 @@ public class PositionTest {
 	public void testRemoveSubProductFromPosition() {
 //		fail("Not yet implemented");
 		Treatment tm = new Treatment("Kain");
-		Product pd = new Product(1, "name", "description", tm);
-		SubProduct sp = new SubProduct(10, "Judas", pd, 10000);
+		Product pd = new Product("name", "description", tm);
+		SubProduct sp = new SubProduct("Judas", pd, 10000, new Position("2M"));
 		Position p = new Position("1A");
 		p.putSubProductOnPosition(sp);
 		p.removeSubProductFromPosition();

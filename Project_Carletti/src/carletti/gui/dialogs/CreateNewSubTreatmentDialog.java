@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 
-public class CreateNewSubTreatmentDialogFour extends JDialog {
+public class CreateNewSubTreatmentDialog extends JDialog {
 
 	private Controller controller;
 	private JPanel mainPanel, infoPanel;
@@ -32,7 +32,7 @@ public class CreateNewSubTreatmentDialogFour extends JDialog {
 	 * 
 	 * @param subTreatmentsTableModel
 	 */
-	public CreateNewSubTreatmentDialogFour(NewProductSubTreatmentsTableModel subTreatmentsTableModel){
+	public CreateNewSubTreatmentDialog(NewProductSubTreatmentsTableModel subTreatmentsTableModel){
 		this.getContentPane().setLayout(new FlowLayout());
 		this.setModal(true);
 		this.setResizable(false);
@@ -125,10 +125,10 @@ public class CreateNewSubTreatmentDialogFour extends JDialog {
 		
 			if (ae.getSource() == btnCreate){
 				subTreatmentsTableModel.newSubTreatment(txfName.getText(), minPanel.getTime(), optimalPanel.getTime(), maxPanel.getTime());
-				CreateNewSubTreatmentDialogFour.this.setVisible(false);
+				CreateNewSubTreatmentDialog.this.setVisible(false);
 			}
 			else if (ae.getSource() == btnCancel){
-				CreateNewSubTreatmentDialogFour.this.setVisible(false);
+				CreateNewSubTreatmentDialog.this.setVisible(false);
 			}
 		}
 	}

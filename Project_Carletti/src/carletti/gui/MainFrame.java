@@ -21,7 +21,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 
-import carletti.gui.dialogs.CreateNewProductDialogThree;
+import carletti.gui.dialogs.CreateNewProductDialog;
 import carletti.gui.dialogs.NewSubProductDialog;
 import carletti.gui.dialogs.NextSubTreatmentDialog;
 import carletti.gui.dialogs.SubProductDialog;
@@ -38,7 +38,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
-public class NewMainFrame extends JFrame {
+public class MainFrame extends JFrame {
 	private Service service;
 
 	private JPanel buttonsPanel;
@@ -59,7 +59,7 @@ public class NewMainFrame extends JFrame {
 	private JButton btnTreatment;
 	private JButton btnNextSubTreatment;
 
-	public NewMainFrame() {
+	public MainFrame() {
 		service = Service.getInstance(JpaDao.getInstance());
 
 		btnCtrl = new Controller();
@@ -201,7 +201,7 @@ public class NewMainFrame extends JFrame {
 				nspd.setVisible(true);
 				updateList();
 			} else if (ae.getSource().equals(btnNewProduct)) {
-				CreateNewProductDialogThree newProductDialog = new CreateNewProductDialogThree();
+				CreateNewProductDialog newProductDialog = new CreateNewProductDialog();
 				newProductDialog.setVisible(true);
 			} else if (ae.getSource().equals(btnWaste)) {
 				SubProduct sp = subProductTableModel
