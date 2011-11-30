@@ -1,6 +1,15 @@
 package carletti.model;
 
 public class LongToStringParser {
+	
+	/**
+	 * Converts a time given in milliseconds into a string
+	 * of the form [+/-]DDdHHhMMmSSs where DD represents days, HH represents hours,
+	 * MM represents minutes and SS represents seconds. 
+	 * All numbers get padded with a zero if they only consist of a single digit.
+	 * @param time
+	 * @return
+	 */
 	public static String parseLongToString(long time){
 		boolean negative = false;
 		int days, hours, minutes, seconds;
@@ -35,6 +44,11 @@ public class LongToStringParser {
 		return buffer.toString();
 	}
 	
+	/**
+	 * Pads a number with zero if it is below 10
+	 * @param number
+	 * @return
+	 */
 	private static String padNumber(int number){
 		if (number < 10){
 			return "0" + number;
