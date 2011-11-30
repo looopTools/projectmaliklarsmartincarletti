@@ -22,6 +22,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 
 import carletti.gui.dialogs.CreateNewProductDialog;
+import carletti.gui.dialogs.CreateNewProductDialogOld;
 import carletti.gui.dialogs.NewSubProductDialog;
 import carletti.gui.dialogs.NextSubTreatmentDialog;
 import carletti.gui.dialogs.SubProductDialog;
@@ -60,7 +61,7 @@ public class MainFrame extends JFrame {
 	private JButton btnNextSubTreatment;
 
 	public MainFrame() {
-		service = Service.getInstance(JpaDao.getInstance());
+		service = Service.getInstance();
 
 		btnCtrl = new Controller();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -45,7 +45,7 @@ public class NewSubProductDialog extends JDialog {
 	private Controller btnCtrl;
 
 	public NewSubProductDialog() {
-		service = Service.getInstance(JpaDao.getInstance());
+		service = Service.getInstance();
 		
 		btnCtrl = new Controller();
 

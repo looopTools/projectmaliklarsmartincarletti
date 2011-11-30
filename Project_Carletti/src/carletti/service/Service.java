@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import carletti.dao.Dao;
+import carletti.dao.LocalDao;
 import carletti.model.Position;
 import carletti.model.Product;
 import carletti.model.State;
@@ -41,6 +42,19 @@ public class Service
 		if (serviceInstance == null)
 		{
 			serviceInstance = new Service(dao);
+		}
+		return serviceInstance;
+	}
+	
+	/**
+	 * Simple getInstance method that defaults to a local, impersistent
+	 * storage in memory. If a call has been made to getInstance(Dao)
+	 * an instance with the previously selected Dao is returned.
+	 * @return
+	 */
+	public static Service getInstance(){
+		if (serviceInstance == null){
+			serviceInstance = new Service(LocalDao.getInstance());
 		}
 		return serviceInstance;
 	}
@@ -173,9 +187,9 @@ public class Service
 	}
 
 	// --------- Malik-------------
-	public void createSomeObjects(Dao dao)
+	public void createSomeObjects()
 	{
-		Service s = Service.getInstance(dao);
+		Service s = Service.getInstance();
 		Treatment t1 = s.createTreatment("Red chocolate MMs");
 		t1.createSubTreatment("1st drying", 1000 * 60 * 30, 1000 * 60 * 32,
 				1000 * 60 * 35);
