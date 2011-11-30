@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import carletti.dao.JpaDao;
+import carletti.model.LongToStringParser;
 import carletti.model.Product;
 import carletti.model.SubProduct;
 import carletti.service.Service;
@@ -47,7 +48,7 @@ public class NewSubProductTableModel extends AbstractTableModel{
 	public Object getValueAt(int row, int col) {
 		SubProduct sp = newData.get(row);
 		Object[] value = {
-				sp.getTimeLeft(sp.timeLeft()), sp.getTime(sp.getTimeAdded()), 
+				LongToStringParser.parseLongToString(sp.timeLeft()), sp.getTime(sp.getTimeAdded()), 
 				new Integer(sp.getId()), sp.getPosition().getPosID(), sp.getName(), 
 				sp.getState(), sp.getCurrentSubTreatment().getName(), 
 				(sp.getCurrentSubTreatmentIndex() + 1) + "/" + sp.getSubtreatments().size()	
