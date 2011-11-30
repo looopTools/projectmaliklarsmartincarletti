@@ -38,6 +38,7 @@ public class SubProduct implements Comparable<SubProduct> {
 	@OneToOne(cascade = { CascadeType.PERSIST })
 	private Product product;
 	private long timeAdded;
+	@OneToOne(cascade={CascadeType.PERSIST})
 	private Position position;
 
 	public SubProduct(String name, Product product, long timeAdded,

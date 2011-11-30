@@ -19,8 +19,8 @@ public class Position {
 	@GeneratedValue
 	private int id;
 	private String posID;
+	@OneToOne(mappedBy = "position")
 	private SubProduct sp; // Holds which product is on the position
-
 	public Position(String posID) {
 		this.posID = posID;
 	}
