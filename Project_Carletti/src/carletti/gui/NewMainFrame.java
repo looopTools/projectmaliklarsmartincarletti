@@ -6,7 +6,9 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -32,6 +34,9 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
 public class NewMainFrame extends JFrame {
 	private Service service;
@@ -47,7 +52,7 @@ public class NewMainFrame extends JFrame {
 
 	private Controller btnCtrl;
 
-	private Dimension minimumSize = new Dimension(800, 400);
+	private Dimension minimumSize = new Dimension(1000, 400);
 	private Dimension btnMinSize = new Dimension(20, 180);
 	private JButton btnNewProduct;
 	private JButton btnProductInfo;
@@ -61,7 +66,7 @@ public class NewMainFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		this.setTitle("Carletti");
-		this.setMinimumSize(minimumSize);
+		this.setSize(minimumSize);
 		buttonsPanel = new JPanel();
 		getContentPane().add(buttonsPanel, BorderLayout.EAST);
 
@@ -135,7 +140,8 @@ public class NewMainFrame extends JFrame {
 		getContentPane().add(subProductsScrollPane, BorderLayout.CENTER);
 
 		subProductTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+		initColumnSizes(subProductTable);
+		
 		// --- Malik Lund ---
 		Thread t = new Thread(new UpdaterThread(this));
 		t.start();
@@ -144,9 +150,31 @@ public class NewMainFrame extends JFrame {
 		this.setVisible(true);
 
 	}
+	
+	/**
+	 * Hardcode some default column sizes.
+	 * @author Malik Lund
+	 * @param table
+	 */
+	private void initColumnSizes(JTable table) {
+        NewSubProductTableModel model = (NewSubProductTableModel)table.getModel();
+        TableColumn column = null;
+        for (int i = 0; i < model.getColumnCount(); i++){
+        	column = table.getColumnModel().getColumn(i);
+        	if (i == 1){
+        		column.setPreferredWidth(125);
+        	}
+        	else if (i == 2){
+        		column.setPreferredWidth(40);
+        	}
+        	else if (i == 3){
+        		column.setPreferredWidth(40);
+        	}
+        }
+    }
 
 	/*
-	 * @author Malik
+	 * @author Malik Lund
 	 */
 	public synchronized void updateList() {
 		int selection = subProductTable.getSelectedRow();
@@ -220,13 +248,19 @@ public class NewMainFrame extends JFrame {
 	}
 	
 	/**
-	 * Custom cell renderer that colors the time remaining cell
+	 * Custom cell renderer that colors the "time remaining" cell
 	 * white, green, yellow or red depending on the time remaining
 	 * until max drying time is exceeded.
 	 * 
 	 * @author Malik Lund
 	 */
 	private class HighlighterCellRenderer extends DefaultTableCellRenderer{
+		private DefaultTableCellRenderer defaultRenderer;
+		
+		public HighlighterCellRenderer(){
+			super();
+			defaultRenderer = new DefaultTableCellRenderer();
+		}
 		
 		@Override
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
@@ -248,8 +282,9 @@ public class NewMainFrame extends JFrame {
 			else if (currentTime > maxTime && column == 0) {
 				comp.setBackground(Color.red);
 			} else {
-//				comp.setBackground(Color.white);
-				DefaultTableCellRenderer defaultRenderer = new DefaultTableCellRenderer();
+				// For reasons I don't understand and don't have time to look into
+				// it is necessary to have two different renderers. The color change is
+				// apparently persistent.
 				return defaultRenderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 			}
 			
