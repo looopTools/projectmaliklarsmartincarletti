@@ -86,6 +86,11 @@ public class Service
 		Treatment t = new Treatment(name);
 		return t;
 	}
+	
+	public void removeTreatment(Treatment treatment)
+	{
+		dao.removeTreatment(treatment);
+	}
 
 	public Product createProduct(String name, String description,
 			Treatment treatment)

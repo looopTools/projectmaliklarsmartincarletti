@@ -15,5 +15,4 @@ public class App {
 		s.createSomeObjects(JpaDao.getInstance());
 		MainFrame nmf = new MainFrame();
 	}
-
 }
