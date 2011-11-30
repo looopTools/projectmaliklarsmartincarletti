@@ -9,10 +9,10 @@ import carletti.gui.dialogs.NextSubTreatmentDialog;
  *
  */
 public class UpdaterThread implements Runnable {
-	private NewMainFrame mainFrame;
+	private MainFrame mainFrame;
 	private NextSubTreatmentDialog nextSubTreatmentDialog;
 	
-	public UpdaterThread(NewMainFrame mainFrame){
+	public UpdaterThread(MainFrame mainFrame){
 		this.mainFrame = mainFrame;
 	}
 	

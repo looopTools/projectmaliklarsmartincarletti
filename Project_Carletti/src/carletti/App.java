@@ -1,10 +1,10 @@
 package carletti;
 
-import carletti.gui.NewMainFrame;
+import carletti.gui.MainFrame;
 import carletti.service.Service;
 import carletti.dao.JpaDao;
 
-public class TestAppLars {
+public class App {
 
 	/**
 	 * @param args
@@ -13,7 +13,7 @@ public class TestAppLars {
 		// TODO Auto-generated method stub
 		Service s = Service.getInstance(JpaDao.getInstance());
 		s.createSomeObjects(JpaDao.getInstance());
-		NewMainFrame nmf = new NewMainFrame();
+		MainFrame nmf = new MainFrame();
 	}
 
 }
