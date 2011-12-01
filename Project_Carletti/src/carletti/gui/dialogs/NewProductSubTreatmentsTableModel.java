@@ -12,7 +12,7 @@ import carletti.model.Treatment;
 /**
  * This class is used by the JTable in CreateNewSubTreatmentDialog.
  * It contains the current list of SubTreatment-objects to be added to a
- * new Treatment-object in a new Product-object
+ * new Treatment-object in a new Product-object.
  * @author Malik Lund
  *
  */
@@ -84,7 +84,8 @@ public class NewProductSubTreatmentsTableModel extends AbstractTableModel {
 	}
 	
 	/**
-	 * 
+	 * Replace the data in the table with the
+	 * SubTreatments in the given Treatment.
 	 * @param subTreatments
 	 */
 	public void setData(Treatment t){
