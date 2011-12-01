@@ -168,31 +168,12 @@ public class ServiceTest
 	}
 
 	@Test
-	public void testShowAllSubProduct()
+	public void testGetSubProducts()
 	{
-		assertEquals(2, service.showAllSubProduct().size());
-	}
-
-	@Test
-	public void testGetDryingSubProduct()
-	{
-		assertEquals(2, service.getDryingSubProduct().size());
-	}
-
-	@Test
-	public void testGetAllNotWastedSubProducts()
-	{
-		
-		assertEquals(2, service.getAllDryingSubProducts().size());
-	}
-
-	@Test
-	public void testGetAllInTreatment()
-	{
-		
-		assertEquals(0, service.getAllInTreatment().size());
-		service.changeState(subproduct2, State.TREATMENT);
-		assertEquals(1, service.getAllInTreatment().size());
+		subproduct.setState(State.DONE);
+		subproduct2.setState(State.WASTE);
+		assertEquals(1, service.getSubProducts(State.DONE).size());
+		assertEquals(1, service.getSubProducts(State.WASTE).size());
 	}
 	
 }
