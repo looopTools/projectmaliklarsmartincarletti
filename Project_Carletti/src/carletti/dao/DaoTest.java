@@ -2,11 +2,21 @@ package carletti.dao;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import carletti.model.Product;
+import carletti.model.SubProduct;
 import carletti.model.Treatment;
 
+/**
+ * 
+ * @author Malik
+ *
+ */
 public class DaoTest {
 	Dao dao = JpaDao.getInstance();
 
@@ -16,6 +26,24 @@ public class DaoTest {
 		Thread.sleep(100);
 		dao = JpaDao.getInstance();
 	}
+	
+	@After
+	/**
+	 * 
+	 */
+	public void cleanUp(){
+		for (SubProduct sp: dao.getSubProducts()){
+			dao.removeSubProduct(sp);
+		}
+		
+		for(Product p: dao.getProducts()){
+			dao.removeProduct(p);
+		}
+		
+		for (Treatment t: dao.getTreatments()){
+			dao.removeTreatment(t);
+		}
+	}
 
 	@Test
 	public void storeTreatmentTest() {
@@ -23,11 +51,10 @@ public class DaoTest {
 		t1.createSubTreatment("st1", 1000, 2000, 3000);
 		t1.createSubTreatment("st2", 1000, 2000, 3000);
 		dao.storeTreatment(t1);
-		assertEquals("Size differs from 1", 1, dao.getTreatments().size());
-	}
-	
-	@Test
-	public void testtest(){
-		assertEquals("Size is not 0", 0, dao.getTreatments().size());
+		List<Treatment> treatments = dao.getTreatments();
+		assertEquals("Size differs from 1", 1, treatments.size());
+		assertEquals("Name differs", "TestTreatment", treatments.get(0).getName());
+		Treatment retrievedTreatment = treatments.get(0);
+		assertEquals("1st SubTreatmentDiffers", t1.getSubTreatments().get(0), retrievedTreatment.getSubTreatments().get(0));
 	}
 }
