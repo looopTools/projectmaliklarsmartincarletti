@@ -5,7 +5,11 @@
 	version="2.0">
 
 	<persistence-unit name="Carletti" transaction-type="RESOURCE_LOCAL">
-		<class>carletti.model.SubProduct</class>
+		<class>carletti.model.Position</class>
+        <class>carletti.model.Product</class>
+        <class>carletti.model.SubProduct</class>
+        <class>carletti.model.SubTreatment</class>
+        <class>carletti.model.Treatment</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="net.sourceforge.jtds.jdbc.Driver" />
@@ -15,7 +19,7 @@
 			<property name="javax.persistence.jdbc.password" value="lnc20020" />
 
 			<!-- EclipseLink should create the database schema automatically -->   
-			<property name="eclipselink.ddl-generation" value="create-tables" />       
+			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />       
 <!-- 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />  -->
 			<property name="eclipselink.ddl-generation.output-mode"
 				value="database" />
