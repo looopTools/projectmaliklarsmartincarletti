@@ -5,6 +5,7 @@
  */
 package carletti.test.model;
 
+import org.junit.After;
 import org.junit.Test;
 
 import carletti.model.Position;
@@ -55,5 +56,4 @@ public class PositionTest {
 		p.putSubProductOnPosition(sp);
 		p.removeSubProductFromPosition();
 	}
-
 }
