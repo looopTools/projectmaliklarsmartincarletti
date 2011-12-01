@@ -294,6 +294,7 @@ public class CreateNewProductDialog extends JDialog {
 			else if (ae.getSource() == btnAddSubTreatment){
 				if (newTreatment){
 					CreateNewSubTreatmentDialog createSubTreatmentDialog = new CreateNewSubTreatmentDialog(subTreatmentsTableModel);
+					createSubTreatmentDialog.setLocationRelativeTo(CreateNewProductDialog.this);
 					createSubTreatmentDialog.setVisible(true);
 				} else {
 					newTreatment = true;
@@ -322,6 +323,7 @@ public class CreateNewProductDialog extends JDialog {
 				
 				// start selection
 				SelectTreatmentDialog selectTreatmentDialog = new SelectTreatmentDialog(subTreatmentsTableModel);
+				selectTreatmentDialog.setLocationRelativeTo(CreateNewProductDialog.this);
 				selectTreatmentDialog.setVisible(true);
 				
 				// handle selection
