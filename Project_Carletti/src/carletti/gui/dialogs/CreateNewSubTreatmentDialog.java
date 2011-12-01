@@ -7,14 +7,13 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.table.TableModel;
 
 public class CreateNewSubTreatmentDialog extends JDialog {
 
@@ -22,10 +21,9 @@ public class CreateNewSubTreatmentDialog extends JDialog {
 	private JPanel mainPanel, infoPanel;
 	private TimeSelectorPanel minPanel, optimalPanel, maxPanel;
 	private JLabel lblNew, lblName, lblMin, lblOptimal, lblMax;
-	private JTextField txfName, txfMin, txfOptimal, txfMax;
+	private JTextField txfName;
 	private JButton btnCreate, btnCancel;
 
-	private boolean succes;
 	private NewProductSubTreatmentsTableModel subTreatmentsTableModel;
 	
 	/**
@@ -60,9 +58,6 @@ public class CreateNewSubTreatmentDialog extends JDialog {
 		lblOptimal = new JLabel("Optimal:");
 		lblMax = new JLabel("Maximum:");
 		txfName = new JTextField();
-		txfMin = new JTextField();
-		txfOptimal = new JTextField();
-		txfMax = new JTextField();
 		btnCreate = new JButton("Create");
 		btnCancel = new JButton("Cancel");
 		
@@ -117,23 +112,69 @@ public class CreateNewSubTreatmentDialog extends JDialog {
 		pack();
 	}
 	
+	/**
+	 * This private class handles all input events.
+	 * @author Malik
+	 *
+	 */
 	private class Controller implements ActionListener{
 
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 		
+			/**
+			 * Create button.
+			 */
 			if (ae.getSource() == btnCreate){
-				subTreatmentsTableModel.newSubTreatment(txfName.getText(), minPanel.getTime(), optimalPanel.getTime(), maxPanel.getTime());
-				CreateNewSubTreatmentDialog.this.setVisible(false);
+				boolean error = false;
+				String name = txfName.getText();
+				if (name.length() <= 0){
+					JOptionPane.showMessageDialog(null, "Name is empty!");
+					error = true;
+				}
+				
+				long min = minPanel.getTime();
+				if (!error && min < 0){
+					JOptionPane.showMessageDialog(null, "Minimum must be larger than 0!");
+					error = true;
+				}
+				
+				long optimal = optimalPanel.getTime();
+				if (!error && optimal < min){
+					JOptionPane.showMessageDialog(null, "Optimal must be larger than minimum!");
+					error = true;
+				}
+				
+				long max = maxPanel.getTime();
+				if (!error && max < optimal){
+					JOptionPane.showMessageDialog(null, "Maximum must be larger than optimal!");
+					error = true;
+				}
+				
+				if (!error){
+					subTreatmentsTableModel.newSubTreatment(name, min, optimal, max);
+					CreateNewSubTreatmentDialog.this.setVisible(false);
+				}
 			}
+			/**
+			 * Cancel button.
+			 */
 			else if (ae.getSource() == btnCancel){
 				CreateNewSubTreatmentDialog.this.setVisible(false);
 			}
 		}
 	}
 	
-	private class TimeSelectorPanel extends JPanel{
+	/**
+	 * Creates a panel containing four SelectorPanel objects (see below). One for
+	 * selecting number of days, one for number of hours, one for minutes
+	 * and one for seconds (it is assumed that it is unnecessary to input
+	 * milliseconds as values).
+	 * @author Malik Lund
+	 *
+	 */
+	class TimeSelectorPanel extends JPanel{
 		
 		private JLabel lblDays, lblHours, lblMinutes, lblSeconds;
 		private SelectorPanel daySelector, hourSelector, minuteSelector, secondSelector;
@@ -149,7 +190,7 @@ public class CreateNewSubTreatmentDialog extends JDialog {
 			lblHours = new JLabel("Hours");
 			lblMinutes = new JLabel("Minutes");
 			lblSeconds = new JLabel("Seconds");
-			daySelector = new SelectorPanel(Integer.MAX_VALUE);
+			daySelector = new SelectorPanel(100);
 			hourSelector = new SelectorPanel(24);
 			minuteSelector = new SelectorPanel(60);
 			secondSelector = new SelectorPanel(60);
@@ -185,6 +226,11 @@ public class CreateNewSubTreatmentDialog extends JDialog {
 			);
 		}
 		
+		/**
+		 * Returns the time represented by all four textfields
+		 * represented in milliseconds.
+		 * @return
+		 */
 		public long getTime(){
 			long result = daySelector.getTime() * 1000 * 60 * 60 * 24;
 			result += hourSelector.getTime() * 1000 * 60 * 60;
@@ -194,6 +240,17 @@ public class CreateNewSubTreatmentDialog extends JDialog {
 		}
 	}
 	
+	/**
+	 * A panel containing a plus- and minus-button and a textfield with
+	 * a number. Pressing the plus button increments the value in the 
+	 * textfield by one, while pressing the minus button decrements the
+	 * value by one.
+	 * If the value gets larger than the given crossover point the value
+	 * wraps around to zero. If a value gets smaller than 0 it wraps around
+	 * to the larges value below the crossover point.
+	 * @author Malik Lund
+	 *
+	 */
 	private class SelectorPanel extends JPanel implements ActionListener {
 		private int crossover;
 		private JTextField txfNumber;
@@ -210,6 +267,8 @@ public class CreateNewSubTreatmentDialog extends JDialog {
 			txfNumber = new JTextField("0");
 			btnPlus = new JButton("+");
 			btnMinus = new JButton("-");
+			
+			txfNumber.setHorizontalAlignment(JTextField.RIGHT);
 			
 			btnPlus.addActionListener(this);
 			btnMinus.addActionListener(this);
@@ -229,27 +288,45 @@ public class CreateNewSubTreatmentDialog extends JDialog {
 			);
 		}
 		
+		/**
+		 * 
+		 * @return The the number in the textfield as a long.
+		 * @throws NumberFormatException
+		 */
 		public long getTime() throws NumberFormatException{
 			return Long.parseLong(txfNumber.getText());
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
+			/**
+			 * Increment button.
+			 */
 			if (ae.getSource() == btnPlus){
 				int number = getNumber();
 				number = (number + 1) % crossover;
-				putNumber(number);
+				txfNumber.setText(number + "");
 			}
+			
+			/**
+			 * Decrement button.
+			 */
 			else if (ae.getSource() == btnMinus){
 				int number = getNumber();
 				number = (number - 1);
 				if (number < 0){
 					number = crossover - 1;
 				}
-				putNumber(number);
+				txfNumber.setText(number + "");
 			}
 		}
 		
+		/**
+		 * Performs various safety checks on the value in the
+		 * text field.
+		 * @return
+		 * @throws NumberFormatException
+		 */
 		private int getNumber() throws NumberFormatException{
 			int number = 0;
 			if (txfNumber.getText().length() > 0){
@@ -265,10 +342,6 @@ public class CreateNewSubTreatmentDialog extends JDialog {
 				number = 0;
 			}
 			return number;
-		}
-		
-		private void putNumber(int n){
-			txfNumber.setText(n + "");
 		}
 	}
 }
