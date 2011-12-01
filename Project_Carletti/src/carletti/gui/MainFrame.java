@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -67,6 +68,7 @@ public class MainFrame extends JFrame {
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		this.setTitle("Carletti");
 		this.setSize(minimumSize);
+		this.setLocation(new Point(100, 50));
 		buttonsPanel = new JPanel();
 		getContentPane().add(buttonsPanel, BorderLayout.EAST);
 
@@ -206,14 +208,17 @@ public class MainFrame extends JFrame {
 							"You need to selected an object");
 				} else {
 					SubProductDialog spd = new SubProductDialog(sp);
+					spd.setLocationRelativeTo(MainFrame.this);
 					spd.setVisible(true);
 				}
 			} else if (ae.getSource().equals(btnNewSubProduct)) {
 				NewSubProductDialog nspd = new NewSubProductDialog();
+				nspd.setLocationRelativeTo(MainFrame.this);
 				nspd.setVisible(true);
 				updateList();
 			} else if (ae.getSource().equals(btnNewProduct)) {
 				CreateNewProductDialog newProductDialog = new CreateNewProductDialog();
+				newProductDialog.setLocationRelativeTo(MainFrame.this);
 				newProductDialog.setVisible(true);
 			} else if (ae.getSource().equals(btnWaste)) {
 				SubProduct sp = subProductTableModel
@@ -225,6 +230,7 @@ public class MainFrame extends JFrame {
 
 				else {
 					WasteSubProduct wsp = new WasteSubProduct(sp);
+					wsp.setLocationRelativeTo(MainFrame.this);
 					wsp.setVisible(true);
 					updateList();
 				}
@@ -248,22 +254,26 @@ public class MainFrame extends JFrame {
 
 			else if (ae.getSource().equals(btnProductInfo)) {
 				ShowProductFrame spf = new ShowProductFrame();
+				spf.setLocationRelativeTo(MainFrame.this);
 				spf.setVisible(true);
 			}
 			
 			else if (ae.getSource().equals(btnShowSubTreatment))
 			{
 				NextSubTreatmentDialog ntd = new NextSubTreatmentDialog();
+				ntd.setLocationRelativeTo(MainFrame.this);
 				ntd.setVisible(true);
 			}
 			else if (ae.getSource().equals(btnShowDone))
 			{
 				ShowDoneDialog sdd = new ShowDoneDialog();
+				sdd.setLocationRelativeTo(MainFrame.this);
 				sdd.setVisible(true);
 			}
 			else if (ae.getSource().equals(btnShowWasted))
 			{
 				ShowWastedDialog swd = new ShowWastedDialog();
+				swd.setLocationRelativeTo(MainFrame.this);
 				swd.setVisible(true);
 				
 			}
