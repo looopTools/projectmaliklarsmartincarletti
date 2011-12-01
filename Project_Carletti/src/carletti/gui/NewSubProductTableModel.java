@@ -13,6 +13,7 @@ import javax.swing.table.AbstractTableModel;
 import carletti.dao.JpaDao;
 import carletti.model.LongToStringParser;
 import carletti.model.Product;
+import carletti.model.State;
 import carletti.model.SubProduct;
 import carletti.service.Service;
 
@@ -23,10 +24,11 @@ public class NewSubProductTableModel extends AbstractTableModel{
 	// The actual data.
 	private ArrayList<Object[]> data = new ArrayList<Object[]>();
 	private List<SubProduct> newData;
+	private State state = State.DRYING;
 		
 	public NewSubProductTableModel(){
 		service = Service.getInstance();
-		newData = service.getAllDryingSubProducts();
+		newData = service.getSubProducts(state);
 	}
 
 	@Override
@@ -80,7 +82,7 @@ public class NewSubProductTableModel extends AbstractTableModel{
 	}
 
 	public void updateData() {
-		newData = service.getAllDryingSubProducts();
+		newData = service.getSubProducts(state);
 	}
 	
 

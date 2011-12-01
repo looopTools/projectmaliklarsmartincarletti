@@ -107,7 +107,7 @@ public class NextSubTreatmentDialog extends JFrame
 							"You need to selected an object");
 				} else
 				{
-					SubProduct sp = service.getAllInTreatment()
+					SubProduct sp = service.getSubProducts(State.TREATMENT)
 							.get(nextSubProcuctTable.getSelectedRow());
 					service.nextTreatnemt(sp);
 					NextSubTreatmentDialog.this.setVisible(false);

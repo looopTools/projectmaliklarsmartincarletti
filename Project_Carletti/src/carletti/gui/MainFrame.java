@@ -6,11 +6,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -22,29 +18,28 @@ import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 
 import carletti.gui.dialogs.CreateNewProductDialog;
-import carletti.gui.dialogs.CreateNewProductDialogOld;
 import carletti.gui.dialogs.NewSubProductDialog;
 import carletti.gui.dialogs.NextSubTreatmentDialog;
+import carletti.gui.dialogs.ShowDoneDialog;
 import carletti.gui.dialogs.SubProductDialog;
 import carletti.gui.dialogs.WasteSubProduct;
 import carletti.model.State;
 import carletti.model.SubProduct;
 import carletti.service.Service;
-import carletti.dao.JpaDao;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
+
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
+
 
 public class MainFrame extends JFrame {
 	private Service service;
 
 	private JPanel buttonsPanel;
 	private JScrollPane subProductsScrollPane;
-	private JList subProductList;
 	private JButton btnNewSubProduct;
 	private JButton btnInfo;
 	private JButton btnWaste;
@@ -58,7 +53,9 @@ public class MainFrame extends JFrame {
 	private JButton btnNewProduct;
 	private JButton btnProductInfo;
 	private JButton btnTreatment;
-	private JButton btnNextSubTreatment;
+	private JButton btnShowSubTreatment;
+	private JButton btnShowDone;
+	private JButton btnShowWasted;
 
 	public MainFrame() {
 		service = Service.getInstance();
@@ -91,8 +88,13 @@ public class MainFrame extends JFrame {
 		btnTreatment = new JButton("Treatment");
 		btnTreatment.addActionListener(btnCtrl);
 		
-		btnNextSubTreatment = new JButton("Next Sub Treatment");
-		btnNextSubTreatment.addActionListener(btnCtrl);
+		btnShowSubTreatment = new JButton("Show Subtreatment");
+		btnShowSubTreatment.addActionListener(btnCtrl);
+		
+		btnShowDone = new JButton("Show Done");
+		btnShowDone.addActionListener(btnCtrl);
+		
+		btnShowWasted = new JButton("Show Wasted");
 		
 		GroupLayout gl_buttonsPanel = new GroupLayout(buttonsPanel);
 		gl_buttonsPanel.setHorizontalGroup(
@@ -102,8 +104,10 @@ public class MainFrame extends JFrame {
 				.addComponent(btnProductInfo, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
 				.addComponent(btnNewProduct, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
 				.addComponent(btnTreatment, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-				.addComponent(btnNextSubTreatment, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(btnShowSubTreatment, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 				.addComponent(btnNewSubProduct, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+				.addComponent(btnShowDone, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+				.addComponent(btnShowWasted, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
 		);
 		gl_buttonsPanel.setVerticalGroup(
 			gl_buttonsPanel.createParallelGroup(Alignment.LEADING)
@@ -120,8 +124,12 @@ public class MainFrame extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnTreatment)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNextSubTreatment)
-					.addGap(136))
+					.addComponent(btnShowSubTreatment)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnShowDone)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnShowWasted)
+					.addGap(107))
 		);
 		buttonsPanel.setLayout(gl_buttonsPanel);
 		btnNewProduct.addActionListener(btnCtrl);
@@ -240,10 +248,15 @@ public class MainFrame extends JFrame {
 				spf.setVisible(true);
 			}
 			
-			else if (ae.getSource().equals(btnNextSubTreatment))
+			else if (ae.getSource().equals(btnShowSubTreatment))
 			{
 				NextSubTreatmentDialog ntd = new NextSubTreatmentDialog();
 				ntd.setVisible(true);
+			}
+			else if (ae.getSource().equals(btnShowDone))
+			{
+				ShowDoneDialog sdd = new ShowDoneDialog();
+				sdd.setVisible(true);
 			}
 		}
 	}
