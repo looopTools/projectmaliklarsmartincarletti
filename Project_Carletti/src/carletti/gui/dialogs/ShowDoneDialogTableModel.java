@@ -1,6 +1,3 @@
-/**
- * @author Martin
- */
 package carletti.gui.dialogs;
 
 import java.util.ArrayList;
@@ -11,9 +8,8 @@ import javax.swing.table.AbstractTableModel;
 import carletti.model.State;
 import carletti.model.SubProduct;
 import carletti.service.Service;
-import carletti.dao.JpaDao;
 
-public class NextSubTreatmentDialogTableModel extends AbstractTableModel
+public class ShowDoneDialogTableModel extends AbstractTableModel
 {
 	private Service service;
 	// Column headers.
@@ -22,12 +18,12 @@ public class NextSubTreatmentDialogTableModel extends AbstractTableModel
 	// The actual data.
 	private ArrayList<Object[]> data = new ArrayList<Object[]>();
 	private List<SubProduct> newData;
-	private State treatment = State.TREATMENT;
+	private State done = State.DONE;
 
-	public NextSubTreatmentDialogTableModel()
+	public ShowDoneDialogTableModel()
 	{
 		service = Service.getInstance();
-		newData = service.getSubProducts(treatment);
+		newData = service.getSubProducts(done);
 	}
 
 	@Override
@@ -79,7 +75,6 @@ public class NextSubTreatmentDialogTableModel extends AbstractTableModel
 
 	public void updateData()
 	{
-		newData = service.getSubProducts(treatment);
+		newData = service.getSubProducts(done);
 	}
-		
 }

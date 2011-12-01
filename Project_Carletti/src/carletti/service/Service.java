@@ -229,42 +229,21 @@ public class Service
 
 	// ----------------------------
 
-	// Add by Lars
-	public List<SubProduct> getAllDryingSubProducts()
+	public List<SubProduct> getSubProducts(State state)
 	{
-		ArrayList<SubProduct> productsNotWasted = new ArrayList<SubProduct>();
-		List<SubProduct> allSubProducts = dao.getSubProducts();
-		for (int i = 0; i < allSubProducts.size(); i++)
-		{
-			if (allSubProducts.get(i).getState() == State.DRYING)
-			{
-				productsNotWasted.add(allSubProducts.get(i));
-			}
-		}
-
-		Collections.sort(productsNotWasted); // Martin
-
-		return productsNotWasted;
-	}
-
-	// ---------Martin---------------
-
-	public List<SubProduct> getAllInTreatment()
-	{
-		ArrayList<SubProduct> subProductUnderTreatment = new ArrayList<SubProduct>();
+		ArrayList<SubProduct> subProduct = new ArrayList<SubProduct>();
 
 		for (int i = 0; i < dao.getSubProducts().size(); i++)
 		{
-			if (dao.getSubProducts().get(i).getState() == State.TREATMENT)
+			if (dao.getSubProducts().get(i).getState() == state)
 			{
-				subProductUnderTreatment.add(dao.getSubProducts().get(i));
+				subProduct.add(dao.getSubProducts().get(i));
 			}
 		}
 
-		return subProductUnderTreatment;
+		return subProduct;
 	}
-
-	// -----------------------------------
+	
 
 	public void changeState(SubProduct sp, State state)
 	{
