@@ -26,7 +26,12 @@ public class Product {
 	@OneToOne(cascade={CascadeType.PERSIST})
 	private Treatment treatment;
 	
-	
+	/**
+	 * Create a Product-object. Id is generated automatically.
+	 * @param name A short name for the product.
+	 * @param description A description of the product.
+	 * @param treatment A treatment plan for the product.
+	 */
 	public Product(String name, String description, Treatment treatment) {
 		this.id = id;
 		this.name = name;
@@ -34,6 +39,9 @@ public class Product {
 		this.treatment = treatment;
 	}
 	
+	/**
+	 * Empty constructor for JPA.
+	 */
 	public Product()
 	{
 		
@@ -58,7 +66,7 @@ public class Product {
 	}
 
 	/**
-	 * 
+	 * Get the id given by the database.
 	 * @return
 	 */
 	public int getId(){
@@ -66,7 +74,7 @@ public class Product {
 	}
 	
 	/**
-	 * 
+	 * Get the name of this product.
 	 * @return
 	 */
 	public String getName(){
@@ -74,15 +82,15 @@ public class Product {
 	}
 	
 	/**
-	 * 
-	 * @param newName
+	 * Replace the name of this product.
+	 * @param newName The new name.
 	 */
 	public void setName(String newName){
 		this.name = newName;
 	}
 	
 	/**
-	 * 
+	 * Get a description of the product.
 	 * @return
 	 */
 	public String getDescription(){
@@ -90,7 +98,7 @@ public class Product {
 	}
 	
 	/**
-	 * 
+	 * Replace the description of this product.
 	 * @param newDescription
 	 */
 	public void setDescription(String newDescription){

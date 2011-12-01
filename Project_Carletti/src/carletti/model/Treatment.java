@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
+
+
+@Entity
 /**
  * Treatment represents the various drying treatments a product 
  * needs to complete before it is a finished product.
@@ -19,8 +22,6 @@ import javax.persistence.OneToMany;
  * @author Malik Lund
  *
  */
-
-@Entity
 public class Treatment {
 	
 	@Id

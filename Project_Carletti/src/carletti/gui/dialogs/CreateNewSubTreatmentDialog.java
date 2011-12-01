@@ -15,6 +15,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * Handles the creation of a new SubTreatment and
+ * associates it with creation of a new Treatment.
+ * @author Malik Lund
+ *
+ */
 public class CreateNewSubTreatmentDialog extends JDialog {
 
 	private Controller controller;
@@ -34,8 +40,8 @@ public class CreateNewSubTreatmentDialog extends JDialog {
 		this.getContentPane().setLayout(new FlowLayout());
 		this.setModal(true);
 		this.setResizable(false);
-		this.subTreatmentsTableModel = subTreatmentsTableModel;
 		
+		this.subTreatmentsTableModel = subTreatmentsTableModel;
 		controller = new Controller();
 		
 		mainPanel = new JPanel();
@@ -122,11 +128,11 @@ public class CreateNewSubTreatmentDialog extends JDialog {
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-		
 			/**
 			 * Create button.
 			 */
 			if (ae.getSource() == btnCreate){
+				// --- input verification start ---
 				boolean error = false;
 				String name = txfName.getText();
 				if (name.length() <= 0){
@@ -151,6 +157,7 @@ public class CreateNewSubTreatmentDialog extends JDialog {
 					JOptionPane.showMessageDialog(null, "Maximum must be larger than optimal!");
 					error = true;
 				}
+				// --- input verification end ---
 				
 				if (!error){
 					subTreatmentsTableModel.newSubTreatment(name, min, optimal, max);
@@ -179,6 +186,9 @@ public class CreateNewSubTreatmentDialog extends JDialog {
 		private JLabel lblDays, lblHours, lblMinutes, lblSeconds;
 		private SelectorPanel daySelector, hourSelector, minuteSelector, secondSelector;
 		
+		/**
+		 * 
+		 */
 		public TimeSelectorPanel(){
 			super();
 			GroupLayout layout = new GroupLayout(this);
@@ -256,6 +266,10 @@ public class CreateNewSubTreatmentDialog extends JDialog {
 		private JTextField txfNumber;
 		private JButton btnPlus, btnMinus;
 		
+		/**
+		 * 
+		 * @param crossover Value where the number crosses over
+		 */
 		public SelectorPanel(int crossover){
 			super();
 			this.crossover = crossover;
@@ -290,7 +304,7 @@ public class CreateNewSubTreatmentDialog extends JDialog {
 		
 		/**
 		 * 
-		 * @return The the number in the textfield as a long.
+		 * @return The the number in the text field as a long.
 		 * @throws NumberFormatException
 		 */
 		public long getTime() throws NumberFormatException{

@@ -1,4 +1,4 @@
-package carletti.dao;
+package carletti.test.model;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +8,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import carletti.dao.Dao;
+import carletti.dao.JpaDao;
 import carletti.model.Position;
 import carletti.model.Product;
 import carletti.model.SubProduct;

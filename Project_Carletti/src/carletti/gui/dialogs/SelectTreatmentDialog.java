@@ -26,9 +26,8 @@ import carletti.service.Service;
 /**
  * Handles the selection of an existing treatment plan.
  * This treatment plan is then associated with a
- * produt in creation.
+ * product in creation.
  * @author Malik Lund
- *
  */
 public class SelectTreatmentDialog extends JDialog {
 	
@@ -134,20 +133,29 @@ public class SelectTreatmentDialog extends JDialog {
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
+			/**
+			 * Select button
+			 */
 			if (ae.getSource() == btnSelect){
 				SelectTreatmentDialog.this.setVisible(false);
 			}
+			/**
+			 * Cancel button
+			 */
 			else if (ae.getSource() == btnCancel){
-				tableModel.setData(new Treatment("Temp"));
+				tableModel.setData(new Treatment("Temp")); // "reset" table
 				SelectTreatmentDialog.this.setVisible(false);
 			}
 		}
 
 		@Override
 		public void valueChanged(ListSelectionEvent lse) {
+			/**
+			 * Update table with selected treatment from the list.
+			 */
 			if (lse.getSource() == treatmentsList){
 				int index = treatmentsList.getSelectedIndex();
-				if (index > 0){
+				if (index >= 0){
 					Treatment t = treatments.get(index);
 					if (t.getName().equals(treatmentsList.getSelectedValue())){
 						tableModel.setData(t);
@@ -155,6 +163,5 @@ public class SelectTreatmentDialog extends JDialog {
 				}
 			}
 		}
-		
 	}
 }

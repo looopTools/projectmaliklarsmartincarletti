@@ -46,6 +46,9 @@ public class CreateNewProductDialog extends JDialog {
 	private NewProductSubTreatmentsTableModel subTreatmentsTableModel;
 	private JScrollPane productDescriptionScrollPane, subTreatmentsScrollPane;
 
+	/**
+	 * 
+	 */
 	public CreateNewProductDialog(){
 		service = service.getInstance();
 		this.setTitle("Create new product");
