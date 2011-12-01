@@ -1,81 +1,117 @@
- /** @author Lars Nielsen, Malik L. Lund, Martin R. Bundgaard
-  * 
-  */
+/** @author Lars Nielsen, Malik L. Lund, Martin R. Bundgaard
+ * 
+ */
 package carletti;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 
-public class LoadGui extends JFrame{
-	
+import carletti.dao.Dao;
+import carletti.dao.JpaDao;
+import carletti.dao.LocalDao;
+import carletti.gui.MainFrame;
+import carletti.service.Service;
+
+public class LoadGui extends JFrame {
+
 	private Dimension frameSize = new Dimension(300, 200);
 	private Dimension rBtnSize = new Dimension(20, 150);
-	//private int x = 20, y = 80;
-	
-	
-	
+	private JPanel selectPanel;
+
+	// private int x = 20, y = 80;
+
 	public LoadGui() {
-		
+
 		this.setTitle("Carletti - Load Screen");
 		this.setSize(frameSize);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setLayout(null);
-		
-		
-		
+		this.setLayout(new FlowLayout());
+
+		selectPanel = new SelectorPanel();
+		this.add(selectPanel);
+
 		this.setVisible(true);
-		
-		
+
 	}
-	
+
 	private class SelectorPanel extends JPanel implements ActionListener {
-		private int crossover;
 		private Dimension rBtnSize = new Dimension(20, 150);
 		private JButton btnOk;
 		private JRadioButton rbtnLocal, rbtnDao;
-		
-		public SelectorPanel(int crossover){
+
+		public SelectorPanel() {
 			super();
-			this.crossover = crossover;
 			GroupLayout layout = new GroupLayout(this);
 			this.setLayout(layout);
 			layout.setAutoCreateGaps(true);
 			layout.setAutoCreateContainerGaps(true);
-			
+
 			rbtnLocal = new JRadioButton("Local");
 			rbtnDao = new JRadioButton("Database");
 			btnOk = new JButton("Ok");
-			
-			
+
 			rbtnLocal.addActionListener(this);
+			rbtnDao.addActionListener(this);
 			btnOk.addActionListener(this);
-			
-			
-			layout.setHorizontalGroup(
-				layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-					.addComponent(btnOk)
-					
-			);
-			
-			layout.setVerticalGroup(
-				layout.createSequentialGroup()
-					.addComponent(btnOk, 20, 20, 20)
-			);
+
+			layout.setHorizontalGroup(layout
+					.createSequentialGroup()
+					.addGroup(
+							layout.createParallelGroup(
+									GroupLayout.Alignment.CENTER)
+									.addComponent(rbtnLocal)
+									.addComponent(btnOk)).addComponent(rbtnDao));
+
+			layout.setVerticalGroup(layout
+					.createSequentialGroup()
+					.addGroup(
+							layout.createParallelGroup(
+									GroupLayout.Alignment.CENTER)
+									.addComponent(rbtnLocal)
+									.addComponent(rbtnDao))
+					.addComponent(btnOk, 20, 20, 20));
 		}
 
 		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			
+		public void actionPerformed(ActionEvent ae) {
+			Dao dao;
+			if (ae.getSource().equals(btnOk)) {
+				if (rbtnLocal.isSelected() == true
+						&& rbtnDao.isSelected() == false) {
+					dao = LocalDao.getInstance();
+					startProgram(dao);
+				} else if (rbtnLocal.isSelected() == false
+						&& rbtnDao.isSelected() == true) {
+					dao = JpaDao.getInstance();
+					startProgram(dao);
+				} else if (rbtnLocal.isSelected() == true
+						&& rbtnDao.isSelected() == true) {
+					JOptionPane.showMessageDialog(null, "You have selected to many options, deselected one");
+
+				}else if (rbtnLocal.isSelected() == false
+						&& rbtnDao.isSelected() == false) {
+					JOptionPane.showMessageDialog(null, "You haven't selcted any options, selected one");
+
+				}
+
+			}
 		}
+	}
+	
+	private void startProgram(Dao dao){
+		Service s = Service.getInstance(dao);
+		s.createSomeObjects();
+		this.setVisible(false);
+		MainFrame mf = new MainFrame();
 	}
 
 }
