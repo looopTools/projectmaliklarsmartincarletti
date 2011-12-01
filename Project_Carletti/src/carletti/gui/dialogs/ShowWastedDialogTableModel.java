@@ -12,7 +12,7 @@ import carletti.model.State;
 import carletti.model.SubProduct;
 import carletti.service.Service;
 
-public class ShowDoneDialogTableModel extends AbstractTableModel
+public class ShowWastedDialogTableModel extends AbstractTableModel
 {
 	private Service service;
 	// Column headers.
@@ -21,33 +21,29 @@ public class ShowDoneDialogTableModel extends AbstractTableModel
 	// The actual data.
 	private ArrayList<Object[]> data = new ArrayList<Object[]>();
 	private List<SubProduct> newData;
-	private State done = State.DONE;
+	private State wasted = State.WASTE;
 
-	public ShowDoneDialogTableModel()
+	public ShowWastedDialogTableModel()
 	{
 		service = Service.getInstance();
-		newData = service.getSubProducts(done);
+		newData = service.getSubProducts(wasted);
 	}
 
-	@Override
 	public int getColumnCount()
 	{
 		return coloumnNames.length;
 	}
 
-	@Override
 	public int getRowCount()
 	{
 		return newData.size();
 	}
 
-	@Override
 	public String getColumnName(int col)
 	{
 		return coloumnNames[col];
 	}
 
-	@Override
 	public Object getValueAt(int row, int col)
 	{
 		SubProduct sp = newData.get(row);
@@ -60,7 +56,6 @@ public class ShowDoneDialogTableModel extends AbstractTableModel
 		return value[col];
 	}
 
-	@Override
 	public Class getColumnClass(int c)
 	{
 		return getValueAt(0, c).getClass();
@@ -78,6 +73,6 @@ public class ShowDoneDialogTableModel extends AbstractTableModel
 
 	public void updateData()
 	{
-		newData = service.getSubProducts(done);
+		newData = service.getSubProducts(wasted);
 	}
 }

@@ -21,6 +21,8 @@ import carletti.gui.dialogs.CreateNewProductDialog;
 import carletti.gui.dialogs.NewSubProductDialog;
 import carletti.gui.dialogs.NextSubTreatmentDialog;
 import carletti.gui.dialogs.ShowDoneDialog;
+import carletti.gui.dialogs.ShowWastedDialog;
+import carletti.gui.dialogs.ShowWastedDialogTableModel;
 import carletti.gui.dialogs.SubProductDialog;
 import carletti.gui.dialogs.WasteSubProduct;
 import carletti.model.State;
@@ -95,6 +97,7 @@ public class MainFrame extends JFrame {
 		btnShowDone.addActionListener(btnCtrl);
 		
 		btnShowWasted = new JButton("Show Wasted");
+		btnShowWasted.addActionListener(btnCtrl);
 		
 		GroupLayout gl_buttonsPanel = new GroupLayout(buttonsPanel);
 		gl_buttonsPanel.setHorizontalGroup(
@@ -257,6 +260,12 @@ public class MainFrame extends JFrame {
 			{
 				ShowDoneDialog sdd = new ShowDoneDialog();
 				sdd.setVisible(true);
+			}
+			else if (ae.getSource().equals(btnShowWasted))
+			{
+				ShowWastedDialog swd = new ShowWastedDialog();
+				swd.setVisible(true);
+				
 			}
 		}
 	}
