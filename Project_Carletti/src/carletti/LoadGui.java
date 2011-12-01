@@ -35,6 +35,7 @@ public class LoadGui extends JFrame {
 		this.setSize(frameSize);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLayout(new FlowLayout());
+		this.setLocationRelativeTo(null);
 
 		selectPanel = new SelectorPanel();
 		this.add(selectPanel);
@@ -93,16 +94,13 @@ public class LoadGui extends JFrame {
 						&& rbtnDao.isSelected() == true) {
 					dao = JpaDao.getInstance();
 					startProgram(dao);
-				} else if (rbtnLocal.isSelected() == true
-						&& rbtnDao.isSelected() == true) {
-					JOptionPane.showMessageDialog(null, "You have selected to many options, deselected one");
-
-				}else if (rbtnLocal.isSelected() == false
-						&& rbtnDao.isSelected() == false) {
-					JOptionPane.showMessageDialog(null, "You haven't selcted any options, selected one");
-
-				}
-
+				} 
+			}
+			else if(ae.getSource().equals(rbtnLocal)){
+				rbtnDao.setSelected(false);
+			}
+			else if(ae.getSource().equals(rbtnDao)){
+				rbtnLocal.setSelected(false);
 			}
 		}
 	}
