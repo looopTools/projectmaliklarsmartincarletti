@@ -37,6 +37,10 @@ public class Position {
 	public void setPosID(String posID) {
 		this.posID = posID;
 	}
+	
+	public SubProduct getSubProduct(){
+		return sp;
+	}
 
 	/*
 	 * @precon There can't be put a SubProduct on a position where there already
@@ -68,6 +72,10 @@ public class Position {
 	
 	void putSubProductOnPositionUD(SubProduct sp){
 		this.sp = sp;
+	}
+	
+	public String toString(){
+		return getPosID();
 	}
 	
 	
