@@ -51,7 +51,6 @@ public class Position {
 		} else {
 			return false;
 		}
-//		return false;
 	}
 
 	/*
@@ -65,7 +64,6 @@ public class Position {
 			sp = null;
 			return true;
 		}
-//		return false;
 	}
 	
 	void putSubProductOnPositionUD(SubProduct sp){
