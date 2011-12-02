@@ -244,6 +244,17 @@ public class Service
 		return subProduct;
 	}
 	
+	//-----Lars
+	public List<Position> getPositions(){
+		return dao.getPositions();
+	}
+	
+	public void createPosition(String posID){
+		dao.storePosition(new Position(posID));
+		
+	}
+	//-----
+	
 
 	public void changeState(SubProduct sp, State state)
 	{

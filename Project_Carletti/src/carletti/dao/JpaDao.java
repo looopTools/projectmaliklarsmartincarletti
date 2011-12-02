@@ -9,10 +9,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import carletti.model.Position;
 import carletti.model.Product;
 import carletti.model.State;
 import carletti.model.SubProduct;
@@ -154,4 +154,29 @@ public class JpaDao implements Dao{
 		Query query = em.createQuery("SELECT t FROM Treatment t", Treatment.class);
 		return query.getResultList();
 	}
+	
+	//-----Lars
+	@Override
+	public List<Position> getPositions(){
+		Query query = em.createQuery("SELECT p FROM Position p", Position.class);
+		return query.getResultList();
+	}
+
+	@Override
+	public void storePosition(Position p) {
+		em.getTransaction().begin();
+		em.persist(p);
+		em.getTransaction().commit();
+		
+		
+	}
+
+	@Override
+	public void removePosition(Position p) {
+		em.getTransaction().begin();
+		em.remove(p);
+		em.getTransaction().commit();
+		
+	}
+	//-----
 }

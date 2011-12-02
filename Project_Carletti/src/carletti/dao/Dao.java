@@ -2,6 +2,7 @@ package carletti.dao;
 
 import java.util.List;
 
+import carletti.model.Position;
 import carletti.model.Product;
 import carletti.model.State;
 import carletti.model.SubProduct;
@@ -22,7 +23,10 @@ public interface Dao {
 	public void removeProduct(Product p);
 	public void storeSubProduct(SubProduct sp);
 	public void removeSubProduct(SubProduct sp);
+	public void storePosition(Position p);
+	public void removePosition(Position p);
 	public List<Treatment> getTreatments();
 	public List<Product> getProducts();
 	public List<SubProduct> getSubProducts();
+	public List<Position> getPositions();
 }
