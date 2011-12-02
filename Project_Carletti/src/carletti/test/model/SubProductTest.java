@@ -91,58 +91,58 @@ public class SubProductTest {
 	/**
 	 * Test setSubtreatments
 	 */
-	@Test
-	public void testSetSubtreatments(){
-		subproduct.nextSubTreatment();
-		subproduct.nextSubTreatment();
-		
-		Treatment newTreatment = service.createTreatment("NewTreatment");
-		newTreatment.createSubTreatment("NewSubTreatment", 50, 60, 70);
-		subproduct.setSubtreatments(newTreatment.getSubTreatments());
-		List<SubTreatment> expectedSubTreatments = newTreatment.getSubTreatments();
-		List<SubTreatment> actualSubTreatments = subproduct.getSubtreatments();
-		for (int i = 0; i < expectedSubTreatments.size(); i++){
-			assertEquals("Subproducts differs", expectedSubTreatments.get(i), actualSubTreatments.get(i));
-		}
-		
-		subproduct.getCurrentSubTreatment();
-	}
+//	@Test
+//	public void testSetSubtreatments(){
+//		subproduct.nextSubTreatment();
+//		subproduct.nextSubTreatment();
+//		
+//		Treatment newTreatment = service.createTreatment("NewTreatment");
+//		newTreatment.createSubTreatment("NewSubTreatment", 50, 60, 70);
+//		subproduct.setSubtreatments(newTreatment.getSubTreatments());
+//		List<SubTreatment> expectedSubTreatments = newTreatment.getSubTreatments();
+//		List<SubTreatment> actualSubTreatments = subproduct.getSubtreatments();
+//		for (int i = 0; i < expectedSubTreatments.size(); i++){
+//			assertEquals("Subproducts differs", expectedSubTreatments.get(i), actualSubTreatments.get(i));
+//		}
+//		
+//		subproduct.getCurrentSubTreatment();
+//	}
 	
-	/**
-	 * Test addition of subTreatment
-	 */
-	@Test
-	public void testAddSubTreatment(){
-		SubTreatment st = new SubTreatment("AddedTreatment", 10, 12, 14);
-		subproduct.addSubTreatment(st);
-		assertEquals("List not enlarged", 4, subproduct.getSubtreatments().size());
-		assertEquals("Last element not the recently added", st, subproduct.getSubtreatments().get(3));
-	}
+//	/**
+//	 * Test addition of subTreatment
+//	 */
+//	@Test
+//	public void testAddSubTreatment(){
+//		SubTreatment st = new SubTreatment("AddedTreatment", 10, 12, 14);
+//		subproduct.addSubTreatment(st);
+//		assertEquals("List not enlarged", 4, subproduct.getSubtreatments().size());
+//		assertEquals("Last element not the recently added", st, subproduct.getSubtreatments().get(3));
+//	}
 	
 	/**
 	 * Test product type change
 	 */
-	@Test
-	public void testSetProduct(){
-		subproduct.nextSubTreatment();
-		subproduct.nextSubTreatment();
-		subproduct.nextSubTreatment();
-		
-		Treatment newTreatment = service.createTreatment("NewTreatment");
-		newTreatment.createSubTreatment("T1", 1, 2, 3);
-		newTreatment.createSubTreatment("T2", 2, 3, 4);
-		Product newProduct = service.createProduct("NewProduct", "Description of new product", newTreatment);
-		subproduct.setProduct(newProduct);
-		assertEquals("Product differs", newProduct, subproduct.getProduct());
-
-		List<SubTreatment> expectedSubTreatments = newTreatment.getSubTreatments();
-		List<SubTreatment> actualSubTreatments = subproduct.getSubtreatments();
-		for (int i = 0; i < expectedSubTreatments.size(); i++){
-			assertEquals("Subproducts differs", expectedSubTreatments.get(i), actualSubTreatments.get(i));
-		}
-		
-		subproduct.getCurrentSubTreatment();
-	}
+//	@Test
+//	public void testSetProduct(){
+//		subproduct.nextSubTreatment();
+//		subproduct.nextSubTreatment();
+//		subproduct.nextSubTreatment();
+//		
+//		Treatment newTreatment = service.createTreatment("NewTreatment");
+//		newTreatment.createSubTreatment("T1", 1, 2, 3);
+//		newTreatment.createSubTreatment("T2", 2, 3, 4);
+//		Product newProduct = service.createProduct("NewProduct", "Description of new product", newTreatment);
+//		subproduct.setProduct(newProduct);
+//		assertEquals("Product differs", newProduct, subproduct.getProduct());
+//
+//		List<SubTreatment> expectedSubTreatments = newTreatment.getSubTreatments();
+//		List<SubTreatment> actualSubTreatments = subproduct.getSubtreatments();
+//		for (int i = 0; i < expectedSubTreatments.size(); i++){
+//			assertEquals("Subproducts differs", expectedSubTreatments.get(i), actualSubTreatments.get(i));
+//		}
+//		
+//		subproduct.getCurrentSubTreatment();
+//	}
 	
 	/**
 	 * Test nextSubTreatment()

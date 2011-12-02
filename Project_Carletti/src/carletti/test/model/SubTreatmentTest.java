@@ -11,22 +11,27 @@ import org.junit.Before;
 import org.junit.Test;
 
 import carletti.model.SubTreatment;
+import carletti.model.Treatment;
 
 public class SubTreatmentTest
 {
-	
+	private Treatment t;
 	private SubTreatment st;
 
 	@Before
 	public void setUp() throws Exception
 	{
-		st = new SubTreatment("subtreatment1", 10, 20, 30);
+		t = new Treatment("Treatment");
+		t.createSubTreatment("subtreatment1", 10, 20, 30);
+		st = t.getSubTreatments().get(0);
 	}
 
 	@Test
 	public void testSubTreatment()
 	{
-		SubTreatment s = new SubTreatment("Proeve", 40, 50, 60);
+		t = new Treatment("Treatment");
+		t.createSubTreatment("Proeve", 40, 50, 60);
+		SubTreatment s = t.getSubTreatments().get(0);
 		assertEquals("Proeve", s.getName());
 		assertEquals(40, s.getDryMin());
 		assertEquals(50, s.getDryPrime());
