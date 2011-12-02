@@ -3,9 +3,10 @@ package carletti.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import carletti.model.Position;
+import carletti.model.Product;
 import carletti.model.State;
 import carletti.model.SubProduct;
-import carletti.model.Product;
 import carletti.model.Treatment;
 
 /**
@@ -25,6 +26,7 @@ public class LocalDao implements Dao {
 	private ArrayList<Treatment> treatments;
 	private ArrayList<Product> products;
 	private ArrayList<SubProduct> subproducts;
+	private ArrayList<Position> positions;
 	private int subProductnextID = 1;
 	private int productNextID = 1;
 	/**
@@ -160,4 +162,26 @@ public class LocalDao implements Dao {
 	public List<Treatment> getTreatments() {
 		return new ArrayList<Treatment>(treatments);
 	}
+	
+	//-----Lars
+	@Override
+	public List<Position> getPositions() {
+		return new ArrayList<Position>(positions);
+	}
+
+	
+	@Override
+	public void storePosition(Position p) {
+		positions.add(p);
+		
+	}
+
+	@Override
+	public void removePosition(Position p) {
+		positions.remove(p);
+		
+	}
+	//-----
+	
+	
 }
