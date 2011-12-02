@@ -22,7 +22,7 @@ public class SubTreatment {
 	private long dryMin, dryPrime, dryMax;
 	private String name;
 	
-	public SubTreatment(String name, long dryMin, long dryPrime, long dryMax){
+	SubTreatment(String name, long dryMin, long dryPrime, long dryMax){
 		this.setName(name);
 		this.dryMin = dryMin;
 		this.dryPrime = dryPrime;
