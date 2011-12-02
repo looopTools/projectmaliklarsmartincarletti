@@ -87,17 +87,9 @@ public class SubProduct implements Comparable<SubProduct> {
 		return new ArrayList<SubTreatment>(subtreatments);
 	}
 
-	public void setSubtreatments(List<SubTreatment> subtreatments) {
+	private void setSubtreatments(List<SubTreatment> subtreatments) {
 		this.subtreatments = subtreatments;
 		setCurrentSubTreatmentIndex(0);
-	}
-
-	public void addSubTreatment(SubTreatment st) {
-		subtreatments.add(st);
-	}
-
-	public void removeSubTreatment(SubTreatment st) {
-		subtreatments.remove(st);
 	}
 
 	public int getCurrentSubTreatmentIndex() {
@@ -112,7 +104,7 @@ public class SubProduct implements Comparable<SubProduct> {
 		return product;
 	}
 
-	public void setProduct(Product product) {
+	private void setProduct(Product product) {
 		this.product = product;
 		setSubtreatments(product.getTreatment().getSubTreatments());
 	}
@@ -133,29 +125,11 @@ public class SubProduct implements Comparable<SubProduct> {
 		return subtreatments.get(getCurrentSubTreatmentIndex());
 	}
 
-	public int stringThis() {
-		return getCurrentSubTreatmentIndex() + 1;
-	}
-
 	public String getTime(long time) {
 		SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy '-' HH:mm:ss");
 		return sd.format(time);
 
 	}
-
-	// ----------Malik-------------
-	public String getTimeLeft(long time) {
-		int days = (int) (time / (1000 * 60 * 60 * 24));
-		time = time - days * 1000 * 60 * 60 * 24;
-		int hours = (int) (time / (1000 * 60 * 60));
-		time = time - hours * 1000 * 60 * 60;
-		int minutes = (int) (time / (1000 * 60));
-		time = time - minutes * 1000 * 60;
-		int seconds = (int) (time / (1000));
-		return String.format("%dd%dh%dm%ds", days, hours, minutes, seconds);
-	}
-
-	// ------------------------------
 
 	// -------Lars--------
 
@@ -172,31 +146,35 @@ public class SubProduct implements Comparable<SubProduct> {
 		position.putSubProductOnPositionUD(this);
 	}
 
-	// -------Martin--------
+	/**
+	 * 
+	 * @author Martin
+	 */
+	@Override
 	public String toString() {
-		return getTimeLeft(timeLeft()) + " | " + getTime(timeAdded) + " | "
-				+ getId() + " " + name + " " + getState() + " " + stringThis()
+		return LongToStringParser.parseLongToString(timeLeft()) + " | " + getTime(timeAdded) + " | "
+				+ getId() + " " + name + " " + getState() + " " + (getCurrentSubTreatmentIndex() + 1)
 				+ "" + " / " + getSubtreatments().size();
 	}
 
+	/**
+	 * 
+	 * @author Martin
+	 * @return
+	 */
 	public long timeLeft() {
-		long min = (getCurrentSubTreatment().getDryMin() + timeAdded - System
-				.currentTimeMillis());
 		long max = (getCurrentSubTreatment().getDryMax() + timeAdded - System
 				.currentTimeMillis());
-
-		SimpleDateFormat sdMin = new SimpleDateFormat("HH:mm:ss");
-		SimpleDateFormat sdMax = new SimpleDateFormat("HH:mm:ss");
-
-		sdMin.format(min);
-		sdMax.format(max);
 
 		return max;
 	}
 
+	/**
+	 * 
+	 * @author Martin
+	 */
 	@Override
-	public int compareTo(SubProduct arg0) {
-		return (int) (timeLeft() - arg0.timeLeft());
+	public int compareTo(SubProduct otherSubProduct) {
+		return (int) (timeLeft() - otherSubProduct.timeLeft());
 	}
-	// ----------------------------
 }

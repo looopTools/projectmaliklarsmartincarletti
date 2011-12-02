@@ -7,6 +7,11 @@ import carletti.model.State;
 import carletti.model.SubProduct;
 import carletti.model.Treatment;
 
+/**
+ * 
+ * @author Malik Lund
+ *
+ */
 public interface Dao {
 
 	public List<SubProduct> getSubProducts(State state);

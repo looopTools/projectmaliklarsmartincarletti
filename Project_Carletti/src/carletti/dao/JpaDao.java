@@ -43,14 +43,15 @@ public class JpaDao implements Dao{
 		return uniqueInstance;
 	}
 	
-	
+	@Override
+	/**
+	 * @author Malik Lund
+	 */
 	public void storeSubProduct(SubProduct sp){
 		em.getTransaction().begin();
 		em.persist(sp);
 		em.getTransaction().commit();
 	}
-	
-	
 	
 	public void close(){
 		em.close();
@@ -58,6 +59,9 @@ public class JpaDao implements Dao{
 	}
 
 	@Override
+	/**
+	 * @author Malik Lund
+	 */
 	public List<SubProduct> getSubProducts(State state) {
 		Query query = em.createQuery("SELECT sp FROM SubProduct sp WHERE sp.state = :state");
 		query.setParameter("state", state);
@@ -65,17 +69,19 @@ public class JpaDao implements Dao{
 	}
 
 	@Override
+	/**
+	 * @author Malik Lund
+	 */
 	public SubProduct changeStateOfSubProduct(SubProduct subProduct, State state) {
 		em.getTransaction().begin();
 		subProduct.setState(state);
 		em.getTransaction().commit();
 		return subProduct;
 	}
-
-	/**
-	 * 
-	 */
 	@Override
+	/**
+	 * @author Malik Lund
+	 */
 	public void storeProduct(Product p) {
 		em.getTransaction().begin();
 		em.persist(p);
@@ -83,6 +89,9 @@ public class JpaDao implements Dao{
 	}
 
 	@Override
+	/**
+	 * @author Malik Lund
+	 */
 	public void removeProduct(Product p) {
 		em.getTransaction().begin();
 		em.remove(p);
@@ -90,6 +99,9 @@ public class JpaDao implements Dao{
 	}
 
 	@Override
+	/**
+	 * @author Malik Lund
+	 */
 	public void removeSubProduct(SubProduct sp) {
 		em.getTransaction().begin();
 		em.remove(sp);
@@ -97,18 +109,27 @@ public class JpaDao implements Dao{
 	}
 
 	@Override
+	/**
+	 * @author Malik Lund
+	 */
 	public List<Product> getProducts() {
 		Query query = em.createQuery("SELECT p FROM Product p", Product.class);
 		return query.getResultList();
 	}
 
 	@Override
+	/**
+	 * @author Malik Lund
+	 */
 	public List<SubProduct> getSubProducts() {
 		Query query = em.createQuery("SELECT sp FROM SubProduct sp", SubProduct.class);
 		return query.getResultList();
 	}
 
 	@Override
+	/**
+	 * @author Malik Lund
+	 */
 	public void storeTreatment(Treatment t) {
 		em.getTransaction().begin();
 		em.persist(t);
@@ -116,6 +137,9 @@ public class JpaDao implements Dao{
 	}
 
 	@Override
+	/**
+	 * @author Malik Lund
+	 */
 	public void removeTreatment(Treatment t) {
 		em.getTransaction().begin();
 		em.remove(t);
@@ -123,6 +147,9 @@ public class JpaDao implements Dao{
 	}
 
 	@Override
+	/**
+	 * @author Malik Lund
+	 */
 	public List<Treatment> getTreatments() {
 		Query query = em.createQuery("SELECT t FROM Treatment t", Treatment.class);
 		return query.getResultList();
