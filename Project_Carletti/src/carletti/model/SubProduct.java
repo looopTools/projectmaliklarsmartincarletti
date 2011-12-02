@@ -169,12 +169,30 @@ public class SubProduct implements Comparable<SubProduct> {
 		return max;
 	}
 
-	/**
+	/** 
 	 * 
 	 * @author Martin
 	 */
+	
+//	@Override
+//	public int compareTo(SubProduct otherSubProduct) {
+//		return (int) (timeLeft() - otherSubProduct.timeLeft());
+//	}
+	
 	@Override
-	public int compareTo(SubProduct otherSubProduct) {
-		return (int) (timeLeft() - otherSubProduct.timeLeft());
+	public int compareTo(SubProduct otherSupProduct)
+	{
+	 	long l = (timeLeft() - otherSupProduct.timeLeft());
+	
+	 	int result = 0;
+	 	
+	 	if (l < 0)
+	 		result = -1; 
+	 	
+	 	else if (l > 0)
+	 		result = 1;
+	 
+		return result;
+		
 	}
 }

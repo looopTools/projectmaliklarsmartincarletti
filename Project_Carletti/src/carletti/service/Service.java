@@ -241,6 +241,7 @@ public class Service
 			}
 		}
 
+		Collections.sort(subProduct);
 		return subProduct;
 	}
 	
