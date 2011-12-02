@@ -199,6 +199,17 @@ public class Service
 	public void createSomeObjects()
 	{
 		Service s = Service.getInstance();
+		
+		s.createPosition("A1");
+		s.createPosition("A2");
+		s.createPosition("A3");
+		s.createPosition("B1");
+		s.createPosition("B2");
+		s.createPosition("B3");
+		s.createPosition("C1");
+		s.createPosition("C2");
+		s.createPosition("C3");
+		
 		Treatment t1 = s.createTreatment("Red chocolate MMs");
 		t1.createSubTreatment("1st drying", 1000 * 60 * 30, 1000 * 60 * 32,
 				1000 * 60 * 35);
@@ -221,10 +232,30 @@ public class Service
 		t3.createSubTreatment("3rd drying", 300, 400, 500);
 		Product p3 = s.createProduct("Coffee Bean",
 				"Coffee paste with a layer of chocolate", t3);
+		
+		List<Position> positions = s.getPositions();
 
-		SubProduct sp1 = s.createSubProduct("Foobar", p1, new Position("A1"));
-		SubProduct sp2 = s.createSubProduct("Barbaz", p2, new Position("B4"));
-		SubProduct sp3 = s.createSubProduct("Bazfoo", p3, new Position("C7"));
+		SubProduct sp1 = s.createSubProduct("Foobar", p1, positions.get(0));
+		SubProduct sp2 = s.createSubProduct("Barbaz", p2, positions.get(4));
+		SubProduct sp3 = s.createSubProduct("Bazfoo", p3, positions.get(8));
+	}
+	
+	private long generateTime(int days, int hours, int minutes, int seconds){
+		long time = 0;
+		time += days * 1000 * 60 * 60 * 24;
+		time += hours * 1000 * 60 * 60;
+		time += minutes * 1000 * 60;
+		time += seconds * 1000;
+		return time;
+	}
+	
+	private long generateTime(int...times){
+		long time = 0;
+		int NrOfArguments = times.length;
+		for (int i = 0; i < times.length; i++){
+			
+		}
+		return time;
 	}
 
 	// ----------------------------
