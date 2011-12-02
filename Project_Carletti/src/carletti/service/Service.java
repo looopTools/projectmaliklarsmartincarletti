@@ -6,6 +6,7 @@ import java.util.List;
 
 import carletti.dao.Dao;
 import carletti.dao.LocalDao;
+import carletti.model.LongToStringParser;
 import carletti.model.Position;
 import carletti.model.Product;
 import carletti.model.State;
@@ -211,25 +212,25 @@ public class Service
 		s.createPosition("C3");
 		
 		Treatment t1 = s.createTreatment("Red chocolate MMs");
-		t1.createSubTreatment("1st drying", 1000 * 60 * 30, 1000 * 60 * 32,
-				1000 * 60 * 35);
-		t1.createSubTreatment("2nd drying", 10000, 20000, 30000);
-		t1.createSubTreatment("3rd drying", 1250, 1300, 1500);
+		t1.createSubTreatment("1st drying", generateTime(2), generateTime(30),
+				generateTime(0, 1));
+		t1.createSubTreatment("2nd drying", generateTime(0, 35), generateTime(0, 40), generateTime(0, 50));
+		t1.createSubTreatment("3rd drying", generateTime(0, 35), generateTime(0, 40), generateTime(0, 50));
 		Product p1 = s.createProduct("Red Chocolate MMs",
 				"Info about red chocolate MMs", t1);
 
 		Treatment t2 = s.createTreatment("Liquorice");
-		t2.createSubTreatment("1st drying", 1000 * 60 * 15, 1000 * 60 * 20,
-				1000 * 60 * 25);
-		t2.createSubTreatment("2nd drying", 1500, 1750, 2000);
+		t2.createSubTreatment("1st drying", generateTime(0, 15), generateTime(0, 20),
+				generateTime(0, 25));
+		t2.createSubTreatment("2nd drying", generateTime(0, 35), generateTime(0, 40), generateTime(0, 50));
 		Product p2 = s.createProduct("Liquorice",
 				"Liquorice with coloured sugar layer", t2);
 
 		Treatment t3 = s.createTreatment("Coffeebean");
-		t3.createSubTreatment("1st drying", 1000 * 60 * 55, 1000 * 60 * 60,
-				1000 * 60 * 70);
-		t3.createSubTreatment("2nd drying", 1200, 1300, 1400);
-		t3.createSubTreatment("3rd drying", 300, 400, 500);
+		t3.createSubTreatment("1st drying", generateTime(0, 55), generateTime(0, 60),
+				generateTime(0, 10, 1));
+		t3.createSubTreatment("2nd drying", generateTime(0, 35), generateTime(0, 40), generateTime(0, 50));
+		t3.createSubTreatment("3rd drying", generateTime(0, 35), generateTime(0, 40), generateTime(0, 50));
 		Product p3 = s.createProduct("Coffee Bean",
 				"Coffee paste with a layer of chocolate", t3);
 		
@@ -240,20 +241,28 @@ public class Service
 		SubProduct sp3 = s.createSubProduct("Bazfoo", p3, positions.get(8));
 	}
 	
-	private long generateTime(int days, int hours, int minutes, int seconds){
-		long time = 0;
-		time += days * 1000 * 60 * 60 * 24;
-		time += hours * 1000 * 60 * 60;
-		time += minutes * 1000 * 60;
-		time += seconds * 1000;
-		return time;
-	}
-	
+	/**
+	 * Takes a variable number of arguments and generates a time
+	 * in milliseconds.
+	 * 
+	 * The first value represents seconds, the second minutes, the third
+	 * hours and the fourth hours. Any arguments after that are ignored.
+	 * 
+	 * @author Malik Lund
+	 * @param times
+	 * @return
+	 */
 	private long generateTime(int...times){
 		long time = 0;
-		int NrOfArguments = times.length;
-		for (int i = 0; i < times.length; i++){
-			
+		long[] constants = {
+				1000,
+				1000 * 60,
+				1000 * 60 * 60,
+				1000 * 60 * 60 * 24
+		};
+		int roof = Math.min(times.length, 4);
+		for (int i = 0; i < roof; i++){
+			time += times[i] * constants[i];
 		}
 		return time;
 	}
