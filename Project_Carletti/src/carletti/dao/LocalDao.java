@@ -37,6 +37,7 @@ public class LocalDao implements Dao {
 		treatments = new ArrayList<Treatment>();
 		products = new ArrayList<Product>();
 		subproducts = new ArrayList<SubProduct>();		
+		positions = new ArrayList<Position>();
 	}
 	
 	/**
