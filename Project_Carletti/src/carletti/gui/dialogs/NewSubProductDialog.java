@@ -7,17 +7,17 @@ package carletti.gui.dialogs;
  */
 
 import java.awt.Dimension;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -33,7 +33,8 @@ import carletti.service.Service;
 public class NewSubProductDialog extends JDialog {
 	private Service service;
 	
-	private JTextField txfName, txfPos;
+	private JTextField txfName;
+	private JComboBox comboPos;
 	private JLabel lblName, lblProd;
 	private JScrollPane jspProducts;
 	private JList prodList;
@@ -46,13 +47,11 @@ public class NewSubProductDialog extends JDialog {
 	private Dimension jspSize = new Dimension(320, 160);
 
 	private Controller btnCtrl;
-	private TextController txtCtrl;
 
 	public NewSubProductDialog() {
 		service = Service.getInstance();
 		
 		btnCtrl = new Controller();
-		txtCtrl = new TextController();
 
 		this.setSize(defaultSize);
 		this.setResizable(false);
@@ -75,12 +74,10 @@ public class NewSubProductDialog extends JDialog {
 		
 		y += 40;
 		
-		txfPos = new JTextField();
-		txfPos.setSize(txfSize);
-		txfPos.setLocation(x, y);
-		txfPos.setText("Enter position");
-		txfPos.addMouseListener(txtCtrl);
-		this.add(txfPos);
+		comboPos = new JComboBox(getPositionsAvailable().toArray());
+		comboPos.setSize(txfSize);
+		comboPos.setLocation(x, y);
+		this.add(comboPos);
 
 		x = 20;
 		
@@ -123,6 +120,19 @@ public class NewSubProductDialog extends JDialog {
 	private void setDialogVisibility(boolean visibility) {
 		this.setVisible(visibility);
 	}
+	
+	private List<Position> getPositionsAvailable(){
+		
+		ArrayList<Position> avaPos = new ArrayList<Position>();
+		List<Position> allPos = service.getPositions();
+		
+		for(int i = 0; i < allPos.size(); i++){
+			if(allPos.get(i).getSubProduct() == null){
+				avaPos.add(allPos.get(i));
+			}
+		}
+		return avaPos;
+	}
 
 	/**
 	 * The inner class Controller, is orgnaised so we can controll which button
@@ -132,31 +142,10 @@ public class NewSubProductDialog extends JDialog {
 
 		public void actionPerformed(ActionEvent ae) {
 			if (ae.getSource().equals(btnSub)) {
-				// int id, String name, Product product
 				String name = txfName.getText();
 				Product p = (Product) prodList.getSelectedValue();
+				Position pos = (Position) comboPos.getSelectedItem();
 				
-				String posID = txfPos.getText();
-				List<Position> positions = service.getPositions();
-				
-				boolean found = false;
-				int i = 0;
-				Position pos = null;
-				
-				while(!found && i < positions.size()){
-					if(i >=  positions.size()){
-						JOptionPane.showMessageDialog(null, "Enter a valid position - see manual");
-					}
-					else{
-						if(posID.equals(positions.get(i).getPosID())){
-							found = true;
-							pos = positions.get(i);
-						}
-						else{
-							i++;
-						}
-					}
-				}
 				service.createSubProduct(name, p, pos);
 				NewSubProductDialog.this.setVisible(false);
 
@@ -166,41 +155,5 @@ public class NewSubProductDialog extends JDialog {
 		}
 	}
 	
-	private class TextController implements MouseListener{
-
-
-		@Override
-		public void mouseClicked(MouseEvent ae) {
-			// TODO Auto-generated method stub
-			if(ae.getSource().equals(txfPos)){
-				if(txfPos.hasFocus() == true){
-					txfPos.setText("");
-				}
-			}
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent ae) {
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mousePressed(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-	}
+	
 }
