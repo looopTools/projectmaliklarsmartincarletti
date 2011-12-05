@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 
 
 /**
- * Product represents encapsulates the name,
+ * Product encapsulates the name,
  * description and treatment of each sub-product.
  * 
  * @author Malik Lund
@@ -33,7 +33,6 @@ public class Product {
 	 * @param treatment A treatment plan for the product.
 	 */
 	public Product(String name, String description, Treatment treatment) {
-		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.treatment = treatment;
@@ -50,7 +49,7 @@ public class Product {
 	/**
 	 * Get the treatment associated with this product
 	 * type.
-	 * @return
+	 * @return The Treatment object associated with this product type.
 	 */
 	public Treatment getTreatment() {
 		return treatment;
@@ -59,7 +58,7 @@ public class Product {
 	/**
 	 * Replace the treatment associated with this product
 	 * type.
-	 * @param treatment
+	 * @param treatment The new Treatment object to be associated with this product type.
 	 */
 	public void setTreatment(Treatment treatment) {
 		this.treatment = treatment;
@@ -67,7 +66,7 @@ public class Product {
 
 	/**
 	 * Get the id given by the database.
-	 * @return
+	 * @return This objects id represented by an int value.
 	 */
 	public int getId(){
 		return id;
@@ -75,7 +74,7 @@ public class Product {
 	
 	/**
 	 * Get the name of this product.
-	 * @return
+	 * @return A String object containing the name.
 	 */
 	public String getName(){
 		return name;
@@ -83,7 +82,7 @@ public class Product {
 	
 	/**
 	 * Replace the name of this product.
-	 * @param newName The new name.
+	 * @param newName The new name as a String object.
 	 */
 	public void setName(String newName){
 		this.name = newName;
@@ -91,7 +90,7 @@ public class Product {
 	
 	/**
 	 * Get a description of the product.
-	 * @return
+	 * @return The description of the product as a String.
 	 */
 	public String getDescription(){
 		return description;
@@ -99,7 +98,7 @@ public class Product {
 	
 	/**
 	 * Replace the description of this product.
-	 * @param newDescription
+	 * @param newDescription A String object that is to be the new description.
 	 */
 	public void setDescription(String newDescription){
 		this.description = newDescription;
