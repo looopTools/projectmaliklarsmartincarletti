@@ -153,15 +153,6 @@ public class ServiceTest
 	}
 
 	@Test
-	public void testShowAllDoneProduct()
-	{
-		service.changeState(subproduct, State.DONE);
-		assertEquals(1, service.showAllDoneProduct().size());
-		service.changeState(subproduct2, State.DONE);
-		assertEquals(2, service.showAllDoneProduct().size());
-	}
-
-	@Test
 	public void testGetProducts()
 	{
 		assertEquals(1, service.getProducts().size());	
