@@ -175,6 +175,7 @@ public class WasteSubProduct extends JDialog{
 		public void actionPerformed(ActionEvent ae) {
 			if(ae.getSource().equals(btnWaste)){
 				service.changeState(sub, State.WASTE);
+				sub.setPosition(null);
 				desposeDialog(false);
 			}
 			else if(ae.getSource().equals(btnCan)){

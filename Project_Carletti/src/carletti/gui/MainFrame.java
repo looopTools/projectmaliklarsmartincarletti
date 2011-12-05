@@ -248,6 +248,7 @@ public class MainFrame extends JFrame {
 				else
 				{
 					service.changeState(sp, State.TREATMENT);
+					sp.setPosition(null);
 				}
 				updateList();
 			}
