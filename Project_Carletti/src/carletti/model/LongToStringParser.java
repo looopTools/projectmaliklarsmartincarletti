@@ -1,5 +1,10 @@
 package carletti.model;
 
+/**
+ * 
+ * @author Malik Lund
+ *
+ */
 public class LongToStringParser {
 	
 	/**
