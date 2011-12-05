@@ -142,8 +142,12 @@ public class SubProduct implements Comparable<SubProduct> {
 	}
 
 	public void setPosition(Position position) {
+		if (position == null){
+			this.position.putSubProductOnPositionUD(null);
+		} else {
+			position.putSubProductOnPositionUD(this);
+		}
 		setPositionUD(position);
-		position.putSubProductOnPositionUD(this);
 	}
 
 	/**
