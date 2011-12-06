@@ -1,8 +1,3 @@
-/**
- * @group: Lars Nielsen, Malik Lasse Lund, Martin R¿nn Bundgaard
- * @author: Lars Nielsen
- * @class: SubTreatment
- */
 package carletti.model;
 
 import javax.persistence.Entity;
@@ -11,6 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+/**
+ * @group: Lars Nielsen, Malik Lasse Lund, Martin R¿nn Bundgaard
+ * @author: Lars Nielsen
+ * @class: SubTreatment
+ */
 public class SubTreatment {
 	
 	/*
@@ -18,7 +18,7 @@ public class SubTreatment {
 	 */
 	@Id
 	@GeneratedValue
-	private int id;
+	private int id; //Is need for the JPA identification 
 	private long dryMin, dryPrime, dryMax;
 	private String name;
 	

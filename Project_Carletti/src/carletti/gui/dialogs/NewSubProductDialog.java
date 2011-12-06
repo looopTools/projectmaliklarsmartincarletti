@@ -1,11 +1,5 @@
 package carletti.gui.dialogs;
 
-/**
- *@author Lars Nielsen, Malik Lasse Lund, Martin Rønn Bundgaard
- *@class NewSubProductDialog
- *@programmer Lars Nielsen
- */
-
 import java.awt.Dimension;
 
 import java.awt.event.ActionEvent;
@@ -26,39 +20,55 @@ import carletti.model.Position;
 import carletti.model.Product;
 import carletti.service.Service;
 
+/**
+ *@group Lars Nielsen, Malik Lasse Lund, Martin Rønn Bundgaard
+ *@class NewSubProductDialog
+ *@programmer Lars Nielsen
+ */
 /*
- * This class is harcoded dou to certain requriments, which windows build
- * couldn't do.
+ * This class is harcoded due to certain requriments, which couldn't 
+ * be achive with JWindowsBuild
  */
 public class NewSubProductDialog extends JDialog {
-	private Service service;
 	
+	private Service service; // Holds an singelton instance of the Service
+	
+	//GUI componenst
 	private JTextField txfName;
 	private JComboBox comboPos;
 	private JLabel lblName, lblProd;
 	private JScrollPane jspProducts;
 	private JList prodList;
 	private JButton btnSub, btnCan;
+	
+	//Start coordinates for the different GUI objects
 	private int x = 20, y = 20;
+	
+	//Dimensions for the GUI components
 	private Dimension defaultSize = new Dimension(360, 360);
 	private Dimension btnSize = new Dimension(140, 20);
 	private Dimension lblSize = new Dimension(140, 20);
 	private Dimension txfSize = new Dimension(160, 20);
 	private Dimension jspSize = new Dimension(320, 160);
 
-	private Controller btnCtrl;
+	private Controller btnCtrl; //Holds an instance of the Controller 
 
 	public NewSubProductDialog() {
-		service = Service.getInstance();
 		
-		btnCtrl = new Controller();
+		service = Service.getInstance(); //Service is instantiated 
+		
+		btnCtrl = new Controller(); //Controller is instantiated 
 
+		//Generel preference  for the JDialog
 		this.setSize(defaultSize);
 		this.setResizable(false);
 		this.setTitle("New Subproduct");
 		this.setLayout(null);
 		this.setModal(true);
 
+		/*
+		 * Instansation of all GUI componetens and the preferences 
+		 */
 		lblName = new JLabel();
 		lblName.setText("Name");
 		lblName.setSize(lblSize);
@@ -117,10 +127,18 @@ public class NewSubProductDialog extends JDialog {
 
 	}
 
+	/**
+	 * Allows to set the visibility in the Controller class
+	 * @param visibility
+	 */
 	private void setDialogVisibility(boolean visibility) {
 		this.setVisible(visibility);
 	}
 	
+	/**
+	 * Used to get all positions which is not occurpied by a SubProudct
+	 * @return
+	 */
 	private List<Position> getPositionsAvailable(){
 		
 		ArrayList<Position> avaPos = new ArrayList<Position>();

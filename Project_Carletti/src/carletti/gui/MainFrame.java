@@ -37,10 +37,17 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 import javax.swing.table.TableColumn;
 
-
+/**
+ * @group Lars Nielsen, Malik L. Lund, Martin R. Bundgaard
+ * @class MainFrame
+ * @author Lars Nielsen
+ *
+ */
 public class MainFrame extends JFrame {
-	private Service service;
+	
+	private Service service; //Holds singelton instance of service
 
+	//GUI components
 	private JPanel buttonsPanel;
 	private JScrollPane subProductsScrollPane;
 	private JButton btnNewSubProduct;
@@ -48,9 +55,6 @@ public class MainFrame extends JFrame {
 	private JButton btnWaste;
 	private JTable subProductTable;
 	private NewSubProductTableModel subProductTableModel;
-
-	private Controller btnCtrl;
-
 	private Dimension minimumSize = new Dimension(1000, 400);
 	private Dimension btnMinSize = new Dimension(20, 180);
 	private JButton btnNewProduct;
@@ -60,10 +64,16 @@ public class MainFrame extends JFrame {
 	private JButton btnShowDone;
 	private JButton btnShowWasted;
 
+	//Button controller
+	private Controller btnCtrl;
+	
 	public MainFrame() {
+		
 		service = Service.getInstance();
 
 		btnCtrl = new Controller();
+		
+		//Frame preferences 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		this.setTitle("Carletti");
@@ -72,6 +82,7 @@ public class MainFrame extends JFrame {
 		buttonsPanel = new JPanel();
 		getContentPane().add(buttonsPanel, BorderLayout.EAST);
 
+		//GUI Components preferences 
 		btnInfo = new JButton("Info");
 		btnInfo.setMinimumSize(btnMinSize);
 		btnInfo.addActionListener(btnCtrl);

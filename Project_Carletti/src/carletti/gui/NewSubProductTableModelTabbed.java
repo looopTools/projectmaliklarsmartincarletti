@@ -1,7 +1,7 @@
 /**
- * @author Lars Nielsen, Malik Lasse Lund, Martin R¿nn Bungaard
+ * @group Lars Nielsen, Malik Lasse Lund, Martin R¿nn Bungaard
  * @class NewSubProductTableModel
- * @programmer Lars Nielsen
+ * @author Lars Nielsen
  */
 package carletti.gui;
 
