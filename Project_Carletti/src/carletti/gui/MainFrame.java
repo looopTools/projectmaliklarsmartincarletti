@@ -211,6 +211,9 @@ public class MainFrame extends JFrame {
 	private class Controller implements ActionListener {
 		public void actionPerformed(ActionEvent ae) {
 
+			/*
+			 * Info button
+			 */
 			if (ae.getSource().equals(btnInfo)) {
 				SubProduct sp = subProductTableModel
 						.selctedSubProduct(subProductTable.getSelectedRow());
@@ -222,16 +225,28 @@ public class MainFrame extends JFrame {
 					spd.setLocationRelativeTo(MainFrame.this);
 					spd.setVisible(true);
 				}
-			} else if (ae.getSource().equals(btnNewSubProduct)) {
+			}
+			/*
+			 * New subproduct button
+			 */
+			else if (ae.getSource().equals(btnNewSubProduct)) {
 				NewSubProductDialog nspd = new NewSubProductDialog();
 				nspd.setLocationRelativeTo(MainFrame.this);
 				nspd.setVisible(true);
 				updateList();
-			} else if (ae.getSource().equals(btnNewProduct)) {
+			} 
+			/*
+			 * New product button
+			 */
+			else if (ae.getSource().equals(btnNewProduct)) {
 				CreateNewProductDialog newProductDialog = new CreateNewProductDialog();
 				newProductDialog.setLocationRelativeTo(MainFrame.this);
 				newProductDialog.setVisible(true);
-			} else if (ae.getSource().equals(btnWaste)) {
+			} 
+			/*
+			 * Waste button
+			 */
+			else if (ae.getSource().equals(btnWaste)) {
 				SubProduct sp = subProductTableModel
 						.selctedSubProduct(subProductTable.getSelectedRow());
 				if (sp == null) {
@@ -247,7 +262,9 @@ public class MainFrame extends JFrame {
 				}
 
 			}
-			
+			/*
+			 * Treatment button
+			 */
 			else if (ae.getSource().equals(btnTreatment)){
 				SubProduct sp = subProductTableModel
 						.selctedSubProduct(subProductTable.getSelectedRow());
@@ -263,25 +280,36 @@ public class MainFrame extends JFrame {
 				}
 				updateList();
 			}
-
+			/*
+			 * Product info button
+			 */
 			else if (ae.getSource().equals(btnProductInfo)) {
 				ShowProductFrame spf = new ShowProductFrame();
 				spf.setLocationRelativeTo(MainFrame.this);
 				spf.setVisible(true);
 			}
 			
+			/*
+			 * Show subtreatment button
+			 */
 			else if (ae.getSource().equals(btnShowSubTreatment))
 			{
 				NextSubTreatmentDialog ntd = new NextSubTreatmentDialog();
 				ntd.setLocationRelativeTo(MainFrame.this);
 				ntd.setVisible(true);
 			}
+			/*
+			 * Show done button
+			 */
 			else if (ae.getSource().equals(btnShowDone))
 			{
 				ShowDoneDialog sdd = new ShowDoneDialog();
 				sdd.setLocationRelativeTo(MainFrame.this);
 				sdd.setVisible(true);
 			}
+			/*
+			 * Show wasted button
+			 */
 			else if (ae.getSource().equals(btnShowWasted))
 			{
 				ShowWastedDialog swd = new ShowWastedDialog();
