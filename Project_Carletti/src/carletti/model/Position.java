@@ -1,8 +1,3 @@
-/**
- *@author Lars Nielsen, Malik Lasse Lund, Martin R¿nn Bundgaard
- *@class Position
- *@programmer Lars Nielsen
- */
 
 package carletti.model;
 
@@ -13,6 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
+/**
+ *@group Lars Nielsen, Malik Lasse Lund, Martin R¿nn Bundgaard
+ *@class Position
+ *@author Lars Nielsen
+ */
 public class Position {
 
 	@Id

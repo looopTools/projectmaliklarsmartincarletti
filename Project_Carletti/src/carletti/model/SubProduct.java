@@ -1,8 +1,3 @@
-/**
- * @group: Lars Nielsen, Malik Lasse Lund, Martin R¿nn Bundgaard
- * @author: Lars Nielsen
- * @class: SubProduct
- */
 package carletti.model;
 
 import java.text.DateFormat;
@@ -23,6 +18,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
+/**
+ * @group: Lars Nielsen, Malik Lasse Lund, Martin R¿nn Bundgaard
+ * @author: Lars Nielsen
+ * @class: SubProduct
+ */
 public class SubProduct implements Comparable<SubProduct> {
 
 	@Id

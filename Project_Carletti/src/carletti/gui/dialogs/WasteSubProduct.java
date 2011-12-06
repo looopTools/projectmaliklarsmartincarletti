@@ -16,11 +16,19 @@ import javax.swing.JTextField;
 
 import carletti.model.State;
 import carletti.model.SubProduct;
-import carletti.dao.JpaDao;
 import carletti.service.Service;
 
+/**
+ * @group Lars Nielsen, Malik L. Lund, Martin R. Bundgaard
+ * @class WasteSubProduct
+ * @author Lars Nielsen
+ *
+ */
 public class WasteSubProduct extends JDialog{
-	private Service service;
+	
+	private Service service; //Holds a singelton of the service class
+	
+	//GUI Components
 	private JPanel infoPanel, btnPanel;
 	private JButton btnWaste;
 	private JButton btnCan;
@@ -32,18 +40,25 @@ public class WasteSubProduct extends JDialog{
 	private JTextField txfName;
 	private JTextField txfState;
 	private JTextField txfProduct;
-	private SubProduct sub;
-	private Controller btnCtrl;
+	
+	private SubProduct sub; //Holds the SubProduct, which can be wasted
+	
+	
+	private Controller btnCtrl; //Instance of the controller class
+	
 	
 	public WasteSubProduct(SubProduct sub) {
-		service = Service.getInstance();
+		
+		service = Service.getInstance(); 
 		this.sub = sub;
 		btnCtrl = new Controller();
 		
+		//Generel Prefernec for the Dialog
 		setTitle("Waste Subproduct");
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
+		//GUI Components and their preferens 
 		infoPanel = new JPanel();
 		getContentPane().add(infoPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_infoPanel = new GridBagLayout();
@@ -141,19 +156,26 @@ public class WasteSubProduct extends JDialog{
 		this.pack();
 	}
 	
+	/**
+	 * Allows to set the visibility of the dialog, in the Controller class 
+	 */
 	private void desposeDialog(boolean despose){
 		this.setVisible(despose);
 	}
 	
+	/**
+	 * Sets the text of the JTextFields, so one know which SubProduct you are wasting 
+	 */
 	private void setInfo(){
 		txfID.setText(Integer.toString(sub.getId()));
 		txfName.setText(sub.getName());
 		checkAndSetState();
 		txfProduct.setText(sub.getProduct().getName());
-		
-		
 	}
 	
+	/**
+	 * Checks the state of the subproduct and sets the state of the txfState, to the current state
+	 */
 	private void checkAndSetState(){
 		if(sub.getState() == State.DONE){
 			txfState.setText("Done");
@@ -169,6 +191,12 @@ public class WasteSubProduct extends JDialog{
 		}
 	}
 	
+	
+	/**
+	 * 
+	 * The controller class, is controlling which actions is 
+	 *
+	 */
 	private class Controller implements ActionListener{
 
 		@Override

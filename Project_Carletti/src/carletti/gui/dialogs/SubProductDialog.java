@@ -1,8 +1,3 @@
-/**
- * @author Lars Nielsen, Malik Lasse Lund, Martin R¿n Bundgaard
- * @class SubProductDialog
- * @programmer: Lars Nielsen
- */
 package carletti.gui.dialogs;
 
 import java.awt.GridLayout;
@@ -18,9 +13,18 @@ import javax.swing.JTextField;
 import carletti.model.State;
 import carletti.model.SubProduct;
 
+/**
+ * @group Lars Nielsen, Malik Lasse Lund, Martin R¿n Bundgaard
+ * @class SubProductDialog
+ * @author Lars Nielsen
+ */
 public class SubProductDialog extends JDialog{
 
 	private SubProduct sub; //holds the current sub product which is wanted for inspection
+	
+	/*
+	 *GUI components 
+	 */
 	private JPanel panel;
 	private JLabel labID, labName, labState, labProduct;
 	private JTextField txfID, txfName, txfState, txfProd;
@@ -28,12 +32,16 @@ public class SubProductDialog extends JDialog{
 	private Controller btnCtrl;
 	
 	public SubProductDialog(SubProduct sub){
+		
 		this.sub = sub;
 		btnCtrl = new Controller();
+		
+		//Preferences for the dialog 
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
 		
+		//GUI components and their preferences
 		panel = new JPanel();
 		getContentPane().add(panel);
 		panel.setLayout(new GridLayout(6, 2, 20, 20));
@@ -76,11 +84,10 @@ public class SubProductDialog extends JDialog{
 		panel.add(btnOK);
 		
 		setInfo();
-		checkAndSetState();
 		this.pack();
 	}
 	
-//	txfID, txfName, txfState, txfProd;
+	//Sets the info for the JTextFields 
 	private void setInfo(){
 		txfID.setText(Integer.toString(sub.getId()));
 		txfName.setText(sub.getName());
@@ -90,6 +97,7 @@ public class SubProductDialog extends JDialog{
 		
 	}
 	
+	//Sets the info for the txfState
 	private void checkAndSetState(){
 		if(sub.getState() == State.DONE){
 			txfState.setText("Done");
@@ -105,10 +113,14 @@ public class SubProductDialog extends JDialog{
 		}
 	}
 	
+	//Allows to change the visibility of the dialog in the Controller
 	private void thisSetVisible(boolean visiblity){
 		this.setVisible(visiblity);
 	}
 	
+	/*
+	 * Keeps track of the actions on the buttons
+	 */
 	private class Controller implements ActionListener{
 
 		@Override
