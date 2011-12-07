@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -21,10 +20,10 @@ import carletti.dao.LocalDao;
 import carletti.gui.MainFrame;
 import carletti.service.Service;
 
+@SuppressWarnings("serial")
 public class LoadGui extends JFrame {
 
 	private Dimension frameSize = new Dimension(300, 200);
-	private Dimension rBtnSize = new Dimension(20, 150);
 	private JPanel selectPanel;
 
 	// private int x = 20, y = 80;
@@ -45,7 +44,6 @@ public class LoadGui extends JFrame {
 	}
 
 	private class SelectorPanel extends JPanel implements ActionListener {
-		private Dimension rBtnSize = new Dimension(20, 150);
 		private JButton btnOk;
 		private JRadioButton rbtnLocal, rbtnDao;
 

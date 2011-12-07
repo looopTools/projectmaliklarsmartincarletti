@@ -38,6 +38,9 @@ public class NewProductSubTreatmentsTableModel extends AbstractTableModel {
 	}
 
 	@Override
+	/**
+	 * @return col 1: Name, col 2: Min, col 3: optimal, col 4: max
+	 */
 	public Object getValueAt(int row, int col) {
 		List<SubTreatment> subTreatments = treatment.getSubTreatments();
 		if (col < 1){
@@ -57,6 +60,9 @@ public class NewProductSubTreatmentsTableModel extends AbstractTableModel {
 	}
 	
 	@Override
+	/**
+	 * Simply returns the class-type of each column.
+	 */
 	public Class getColumnClass(int c){
 		return getValueAt(0,c).getClass();
 	}
