@@ -18,9 +18,7 @@ public class DatabaseConnectTester {
 		try {
 			Class.forName("net.sourceforge.jtds.jdbc.Driver");
 			myConnection = DriverManager.getConnection(
-					"jdbc:jtds:sqlserver://Malik-PB/Carletti",
-					"sa",
-					"sa");
+					"jdbc:jtds:sqlserver://Martin-PC/Carletti", "sa", "178255");
 			Statement stmt = myConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			ResultSet res = stmt.executeQuery("SELECT * FROM SUBPRODUCT;");
 			ResultSetMetaData resMeta = res.getMetaData();
