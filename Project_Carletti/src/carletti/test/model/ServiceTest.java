@@ -70,9 +70,6 @@ public class ServiceTest
 		{
 			service.removeTreatment(t);
 		}
-		
-		
-
 	}
 
 	@Test

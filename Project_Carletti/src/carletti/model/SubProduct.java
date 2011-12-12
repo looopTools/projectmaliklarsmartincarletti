@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Column;
+
 
 @Entity
 /**
@@ -28,6 +30,7 @@ public class SubProduct implements Comparable<SubProduct> {
 	@Id
 	@GeneratedValue
 	private int id; // To have a key for the database
+	@Column(nullable = false)
 	private String name;
 	@Enumerated(EnumType.STRING)
 	private State state; // The current state which a SubProduct is in
@@ -35,6 +38,7 @@ public class SubProduct implements Comparable<SubProduct> {
 	@OneToMany
 	private List<SubTreatment> subtreatments = new ArrayList<SubTreatment>();
 	private int currentSubTreatmentIndex = 0;
+	 @JoinColumn(nullable = false)
 	@OneToOne(cascade = { CascadeType.PERSIST })
 	private Product product;
 	private long timeAdded;
