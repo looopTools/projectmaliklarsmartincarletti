@@ -38,7 +38,7 @@ public class SubProduct implements Comparable<SubProduct> {
 	@OneToMany
 	private List<SubTreatment> subtreatments = new ArrayList<SubTreatment>();
 	private int currentSubTreatmentIndex = 0;
-	 @JoinColumn(nullable = false)
+	@JoinColumn(nullable = false)
 	@OneToOne(cascade = { CascadeType.PERSIST })
 	private Product product;
 	private long timeAdded;
