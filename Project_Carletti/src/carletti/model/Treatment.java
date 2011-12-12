@@ -30,6 +30,7 @@ public class Treatment {
 	private String name;
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<SubTreatment> subTreatments;
+	private int number;
 	
 	/**
 	 * 
@@ -44,6 +45,7 @@ public class Treatment {
 	public Treatment(String name){
 		this.name = name;
 		subTreatments = new ArrayList<SubTreatment>();
+		number = 0;
 	}
 	
 	/**
@@ -54,8 +56,9 @@ public class Treatment {
 	 * @param dryMax Maximal drying time.
 	 */
 	public void createSubTreatment(String name, long dryMin, long dryPrime, long dryMax){
-		SubTreatment st = new SubTreatment(name, dryMin, dryPrime, dryMax);
+		SubTreatment st = new SubTreatment(name, number, dryMin, dryPrime, dryMax);
 		subTreatments.add(st);
+		number = number + 1;
 	}
 	
 	public String getName(){

@@ -18,12 +18,14 @@ public class SubTreatment {
 	 */
 	@Id
 	@GeneratedValue
-	private int id; //Is need for the JPA identification 
+	private int id; //Is need for the JPA identification
+	private int number;
 	private long dryMin, dryPrime, dryMax;
 	private String name;
 	
-	SubTreatment(String name, long dryMin, long dryPrime, long dryMax){
+	SubTreatment(String name, int number, long dryMin, long dryPrime, long dryMax){
 		this.setName(name);
+		this.setNumber(number);
 		this.dryMin = dryMin;
 		this.dryPrime = dryPrime;
 		this.dryMax = dryMax;
@@ -70,5 +72,13 @@ public class SubTreatment {
 	public String toString()
 	{
 		return "\n" + name + "\n" + "min= " + getDryMin() + "\nprime= " + getDryPrime() + "\nmax= " + getDryMax();
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
 	}
 }
