@@ -5,20 +5,22 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import javax.swing.JFileChooser;
+
 /**
  * Goes through every subfolder in the current directory,
  * finds all the .java files and merges them into a single
  * file.
- * @author Malik Lund
+ * @author Malik Lund, Lars Nielsen
  *
  */
 public class SourceMerger {
 	private static FileWriter writer;
 	
-	public static void merge(String path) throws IOException{
+	public static void merge(File path) throws IOException{
 		File output = new File("mergedFile.java");
 		writer = new FileWriter(output);
-		handleDirectory(new File(path));
+		handleDirectory(path);
 		writer.close();
 	}
 	
@@ -45,9 +47,21 @@ public class SourceMerger {
 	}
 	
 	public static void main(String[] args){
+		JFileChooser pathChooser = new JFileChooser();
+		pathChooser.setCurrentDirectory(new File("."));
+		pathChooser.setDialogTitle("Select source folder");
+		pathChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		pathChooser.setAcceptAllFileFilterUsed(false);
+		File file = null;
+		if (pathChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+			file = pathChooser.getSelectedFile();
+		}
+		
 		try {
-			SourceMerger.merge(".");
-		} catch (IOException e) {
+			if (file != null){
+				SourceMerger.merge(file);
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
