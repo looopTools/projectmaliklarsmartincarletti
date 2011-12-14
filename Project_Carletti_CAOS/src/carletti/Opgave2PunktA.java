@@ -14,11 +14,11 @@ import java.sql.Statement;
  * @class
  *
  */
-public class NextTreatment {
+public class Opgave2PunktA {
 	
 	private int ID;
 	
-	public NextTreatment(int ID){
+	public Opgave2PunktA(int ID){
 		this.ID = ID;
 		
 		String query = "UPDATE SUBPRODUCT SET CURRENTSUBTREATMENTINDEX = CURRENTSUBTREATMENTINDEX+1, STATE = 'DRYING' WHERE ID =" + getID() +
