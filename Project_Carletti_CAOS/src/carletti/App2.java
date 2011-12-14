@@ -26,6 +26,7 @@ public class App2 {
 		System.out.print("Type a command: ");
 		
 		HashMap<String, Runnable> runnables = new HashMap<String, Runnable>();
+		runnables.put("a", new Opgave2PunktA()); //Lars 
 		runnables.put("b", new Opgave2PunktB());
 		runnables.put("d", new Opgave2PunktD());
 		runnables.put("g", new Opgave2PunktG());
