@@ -3,9 +3,9 @@ package carletti;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
 /**
  * 
@@ -14,13 +14,28 @@ import java.sql.Statement;
  * @class
  *
  */
-public class Opgave2PunktA {
+public class Opgave2PunktA implements Runnable {
 	
 	private int ID;
 	
-	public Opgave2PunktA(int ID){
-		this.ID = ID;
+	public Opgave2PunktA(){
 		
+	}
+
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
+	}
+
+	@Override
+	public void run() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Enter ID: ");
+		int id = Integer.parseInt(scanner.nextLine());
+		setID(id);
 		String query = "UPDATE SUBPRODUCT SET CURRENTSUBTREATMENTINDEX = CURRENTSUBTREATMENTINDEX+1, STATE = 'DRYING' WHERE ID =" + getID() +
 				" AND STATE = 'TREATMENT'";
 		Connection myConnection;
@@ -64,14 +79,6 @@ public class Opgave2PunktA {
 			e.printStackTrace();
 		}
 		
-	}
-
-	public int getID() {
-		return ID;
-	}
-
-	public void setID(int iD) {
-		ID = iD;
 	}
 	
 	
