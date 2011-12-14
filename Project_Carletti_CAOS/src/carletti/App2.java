@@ -8,6 +8,8 @@ public class App2 {
 	/**
 	 * @param args
 	 */
+	
+	
 	public static void main(String[] args) {
 		String[] commands = {
 			" a: nextTreatment",
@@ -30,6 +32,8 @@ public class App2 {
 		runnables.put("b", new Opgave2PunktB());
 		runnables.put("d", new Opgave2PunktD());
 		runnables.put("g", new Opgave2PunktG());
+		runnables.put("c", new Opgave2PunktC());
+		runnables.put("e", new Opgave2PunktE());
 		
 		Scanner commandScanner = new Scanner(System.in);
 		String command = commandScanner.nextLine();
