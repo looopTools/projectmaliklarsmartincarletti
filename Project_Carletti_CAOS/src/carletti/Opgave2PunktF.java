@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class TrashOldData {
+public class Opgave2PunktF {
 
-	public TrashOldData() {
+	public Opgave2PunktF() {
 
 		String query = "EXEC trashOldData";
 		Connection myConnection;

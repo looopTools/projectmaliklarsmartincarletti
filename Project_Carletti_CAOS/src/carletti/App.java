@@ -33,7 +33,7 @@ public class App {
 
 				System.out.print("Type ID: ");
 				argument = argumentScanner.nextLine();
-				NextTreatment nt = new NextTreatment(Integer.parseInt(argument));
+				Opgave2PunktA nt = new Opgave2PunktA(Integer.parseInt(argument));
 
 			} 
 			else if (command.equals(commands[1])) {
@@ -54,7 +54,7 @@ public class App {
 
 			else if (command.equals(commands[5])) {
 
-				TrashOldData tod = new TrashOldData();
+				Opgave2PunktF tod = new Opgave2PunktF();
 			}
 			System.out.print("Type a Command: ");
 			command = commandScanner.nextLine();
