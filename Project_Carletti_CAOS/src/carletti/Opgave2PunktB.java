@@ -13,20 +13,20 @@ import java.sql.Statement;
  *
  */
 public class Opgave2PunktB implements Runnable{
+	private Connection connection;
 	
-	public Opgave2PunktB(){
-		
+	public Opgave2PunktB(Connection connection){
+		this.connection = connection;
 	}
 	
 	public void run(){
-		Connection myConnection;
 		try {
-			Class.forName("net.sourceforge.jtds.jdbc.Driver");
-			myConnection = DriverManager.getConnection(
-					"jdbc:jtds:sqlserver://Malik-PB/Carletti",
-					"sa",
-					"sa");
-			Statement stmt = myConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+//			Class.forName("net.sourceforge.jtds.jdbc.Driver");
+//			myConnection = DriverManager.getConnection(
+//					"jdbc:jtds:sqlserver://Malik-PB/Carletti",
+//					"sa",
+//					"sa");
+			Statement stmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			ResultSet res = stmt.executeQuery(
 					" SELECT sp.ID, sp.NAME, (sp.TIMEADDED + st.DRYMAX) AS timeRemaining" +
 					" FROM SUBPRODUCT sp, SUBTREATMENT st, SUBPRODUCT_SUBTREATMENT sp_st" +
@@ -51,11 +51,9 @@ public class Opgave2PunktB implements Runnable{
 			if (stmt != null){
 				stmt.close();
 			}
-			if (myConnection != null){
-				myConnection.close();
+			if (connection != null){
+				connection.close();
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -13,17 +13,21 @@ import java.sql.Statement;
  *
  */
 public class Opgave2PunktG implements Runnable{
+	private Connection connection;
+	
+	public Opgave2PunktG(Connection connection){
+		this.connection = connection;
+	}
 	
 	public void run(){
 		int selectedProductId = 10;
-		Connection myConnection;
 		try {
-			Class.forName("net.sourceforge.jtds.jdbc.Driver");
-			myConnection = DriverManager.getConnection(
-					"jdbc:jtds:sqlserver://Malik-PB/Carletti",
-					"sa",
-					"sa");
-			Statement stmt = myConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+//			Class.forName("net.sourceforge.jtds.jdbc.Driver");
+//			myConnection = DriverManager.getConnection(
+//					"jdbc:jtds:sqlserver://Malik-PB/Carletti",
+//					"sa",
+//					"sa");
+			Statement stmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			
 			// fetch the id of the subProduct to test the trigger with.
 			ResultSet res = stmt.executeQuery("SELECT ID FROM SUBPRODUCT WHERE NAME = 'PunktGSubProduct'");
@@ -50,11 +54,9 @@ public class Opgave2PunktG implements Runnable{
 			if (stmt != null){
 				stmt.close();
 			}
-			if (myConnection != null){
-				myConnection.close();
+			if (connection != null){
+				connection.close();
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
