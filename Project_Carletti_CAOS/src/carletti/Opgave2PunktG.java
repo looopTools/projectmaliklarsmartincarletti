@@ -12,11 +12,7 @@ import java.sql.Statement;
  * @author Malik Lund
  *
  */
-public class Opgave2PunktD implements Runnable{
-	
-	public Opgave2PunktD(){
-		
-	}
+public class Opgave2PunktG implements Runnable{
 	
 	public void run(){
 		int selectedProductId = 10;
@@ -28,14 +24,17 @@ public class Opgave2PunktD implements Runnable{
 					"sa",
 					"sa");
 			Statement stmt = myConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			ResultSet res = stmt.executeQuery(
-					" SELECT sp.ID, sp.NAME, sp.TIMEADDED, st.NAME, sp.TIMEADDED + st.DRYMIN AS minimum, sp.TIMEADDED + st.DRYPRIME AS prime, sp.TIMEADDED + st.DRYMAX AS maximum" +
-					" FROM SUBPRODUCT sp, SUBTREATMENT st, SUBPRODUCT_SUBTREATMENT sp_st" +
-					" WHERE sp.PRODUCT_ID = " + selectedProductId +
-					"   AND sp_st.SubProduct_ID = sp.ID" +
-					"   AND sp.CURRENTSUBTREATMENTINDEX = st.number" +
-					"   AND st.ID = sp_st.subtreatments_ID");
 			
+			// fetch the id of the subProduct to test the trigger with.
+			ResultSet res = stmt.executeQuery("SELECT ID FROM SUBPRODUCT WHERE NAME = 'PunktGSubProduct'");
+			res.first();
+			int subProductId = res.getInt("ID");
+			
+			// change state of the fetched id.
+			stmt.execute("UPDATE SUBPRODUCT SET STATE = 'TREATMENT' WHERE ID = " + subProductId);
+			
+			// fetch content of exceededsubproducts-table to see changes.
+			res = stmt.executeQuery("SELECT * FROM EXCEEDEDSUBPRODUCTS");
 			ResultSetMetaData resMeta = res.getMetaData();
 			while (res.next()){
 				StringBuffer buffer = new StringBuffer();

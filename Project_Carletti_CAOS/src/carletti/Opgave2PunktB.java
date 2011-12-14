@@ -7,13 +7,18 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Opgave2PunktB {
+/**
+ * 
+ * @author Malik Lund
+ *
+ */
+public class Opgave2PunktB implements Runnable{
 	
 	public Opgave2PunktB(){
 		
 	}
 	
-	public void connect(){
+	public void run(){
 		Connection myConnection;
 		try {
 			Class.forName("net.sourceforge.jtds.jdbc.Driver");
@@ -54,10 +59,5 @@ public class Opgave2PunktB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public static void main(String[] args){
-		Opgave2PunktB tester = new Opgave2PunktB();
-		tester.connect();
 	}
 }
