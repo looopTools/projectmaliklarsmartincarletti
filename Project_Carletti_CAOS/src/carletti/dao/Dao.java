@@ -19,8 +19,6 @@ public class Dao
 	
 	public static void drying(int ID){
 		
-//		Connection myConnection;
-		
 		String s = "SELECT sp.ID, sp.NAME ,(sp.TIMEADDED + st.DRYMIN) AS timeRemainingMIN, " +
 				" (sp.TIMEADDED + st.DRYPRIME) AS timeRemainingPRIME, (sp.TIMEADDED + st.DRYMAX) AS timeRemainingMAX" +
 				" FROM SUBPRODUCT sp, PRODUCT p, TREATMENT t, TREATMENT_SUBTREATMENT ts, SUBTREATMENT st " +
@@ -31,9 +29,6 @@ public class Dao
 				" AND st.ID = ts.subTreatments_ID" +
 				" AND sp.CURRENTSUBTREATMENTINDEX = st.number";
 		try {
-//			Class.forName("net.sourceforge.jtds.jdbc.Driver");
-//			connection = DriverManager.getConnection(
-//					"jdbc:jtds:sqlserver://MARTIN-PC/Carletti", "sa", "178255");
 			Statement stmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			ResultSet res = stmt.executeQuery(s);
 			ResultSetMetaData resMeta = res.getMetaData();
@@ -61,7 +56,6 @@ public class Dao
 
 	public static void storeSubproduct(SubProduct sp)
 	{
-//		int ID = sp.getId();
 		int CURRENTSUBTREATMENTINDEX = sp.getCurrentSubTreatmentIndex();
 		String NAME = sp.getName();
 		String STATE = sp.getState().toString();
@@ -75,13 +69,8 @@ public class Dao
 				" INSERT INTO SUBPRODUCT(ID, CURRENTSUBTREATMENTINDEX, NAME, STATE, TIMEADDED, POSITION_ID, PRODUCT_ID)" +
 				" VALUES (  @id" + ", " + CURRENTSUBTREATMENTINDEX + ", " +  NAME  + ", " + "'" + STATE + "'" + ", " + TIMEADDED + ", " + POSITION_ID + ", " + PRODUCT_ID + ")";
 		
-
-//		Connection myConnection;
 		try
 		{
-//			Class.forName("net.sourceforge.jtds.jdbc.Driver");
-//			myConnection = DriverManager.getConnection(
-//					"jdbc:jtds:sqlserver://MARTIN-PC/Carletti", "sa", "178255");
 			Statement stmt = connection.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY);

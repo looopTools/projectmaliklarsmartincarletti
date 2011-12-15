@@ -22,11 +22,6 @@ public class Opgave2PunktG implements Runnable{
 	public void run(){
 		int selectedProductId = 10;
 		try {
-//			Class.forName("net.sourceforge.jtds.jdbc.Driver");
-//			myConnection = DriverManager.getConnection(
-//					"jdbc:jtds:sqlserver://Malik-PB/Carletti",
-//					"sa",
-//					"sa");
 			Statement stmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			
 			// fetch the id of the subProduct to test the trigger with.
