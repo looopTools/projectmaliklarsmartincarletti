@@ -17,10 +17,6 @@ public class Opgave2PunktF implements Runnable{
 		String query = "EXEC trashOldData";
 		Connection myConnection;
 		try {
-//			Class.forName("net.sourceforge.jtds.jdbc.Driver");
-//			myConnection = DriverManager.getConnection(
-//					"jdbc:jtds:sqlserver://10.37.129.3:1433/Carletti", "sa",
-//					"lnc20020");
 			Statement stmt = connection.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_UPDATABLE + 1);

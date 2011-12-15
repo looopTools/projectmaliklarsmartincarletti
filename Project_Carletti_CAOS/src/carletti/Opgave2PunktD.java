@@ -22,11 +22,6 @@ public class Opgave2PunktD implements Runnable{
 	public void run(){
 		int selectedProductId = 10;
 		try {
-//			Class.forName("net.sourceforge.jtds.jdbc.Driver");
-//			myConnection = DriverManager.getConnection(
-//					"jdbc:jtds:sqlserver://Malik-PB/Carletti",
-//					"sa",
-//					"sa");
 			Statement stmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			ResultSet res = stmt.executeQuery(
 					" SELECT sp.ID, sp.NAME, sp.TIMEADDED, st.NAME, sp.TIMEADDED + st.DRYMIN AS minimum, sp.TIMEADDED + st.DRYPRIME AS prime, sp.TIMEADDED + st.DRYMAX AS maximum" +

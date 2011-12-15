@@ -1,77 +1,70 @@
 package carletti;
 
-import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Scanner;
 
-/**
- * 
- * @group Martin R. Bundgaard, Malik L. Lund, Lars Nielsen
- * @author Lars Nielsen
- * @class
- * 
- */
+import carletti.dao.Dao;
+
 public class App {
 
-	public static void main(String[] args) {
-		String[] commands = { "nextTreatment", "printSubProducts",
-				"getTimeInfoSubProduct", "printSubProductOfProductType",
-				"newSubProduct", "trashOldData", "EXIT" };
-		String command = "";
-		String argument = "";
+	/**
+	 * @param args
+	 * @throws ClassNotFoundException 
+	 * @throws SQLException 
+	 */
+	
+	
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		
+		Class.forName("net.sourceforge.jtds.jdbc.Driver");
+		String url = args[0];
+		String username = args[1];
+		String password = args[2];
+		Connection connection = DriverManager.getConnection(url, username, password);
+		
+		String[] commands = {
+			"   a: nextTreatment",
+			"   b: printSubProducts",
+			"   c: getTimeInfoSubProduct",
+			"   d: printSubProductOfProductType",
+			"   e: newSubProduct",
+			"   f: trashOldData",
+			"   g: trashOldData",
+			"exit: exit"
+		};
 
-		printCommands(commands);
-
-		System.out.print("Type a Command: ");
+		for (String s: commands){
+			System.out.println(s);
+		}
+		System.out.print("Type a command: ");
+		
+		Dao.setConnection(connection);
+		
+		HashMap<String, Runnable> runnables = new HashMap<String, Runnable>();
+		runnables.put("a", new Opgave2PunktA(connection)); //Lars 
+		runnables.put("b", new Opgave2PunktB(connection));
+		runnables.put("c", new Opgave2PunktC());
+		runnables.put("d", new Opgave2PunktD(connection));
+		runnables.put("e", new Opgave2PunktE());
+		runnables.put("f", new Opgave2PunktF(connection));
+		runnables.put("g", new Opgave2PunktG(connection));
+		
 		Scanner commandScanner = new Scanner(System.in);
-		command = commandScanner.nextLine();
+		String command = commandScanner.nextLine();
 
-		Scanner argumentScanner = new Scanner(System.in);
-
-		while (!command.equals(commands[6])) {
-
-			if (command.equals(commands[0])) {
-
-				System.out.print("Type ID: ");
-				argument = argumentScanner.nextLine();
-				Opgave2PunktA nt = new Opgave2PunktA(Integer.parseInt(argument));
-
-			} 
-			else if (command.equals(commands[1])) {
-
+		while (!command.equals("exit")){
+			Runnable r = runnables.get(command);
+			if (r != null){
+				r.run();
 			}
-
-			else if (command.equals(commands[2])) {
-
-			}
-
-			else if (command.equals(commands[3])) {
-
-			}
-
-			else if (command.equals(commands[4])) {
-
-			}
-
-			else if (command.equals(commands[5])) {
-
-				Opgave2PunktF tod = new Opgave2PunktF();
-			}
-			System.out.print("Type a Command: ");
+			System.out.print("Type a command: ");
 			command = commandScanner.nextLine();
 		}
-
-		if (command.equals(commands[6])) {
-			System.out.println("Thanks for using this Applikation");
+		if (connection != null){
+			connection.close();
 		}
-
-	}
-
-	private static void printCommands(String[] commands) {
-		System.out.println("----Commands----");
-		for (int i = 0; i < commands.length; i++) {
-			System.out.println(commands[i] + " ");
-		}
-		System.out.println("----Enter Command----");
-
 	}
 }

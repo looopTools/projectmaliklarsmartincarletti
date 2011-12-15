@@ -21,11 +21,6 @@ public class Opgave2PunktB implements Runnable{
 	
 	public void run(){
 		try {
-//			Class.forName("net.sourceforge.jtds.jdbc.Driver");
-//			myConnection = DriverManager.getConnection(
-//					"jdbc:jtds:sqlserver://Malik-PB/Carletti",
-//					"sa",
-//					"sa");
 			Statement stmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			ResultSet res = stmt.executeQuery(
 					" SELECT sp.ID, sp.NAME, (sp.TIMEADDED + st.DRYMAX) AS timeRemaining" +
