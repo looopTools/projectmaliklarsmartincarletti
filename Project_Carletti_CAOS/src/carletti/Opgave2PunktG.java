@@ -54,9 +54,6 @@ public class Opgave2PunktG implements Runnable{
 			if (stmt != null){
 				stmt.close();
 			}
-			if (connection != null){
-				connection.close();
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

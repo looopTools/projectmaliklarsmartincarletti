@@ -11,11 +11,15 @@ import carletti.model.SubProduct;
 
 public class Dao
 {
+	private static Connection connection;
 	
+	public static void setConnection(Connection newConnection){
+		connection = newConnection;
+	}
 	
 	public static void drying(int ID){
 		
-		Connection myConnection;
+//		Connection myConnection;
 		
 		String s = "SELECT sp.ID, sp.NAME ,(sp.TIMEADDED + st.DRYMIN) AS timeRemainingMIN, " +
 				" (sp.TIMEADDED + st.DRYPRIME) AS timeRemainingPRIME, (sp.TIMEADDED + st.DRYMAX) AS timeRemainingMAX" +
@@ -27,10 +31,10 @@ public class Dao
 				" AND st.ID = ts.subTreatments_ID" +
 				" AND sp.CURRENTSUBTREATMENTINDEX = st.number";
 		try {
-			Class.forName("net.sourceforge.jtds.jdbc.Driver");
-			myConnection = DriverManager.getConnection(
-					"jdbc:jtds:sqlserver://MARTIN-PC/Carletti", "sa", "178255");
-			Statement stmt = myConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+//			Class.forName("net.sourceforge.jtds.jdbc.Driver");
+//			connection = DriverManager.getConnection(
+//					"jdbc:jtds:sqlserver://MARTIN-PC/Carletti", "sa", "178255");
+			Statement stmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			ResultSet res = stmt.executeQuery(s);
 			ResultSetMetaData resMeta = res.getMetaData();
 			while (res.next()){
@@ -47,12 +51,7 @@ public class Dao
 			if (stmt != null){
 				stmt.close();
 			}
-			if (myConnection != null){
-				myConnection.close();
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
+		}catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -77,13 +76,13 @@ public class Dao
 				" VALUES (  @id" + ", " + CURRENTSUBTREATMENTINDEX + ", " +  NAME  + ", " + "'" + STATE + "'" + ", " + TIMEADDED + ", " + POSITION_ID + ", " + PRODUCT_ID + ")";
 		
 
-		Connection myConnection;
+//		Connection myConnection;
 		try
 		{
-			Class.forName("net.sourceforge.jtds.jdbc.Driver");
-			myConnection = DriverManager.getConnection(
-					"jdbc:jtds:sqlserver://MARTIN-PC/Carletti", "sa", "178255");
-			Statement stmt = myConnection.createStatement(
+//			Class.forName("net.sourceforge.jtds.jdbc.Driver");
+//			myConnection = DriverManager.getConnection(
+//					"jdbc:jtds:sqlserver://MARTIN-PC/Carletti", "sa", "178255");
+			Statement stmt = connection.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY);
 			boolean res = stmt.execute(s);
@@ -91,17 +90,8 @@ public class Dao
 			{
 				stmt.close();
 			}
-			if (myConnection != null)
-			{
-				myConnection.close();
-			}
 			
         	System.out.println("Subprodukt er oprettet!");
-
-		}
-		catch (ClassNotFoundException e)
-		{
-			e.printStackTrace();
 
 		} catch (SQLException e)
 		{

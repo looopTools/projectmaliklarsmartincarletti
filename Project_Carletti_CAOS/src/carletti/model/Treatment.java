@@ -42,6 +42,12 @@ public class Treatment {
 		
 	}
 	
+	public Treatment(String name){
+		this.name = name;
+		subTreatments = new ArrayList<SubTreatment>();
+		number = 0;
+	}
+	
 	public Treatment(int id, String name){
 		this.name = name;
 		this.id = id;

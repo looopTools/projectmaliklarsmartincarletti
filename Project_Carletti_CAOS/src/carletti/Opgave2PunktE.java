@@ -1,5 +1,6 @@
 package carletti;
 
+import java.sql.Connection;
 import java.util.Scanner;
 
 import carletti.model.Position;

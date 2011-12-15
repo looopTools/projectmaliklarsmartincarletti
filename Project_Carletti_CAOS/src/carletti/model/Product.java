@@ -37,6 +37,12 @@ public class Product
 		this.treatment = treatment;
 	}
 	
+	public Product(String name, String description, Treatment treatment) {
+		this.name = name;
+		this.description = description;
+		this.treatment = treatment;
+	}
+	
 	/**
 	 * Empty constructor for JPA.
 	 */
