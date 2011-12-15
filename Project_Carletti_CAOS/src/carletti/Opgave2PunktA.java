@@ -16,10 +16,11 @@ import java.util.Scanner;
  */
 public class Opgave2PunktA implements Runnable {
 	
+	private Connection connection;
 	private int ID;
 	
-	public Opgave2PunktA(){
-		
+	public Opgave2PunktA(Connection connection){
+		this.connection = connection;
 	}
 
 	public int getID() {
@@ -38,13 +39,13 @@ public class Opgave2PunktA implements Runnable {
 		setID(id);
 		String query = "UPDATE SUBPRODUCT SET CURRENTSUBTREATMENTINDEX = CURRENTSUBTREATMENTINDEX+1, STATE = 'DRYING' WHERE ID =" + getID() +
 				" AND STATE = 'TREATMENT'";
-		Connection myConnection;
+//		Connection myConnection;
 		try {
-			Class.forName("net.sourceforge.jtds.jdbc.Driver");
-			myConnection = DriverManager.getConnection(
-					"jdbc:jtds:sqlserver://10.37.129.3:1433/Carletti", "sa",
-					"lnc20020");
-			Statement stmt = myConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE+1);
+//			Class.forName("net.sourceforge.jtds.jdbc.Driver");
+//			myConnection = DriverManager.getConnection(
+//					"jdbc:jtds:sqlserver://10.37.129.3:1433/Carletti", "sa",
+//					"lnc20020");
+			Statement stmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE+1);
 //			ResultSet res = stmt.executeQuery(query); //Query to be executed
 //			
 //			ResultSetMetaData resMeta = res.getMetaData();
@@ -67,15 +68,13 @@ public class Opgave2PunktA implements Runnable {
 //			if (res != false){
 //				res.close();
 //			}
-//			if (stmt != null){
-//				stmt.close();
-//			}
+			if (stmt != null){
+				stmt.close();
+			}
 //			if (myConnection != null){
 //				myConnection.close();
 //			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
+		}catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
